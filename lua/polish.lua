@@ -5,7 +5,12 @@
 -- Set up custom filetypes
 
 vim.filetype.add {
-  pattern = { [".*/hypr/.*%.conf"] = "hyprlang" },
+  pattern = {
+    [".*/hypr/.*%.conf"] = "hyprlang",
+    [".zsh"] = "sh",
+    [".zshenv"] = "sh",
+    [".zsh/.*%.zsh"] = "sh",
+  },
 }
 
 local function yaml_ft(path, bufnr)
