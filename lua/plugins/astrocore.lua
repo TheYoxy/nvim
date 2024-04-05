@@ -3,6 +3,10 @@
 -- NOTE: We highly recommend setting up the Lua Language Server (`:LspInstall lua_ls`)
 --       as this provides autocomplete and documentation while editing
 
+--- Merge two tables together
+---@param t1 table<any,any>
+---@param t2 table<any,any>
+---@return table<any,any>
 local function tableMerge(t1, t2)
   for k, v in pairs(t2) do
     if type(v) == "table" then
@@ -18,6 +22,7 @@ local function tableMerge(t1, t2)
   return t1
 end
 
+---@type table<string,any>
 local powershell_vim = {}
 if vim.loop.os_uname().sysname == "Windows_NT" then
   powershell_vim {
@@ -103,7 +108,6 @@ return {
         ["<Leader>x"] = { function() vim.diagnostic.goto_next() end, desc = "Next diagnostic" },
         ["<Leader>X"] = { function() vim.diagnostic.goto_prev() end, desc = "Previous diagnostic" },
         ["<Leader>bn"] = { "<cmd>tabnew<cr>", desc = "New tab" },
-        ["<Leader>gg"] = { ":LazyGit<cr>", desc = "Open lazygit" },
         ["<C-s>"] = { ":w!<cr>", desc = "Save File" },
         ["<Leader>e"] = { function() require("telescope.builtin").oldfiles() end, desc = "Find history" },
         -- second key is the lefthand side of the map
@@ -151,28 +155,6 @@ return {
       t = {
         -- setting a mapping to false will disable it
         -- ["<esc>"] = false,
-      },
-    },
-    autocmds = {
-      autohidetabline = false,
-      User = {
-        {
-          event = "VimEnter",
-          desc = "Hide tabline when only one buffer and one tab", -- nice description
-          -- triggered when vim.t.bufs is updated
-          pattern = "AstroBufsUpdated", -- the pattern is the name of our User autocommand events
-          group = "autohidetabline", -- add the autocmd to the newly created augroup
-          callback = function()
-            -- if there is more than one buffer in the tab, show the tabline
-            -- if there are 0 or 1 buffers in the tab, only show the tabline if there is more than one vim tab
-            local new_showtabline = #vim.t.bufs > 1 and 2 or 1
-            -- check if the new value is the same as the current value
-            if new_showtabline ~= vim.opt.showtabline:get() then
-              -- if it is different, then set the new `showtabline` value
-              vim.opt.showtabline = new_showtabline
-            end
-          end,
-        },
       },
     },
   },

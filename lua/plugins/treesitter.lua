@@ -27,30 +27,28 @@ return {
 
     if vim.fn.has "linux" then table.insert(ensure_installed, "hyprlang") end
 
-
-    opts.ensure_installed = require("astrocore").list_insert_unique(opts.ensure_installed,ensure_installed)
-      opts.futo_install = vim.fn.executable "tree-sitter" == 1
-      opts.matchup = { enable = true }
-      opts.ensure_installed = ensure_installed
+    opts.ensure_installed = require("astrocore").list_insert_unique(opts.ensure_installed, ensure_installed)
+    opts.futo_install = vim.fn.executable "tree-sitter" == 1
+    opts.matchup = { enable = true }
+    opts.ensure_installed = ensure_installed
     opts.textobjects = {
+      enable = true,
+      select = {
         enable = true,
-        select = {
-          enable = true,
-          lookahead = true,
-          keymaps = {
-            ["af"] = "@function.outer",
-            ["if"] = "@function.inner",
-            ["ac"] = "@class.outer",
-            ["ic"] = "@class.inner",
-            ["aP"] = "@parameter.outer",
-            ["iP"] = "@parameter.inner",
-          },
+        lookahead = true,
+        keymaps = {
+          ["af"] = "@function.outer",
+          ["if"] = "@function.inner",
+          ["ac"] = "@class.outer",
+          ["ic"] = "@class.inner",
+          ["aP"] = "@parameter.outer",
+          ["iP"] = "@parameter.inner",
         },
-      }
-
+      },
+    }
 
     opts.context = {
-        enable = true,
-      }
+      enable = true,
+    }
   end,
 }

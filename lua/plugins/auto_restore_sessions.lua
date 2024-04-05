@@ -1,3 +1,6 @@
+if true then return {} end -- WARN:Remove this line to enable this file
+
+---@type LazySpec
 return {
   "AstroNvim/astrocore",
   ---@type AstroCoreOpts
