@@ -10,6 +10,9 @@ vim.filetype.add {
     [".zsh"] = "sh",
     [".zshenv"] = "sh",
     [".zsh/.*%.zsh"] = "sh",
+    ["Directory.[Bb]uild.props"] = "csproj",
+    ["Directory.[Bb]uild.target"] = "csproj",
+    ["*.csproj"] = "csproj",
   },
 }
 
