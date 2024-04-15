@@ -25,7 +25,7 @@ end
 ---@type table<string,any>
 local powershell_vim = {}
 if vim.loop.os_uname().sysname == "Windows_NT" then
-  powershell_vim {
+  powershell_vim = {
     shell = vim.fn.executable "pwsh" and "pwsh" or "powershell",
     shellcmdflag = "-NoLogo -NoProfile -ExecutionPolicy RemoteSigned -Command [Console]::InputEncoding=[Console]::OutputEncoding=[System.Text.Encoding]::UTF8;",
     shellredir = "-RedirectStandardOutput %s -NoNewWindow -Wait",
