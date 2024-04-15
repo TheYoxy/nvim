@@ -13,6 +13,9 @@ vim.filetype.add {
     ["Directory.[Bb]uild.props"] = "csproj",
     ["Directory.[Bb]uild.target"] = "csproj",
     ["*.csproj"] = "csproj",
+    [".dotfiles/dot_zshrc"] = "sh",
+    [".dotfiles/dot_zshenv"] = "sh",
+    ["*%.tmpl"] = "gotmpl",
   },
 }
 
