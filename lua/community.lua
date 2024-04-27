@@ -15,6 +15,7 @@ return {
   { import = "astrocommunity.color.modes-nvim" },
 
   { import = "astrocommunity.colorscheme.github-nvim-theme" },
+  { import = "astrocommunity.colorscheme.catppuccin" },
 
   { import = "astrocommunity.completion.copilot-lua-cmp" },
 
