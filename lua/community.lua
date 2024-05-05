@@ -36,6 +36,7 @@ return {
   { import = "astrocommunity.pack.json" },
   { import = "astrocommunity.pack.kotlin" },
   { import = "astrocommunity.pack.lua" },
+  { import = "astrocommunity.pack.nix" },
   { import = "astrocommunity.pack.prisma" },
   { import = "astrocommunity.pack.rust" },
   { import = "astrocommunity.pack.tailwindcss" },

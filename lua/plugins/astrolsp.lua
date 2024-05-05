@@ -43,6 +43,19 @@ return {
     -- customize language server configuration options passed to `lspconfig`
     ---@diagnostic disable: missing-fields
     config = {
+      nil_ls = {
+        settings = {
+          ["nil"] = {
+            nix = {
+              maxMemoryMB = 8192,
+              flake = {
+                autoEvalInputs = true,
+                nixpkgsInputName = "nixos",
+              },
+            },
+          },
+        },
+      },
       tsserver = {
         on_attach = function(client, bufnr) require("twoslash-queries").attach(client, bufnr) end,
         settings = {
