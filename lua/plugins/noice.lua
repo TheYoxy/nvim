@@ -3,7 +3,6 @@ return {
     "rcarriga/nvim-notify",
     --- @type notify.Config
     opts = {
-
       render = "compact",
       stages = "fade",
     },
