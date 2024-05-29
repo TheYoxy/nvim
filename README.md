@@ -1,6 +1,4 @@
-# AstroNvim Template
-
-**NOTE:** This is for AstroNvim v4+
+# Theyoxy Nvim config
 
 A template for getting started with [AstroNvim](https://github.com/AstroNvim/AstroNvim)
 
