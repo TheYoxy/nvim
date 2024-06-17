@@ -49,7 +49,7 @@ return {
             nix = {
               maxMemoryMB = 8192,
               flake = {
-                autoEvalInputs = true,
+                autoEvalInputs = false,
                 nixpkgsInputName = "nixos",
               },
             },
