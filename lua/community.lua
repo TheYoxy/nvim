@@ -42,12 +42,11 @@ return {
   { import = "astrocommunity.pack.typescript" },
   { import = "astrocommunity.pack.yaml" },
 
-  { import = "astrocommunity.recipes.heirline-vscode-winbar" },
-  { import = "astrocommunity.recipes.heirline-clock-statusline" },
+  { import = "astrocommunity.recipes.heirline-nvchad-statusline" },
 
   { import = "astrocommunity.scrolling.neoscroll-nvim" },
 
-  { import = "astrocommunity.terminal-integration.vim-tpipeline" },
+  -- { import = "astrocommunity.terminal-integration.vim-tpipeline" },
 
   { import = "astrocommunity.utility.noice-nvim" },
 
