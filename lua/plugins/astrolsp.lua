@@ -56,6 +56,22 @@ return {
           },
         },
       },
+      rust_analyzer = {
+        settings = {
+          ["rust-analyzer"] = {
+            inlayHints = {
+              -- maxLength = nil,
+              lifetimeElisionHints = {
+                useParameterNames = true,
+                enable = "skip_trivial",
+              },
+              closureReturnTypeHints = {
+                enable = "always",
+              },
+            },
+          },
+        },
+      },
       tsserver = {
         on_attach = function(client, bufnr) require("twoslash-queries").attach(client, bufnr) end,
         settings = {
