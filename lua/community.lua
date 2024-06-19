@@ -5,7 +5,6 @@
 ---@type LazySpec
 return {
   "AstroNvim/astrocommunity",
-  { import = "astrocommunity.pack.lua" },
   -- import/override with your plugins folder
 
   -- example of imporing a plugin, comment out to use it or add your own
@@ -26,9 +25,11 @@ return {
   { import = "astrocommunity.media.vim-wakatime" },
 
   { import = "astrocommunity.pack.astro" },
+  { import = "astrocommunity.pack.ansible" },
   { import = "astrocommunity.pack.bash" },
   { import = "astrocommunity.pack.docker" },
   -- { import = "astrocommunity.pack.full-dadbod" },
+  { import = "astrocommunity.pack.helm" },
   { import = "astrocommunity.pack.json" },
   -- { import = "astrocommunity.pack.kotlin" },
   -- { import = "astrocommunity.pack.go" },

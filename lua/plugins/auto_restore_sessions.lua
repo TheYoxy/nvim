@@ -1,4 +1,4 @@
-if true then return {} end -- WARN:Remove this line to enable this file
+if vim.g.vscode then return {} end -- NOTE: don't do anything in vscode instances
 
 ---@type LazySpec
 return {

@@ -1,5 +1,3 @@
--- if true then return {} end -- WARN:remove this line to enable the file
-
 ---@type LazySpec
 return {
   "AstroNvim/astrolsp",

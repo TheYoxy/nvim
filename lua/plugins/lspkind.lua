@@ -3,7 +3,7 @@ return {
   "onsails/lspkind.nvim",
   opts = function(_, opts)
     -- use codicons preset
-    opts.preset = "codicons"
+    opts.preset = "default"
     -- set some missing symbol types
     opts.symbol_map = {
       Array = "",

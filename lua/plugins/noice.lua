@@ -1,11 +1,8 @@
+---@type LazySpec
 return {
   {
-    "rcarriga/nvim-notify",
-    --- @type notify.Config
-    opts = {
-      render = "compact",
-      stages = "fade",
-    },
+    "AstroNvim/astrocommunity",
+    { import = "astrocommunity.utility.noice-nvim" },
   },
   {
     "nvim-treesitter/nvim-treesitter",
@@ -22,10 +19,30 @@ return {
     "folke/noice.nvim",
     event = "VeryLazy",
     dependencies = {
-      "rcarriga/nvim-notify",
+      {
+        "MunifTanjim/nui.nvim",
+      },
+      {
+
+        "rcarriga/nvim-notify",
+        --- @type notify.Config
+        --- @diagnostic disable: missing-fields
+        opts = {
+          render = "compact",
+          stages = "fade",
+        },
+      },
     },
     --- @type NoiceConfig
     opts = {
+      lsp = {
+        -- override markdown rendering so that **cmp** and other plugins use **Treesitter**
+        override = {
+          ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
+          ["vim.lsp.util.stylize_markdown"] = true,
+          ["cmp.entry.get_documentation"] = true, -- requires hrsh7th/nvim-cmp
+        },
+      },
       messages = {
         enabled = true,
         view = "mini", -- default view for messages
