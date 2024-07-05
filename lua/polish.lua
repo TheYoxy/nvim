@@ -37,9 +37,9 @@ local function yaml_ft(path, bufnr)
   return "yaml"
 end
 
-vim.filetype.add {
-  extension = {
-    yml = yaml_ft,
-    yaml = yaml_ft,
-  },
-}
+-- vim.filetype.add {
+--   extension = {
+--     yml = yaml_ft,
+--     yaml = yaml_ft,
+--   },
+-- }
