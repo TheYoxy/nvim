@@ -17,10 +17,14 @@ return {
 
   { import = "astrocommunity.diagnostics.trouble-nvim" },
 
+  { import = "astrocommunity.editing-support.conform-nvim" },
   { import = "astrocommunity.editing-support.rainbow-delimiters-nvim" },
   { import = "astrocommunity.editing-support.treesj" },
+  { import = "astrocommunity.editing-support.nvim-devdocs" },
 
   { import = "astrocommunity.git.octo-nvim" },
+
+  { import = "astrocommunity.lsp.nvim-lint" },
 
   { import = "astrocommunity.media.vim-wakatime" },
 
