@@ -47,9 +47,9 @@ return {
         settings = {
           ["nil"] = {
             nix = {
-              maxMemoryMB = 8192,
+              maxMemoryMB = 16384,
               flake = {
-                autoEvalInputs = false,
+                autoEvalInputs = true,
                 nixpkgsInputName = "nixos",
               },
             },
