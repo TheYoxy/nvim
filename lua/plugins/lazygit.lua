@@ -13,19 +13,19 @@ return {
     dependencies = {
       "nvim-telescope/telescope.nvim",
       "nvim-lua/plenary.nvim",
-    },
-    event = "BufRead",
-    config = function() require("telescope").load_extension "lazygit" end,
-  },
-  {
-    "AstroNvim/astrocore",
-    ---@type AstroCoreOpts
-    opts = {
-      mappings = {
-        n = {
-          ["<Leader>gg"] = { ":LazyGit<cr>", desc = "Open lazygit" },
+      {
+        "AstroNvim/astrocore",
+        ---@type AstroCoreOpts
+        opts = {
+          mappings = {
+            n = {
+              ["<Leader>gg"] = { ":LazyGit<cr>", desc = "Open lazygit" },
+            },
+          },
         },
       },
     },
+    event = "BufRead",
+    config = function() require("telescope").load_extension "lazygit" end,
   },
 }
