@@ -22,15 +22,15 @@ return {
   { import = "astrocommunity.editing-support.treesj" },
   { import = "astrocommunity.editing-support.nvim-devdocs" },
 
-  { import = "astrocommunity.fuzzy-finder.fzf-lua" },
+  -- { import = "astrocommunity.fuzzy-finder.fzf-lua" },
 
   { import = "astrocommunity.git.octo-nvim" },
 
-  { import = "astrocommunity.lsp.action-preview-nvim" },
+  -- { import = "astrocommunity.lsp.action-preview-nvim" },
   { import = "astrocommunity.lsp.nvim-lint" },
   { import = "astrocommunity.keybinding.nvcheatsheet-nvim" },
 
-  { import = "astrocommunity.media.image-nvim" },
+  -- { import = "astrocommunity.media.image-nvim" },
   { import = "astrocommunity.media.presence-nvim" },
   { import = "astrocommunity.media.vim-wakatime" },
 
