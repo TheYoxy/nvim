@@ -23,6 +23,7 @@ return {
         allow_filetypes = { -- enable format on save for specified filetypes only
           -- "go",
           "lua",
+          "rust",
         },
         ignore_filetypes = { -- disable format on save for specified filetypes
           -- "python",
@@ -51,22 +52,6 @@ return {
               flake = {
                 autoEvalInputs = true,
                 nixpkgsInputName = "nixos",
-              },
-            },
-          },
-        },
-      },
-      rust_analyzer = {
-        settings = {
-          ["rust-analyzer"] = {
-            inlayHints = {
-              -- maxLength = nil,
-              lifetimeElisionHints = {
-                useParameterNames = true,
-                enable = "skip_trivial",
-              },
-              closureReturnTypeHints = {
-                enable = "always",
               },
             },
           },

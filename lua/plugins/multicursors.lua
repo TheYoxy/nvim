@@ -1,22 +1,27 @@
 ---@type LazySpec
 return {
-  {
-    "smoka7/multicursors.nvim",
-    event = "VeryLazy",
-    dependencies = { "smoka7/hydra.nvim" },
-    cmd = { "MCstart", "MCvisual", "MCclear", "MCpattern", "MCvisualPattern", "MCunderCursor" },
-    opts = {},
+  "brenton-leighton/multiple-cursors.nvim",
+  cmd = {
+    "MultipleCursorsAddDown",
+    "MultipleCursorsAddUp",
+    "MultipleCursorsMouseAddDelete",
+    "MultipleCursorsAddMatches",
+    "MultipleCursorsAddMatchesV",
+    "MultipleCursorsAddJumpNextMatch",
+    "MultipleCursorsJumpNextMatch",
+    "MultipleCursorsLock",
   },
-  {
+  opts = {},
+  dependencies = {
     "AstroNvim/astrocore",
     ---@type AstroCoreOpts
     opts = {
       mappings = {
         n = {
-          ["<C-g>"] = { "<cmd>MCstart<cr>", desc = "Create a selection for word under the cursor" },
+          ["<C-g>"] = { "<cmd>MultipleCursorsAddMatches<cr>", desc = "Add cursor matches" },
         },
-        v = {
-          ["<C-g>"] = { "<cmd>MCstart<cr>", desc = "Create a selection for word under the cursor" },
+        x = {
+          ["<C-g>"] = { "<cmd>MultipleCursorsAddMatches<cr>", desc = "Add cursor matches" },
         },
       },
     },

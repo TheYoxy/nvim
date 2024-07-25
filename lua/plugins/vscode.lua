@@ -13,11 +13,10 @@ end
 
 ---@type LazySpec
 return {
-  {
-    "AstroNvim/astrocommunity",
-    { import = "astrocommunity.recipes.vscode" },
-  },
-  {
+  "AstroNvim/astrocommunity",
+  { import = "astrocommunity.recipes.vscode" },
+  dependencies = {
+
     "AstroNvim/astrocore",
     opts = function(_, opts)
       replace(
@@ -26,6 +25,12 @@ return {
       )
       opts.mappings = {
         n = {
+          -- tmux like action to navigate
+          ["<C-a> h"] = function() require("vscode-neovim").action "workbench.action.navigateRight" end,
+          ["<C-a> l"] = function() require("vscode-neovim").action "workbench.action.navigateLeft" end,
+          ["<C-a> k"] = function() require("vscode-neovim").action "workbench.action.navigateDown" end,
+          ["<C-a> j"] = function() require("vscode-neovim").action "workbench.action.navigateUp" end,
+
           ["<leader>e"] = function() require("vscode-neovim").action "workbench.action.quickOpen" end,
           ["<leader>rf"] = function() require("vscode-neovim").action "editor.action.formatDocument" end,
           ["<leader>rv"] = function()

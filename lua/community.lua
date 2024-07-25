@@ -11,7 +11,7 @@ return {
   -- available plugins can be found at https://github.com/AstroNvim/astrocommunity
   { import = "astrocommunity.bars-and-lines.vim-illuminate" },
 
-  { import = "astrocommunity.color.modes-nvim" },
+  -- { import = "astrocommunity.color.modes-nvim" },
 
   { import = "astrocommunity.completion.copilot-lua-cmp" },
 
@@ -20,7 +20,7 @@ return {
   { import = "astrocommunity.editing-support.conform-nvim" },
   { import = "astrocommunity.editing-support.rainbow-delimiters-nvim" },
   { import = "astrocommunity.editing-support.treesj" },
-  { import = "astrocommunity.editing-support.nvim-devdocs" },
+  -- { import = "astrocommunity.editing-support.nvim-devdocs" },
 
   -- { import = "astrocommunity.fuzzy-finder.fzf-lua" },
 
@@ -46,17 +46,16 @@ return {
   { import = "astrocommunity.pack.lua" },
   { import = "astrocommunity.pack.nix" },
   { import = "astrocommunity.pack.prisma" },
-  { import = "astrocommunity.pack.rust" },
   { import = "astrocommunity.pack.tailwindcss" },
   { import = "astrocommunity.pack.terraform" },
   { import = "astrocommunity.pack.typescript" },
   { import = "astrocommunity.pack.yaml" },
 
+  { import = "astrocommunity.recipes.auto-session-restore" },
   { import = "astrocommunity.recipes.heirline-nvchad-statusline" },
+  { import = "astrocommunity.recipes.telescope-lsp-mappings" },
 
   { import = "astrocommunity.scrolling.neoscroll-nvim" },
-
-  -- { import = "astrocommunity.terminal-integration.vim-tpipeline" },
 
   { import = "astrocommunity.utility.noice-nvim" },
 
