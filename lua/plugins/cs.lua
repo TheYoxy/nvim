@@ -1,3 +1,6 @@
+-- Last updated: 25/07/24
+
+---@type LazySpec
 return {
   -- CSharp support
   {
@@ -13,7 +16,7 @@ return {
     "jay-babu/mason-null-ls.nvim",
     optional = true,
     opts = function(_, opts)
-      opts.ensure_installed = require("astrocore").list_insert_unique(opts.ensure_installed, { "" })
+      opts.ensure_installed = require("astrocore").list_insert_unique(opts.ensure_installed, { "csharpier" })
     end,
   },
   {
@@ -22,6 +25,24 @@ return {
     opts = function(_, opts)
       opts.ensure_installed = require("astrocore").list_insert_unique(opts.ensure_installed, { "csharp_ls" })
     end,
+  },
+  {
+    "Decodetalkers/csharpls-extended-lsp.nvim",
+    dependencies = {
+      {
+        "AstroNvim/astrolsp",
+        opts = {
+          config = {
+            csharp_ls = {
+              handlers = {
+                ["textDocument/definition"] = function(...) require("csharpls_extended").handler(...) end,
+                ["textDocument/typeDefinition"] = function(...) require("csharpls_extended").handler(...) end,
+              },
+            },
+          },
+        },
+      },
+    },
   },
   {
     "jay-babu/mason-nvim-dap.nvim",
@@ -34,8 +55,10 @@ return {
     "WhoIsSethDaniel/mason-tool-installer.nvim",
     optional = true,
     opts = function(_, opts)
-      opts.ensure_installed =
-        require("astrocore").list_insert_unique(opts.ensure_installed, { "csharp-language-server", "netcoredbg" })
+      opts.ensure_installed = require("astrocore").list_insert_unique(
+        opts.ensure_installed,
+        { "csharp-language-server", "csharpier", "netcoredbg" }
+      )
     end,
   },
 }

@@ -18,10 +18,12 @@ return {
     opts = {
       mappings = {
         n = {
-          ["<C-g>"] = { "<cmd>MultipleCursorsAddMatches<cr>", desc = "Add cursor matches" },
+          ["<C-g>"] = { "<cmd>MultipleCursorsAddJumpNextMatch<cr>", desc = "Add next cursor matches" },
+          ["<C-G>"] = { "<cmd>MultipleCursorsAddMatches<cr>", desc = "Add all cursors matches" },
         },
         x = {
-          ["<C-g>"] = { "<cmd>MultipleCursorsAddMatches<cr>", desc = "Add cursor matches" },
+          ["<C-g>"] = { "<cmd>MultipleCursorsAddJumpNextMatch<cr>", desc = "Add next cursor matches" },
+          ["<C-G>"] = { "<cmd>MultipleCursorsAddMatches<cr>", desc = "Add all cursors matches" },
         },
       },
     },

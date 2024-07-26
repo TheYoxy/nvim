@@ -24,7 +24,7 @@ return {
 
   -- { import = "astrocommunity.fuzzy-finder.fzf-lua" },
 
-  { import = "astrocommunity.git.octo-nvim" },
+  -- { import = "astrocommunity.git.octo-nvim" },
 
   -- { import = "astrocommunity.lsp.action-preview-nvim" },
   { import = "astrocommunity.lsp.nvim-lint" },
@@ -37,6 +37,7 @@ return {
   { import = "astrocommunity.pack.astro" },
   { import = "astrocommunity.pack.ansible" },
   { import = "astrocommunity.pack.bash" },
+  { import = "astrocommunity.pack.chezmoi" },
   { import = "astrocommunity.pack.docker" },
   -- { import = "astrocommunity.pack.full-dadbod" },
   { import = "astrocommunity.pack.helm" },
@@ -46,9 +47,7 @@ return {
   { import = "astrocommunity.pack.lua" },
   { import = "astrocommunity.pack.nix" },
   { import = "astrocommunity.pack.prisma" },
-  { import = "astrocommunity.pack.tailwindcss" },
   { import = "astrocommunity.pack.terraform" },
-  { import = "astrocommunity.pack.typescript" },
   { import = "astrocommunity.pack.yaml" },
 
   { import = "astrocommunity.recipes.auto-session-restore" },
@@ -58,6 +57,5 @@ return {
   { import = "astrocommunity.scrolling.neoscroll-nvim" },
 
   { import = "astrocommunity.utility.noice-nvim" },
-
   -- { import = "astrocommunity.workflow.bad-practices-nvim" },
 }
