@@ -30,7 +30,7 @@ return {
   { import = "astrocommunity.lsp.nvim-lint" },
   { import = "astrocommunity.keybinding.nvcheatsheet-nvim" },
 
-  -- { import = "astrocommunity.media.image-nvim" },
+  { import = "astrocommunity.media.image-nvim" },
   { import = "astrocommunity.media.presence-nvim" },
   { import = "astrocommunity.media.vim-wakatime" },
 
