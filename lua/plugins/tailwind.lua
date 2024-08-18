@@ -18,7 +18,7 @@ return {
       ---@diagnostic disable: missing-fields
       config = {
         tailwindcss = {
-          on_attach = function(client, bufnr) require("tailwindcss-colors").buf_attach(client, bufnr) end,
+          on_attach = function(_, bufnr) require("tailwindcss-colors").buf_attach(bufnr) end,
           settings = {
             tailwindCSS = {
               experimental = {
