@@ -10,7 +10,6 @@ return {
       ---@diagnostic disable: missing-fields
       config = {
         vtsls = {
-          on_attach = function(client, bufnr) require("twoslash-queries").attach(client, bufnr) end,
           settings = {
             typescript = {
               inlayHints = {
