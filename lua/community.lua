@@ -34,6 +34,8 @@ return {
   { import = "astrocommunity.media.presence-nvim" },
   { import = "astrocommunity.media.vim-wakatime" },
 
+  { import = "astrocommunity.markdown-and-latex.glow-nvim" },
+
   { import = "astrocommunity.pack.astro" },
   { import = "astrocommunity.pack.ansible" },
   { import = "astrocommunity.pack.bash" },
