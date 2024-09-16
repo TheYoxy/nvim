@@ -20,6 +20,7 @@ return {
   { import = "astrocommunity.editing-support.conform-nvim" },
   { import = "astrocommunity.editing-support.rainbow-delimiters-nvim" },
   { import = "astrocommunity.editing-support.treesj" },
+  { import = "astrocommunity.editing-support.text-case-nvim" },
   -- { import = "astrocommunity.editing-support.nvim-devdocs" },
 
   -- { import = "astrocommunity.fuzzy-finder.fzf-lua" },
