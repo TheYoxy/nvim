@@ -51,7 +51,6 @@ return {
               maxMemoryMB = 16384,
               flake = {
                 autoEvalInputs = true,
-                nixpkgsInputName = "nixos",
               },
             },
           },
@@ -86,6 +85,34 @@ return {
           function() vim.lsp.buf.format(require("astrolsp").format_opts) end,
           desc = "Format buffer",
           cond = "textDocument/formatting",
+        },
+        ["<Leader>ri"] = {
+          function()
+            -- Check if the current buffer has vtsls as its language server
+            local clients = vim.lsp.get_clients { bufnr = 0 }
+            local has_vtsls = false
+            for _, client in ipairs(clients) do
+              if client.name == "vtsls" then
+                has_vtsls = true
+                break
+              end
+            end
+
+            if has_vtsls then
+              -- Execute the "Remove Unused Imports" code action
+              vim.lsp.buf.code_action {
+                context = {
+                  only = { "source.organizeImports" },
+                },
+                apply = true,
+              }
+              print "Removed unused imports"
+            else
+              print "vtsls is not active in this buffer"
+            end
+          end,
+          desc = "Remove imports",
+          cond = "textDocument/codeAction",
         },
         -- [":"] = {
         --   function() require("fine-cmdline").open { default_value = "" } end,
