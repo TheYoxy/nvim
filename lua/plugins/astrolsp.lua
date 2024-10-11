@@ -72,6 +72,9 @@ return {
     -- mappings to be set up on attaching of a language server
     mappings = {
       n = {
+        ["<Leader>xq"] = false,
+        ["<Leader>xl"] = false,
+        ["<Leader>w"] = false,
         ["<Leader>r"] = { name = "Refactoring" },
         ["<Leader>rr"] = {
           function() vim.lsp.buf.rename() end,
