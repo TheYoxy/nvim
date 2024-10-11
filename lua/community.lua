@@ -11,6 +11,8 @@ return {
   -- available plugins can be found at https://github.com/AstroNvim/astrocommunity
   { import = "astrocommunity.bars-and-lines.vim-illuminate" },
 
+  { import = "astrocommunity.completion.copilot-lua-cmp" },
+
   { import = "astrocommunity.editing-support.conform-nvim" },
   { import = "astrocommunity.editing-support.rainbow-delimiters-nvim" },
   { import = "astrocommunity.editing-support.treesj" },

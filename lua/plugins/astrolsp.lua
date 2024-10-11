@@ -12,7 +12,7 @@ return {
     features = {
       autoformat = true, -- enable or disable auto formatting on start
       codelens = true, -- enable/disable codelens refresh on start
-      inlay_hints = false, -- enable/disable inlay hints on start
+      inlay_hints = true, -- enable/disable inlay hints on start
       semantic_tokens = true, -- enable/disable semantic token highlighting
     },
     -- customize lsp formatting options
@@ -102,6 +102,10 @@ return {
             end
 
             if has_vtsls then
+              local vtsls = require "vtsls.commands"
+              vtsls.remove_unused_imports()
+              vtsls.organize_imports()
+            else
               -- Execute the "Remove Unused Imports" code action
               vim.lsp.buf.code_action {
                 context = {
@@ -109,9 +113,6 @@ return {
                 },
                 apply = true,
               }
-              print "Removed unused imports"
-            else
-              print "vtsls is not active in this buffer"
             end
           end,
           desc = "Remove imports",
