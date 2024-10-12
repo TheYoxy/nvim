@@ -6,6 +6,13 @@ return {
     "AstroNvim/astrolsp",
     ---@type AstroLSPOpts
     opts = {
+      formatting = {
+        format_on_save = {
+          allow_filetypes = {
+            "rust",
+          },
+        },
+      },
       -- customize language server configuration options passed to `lspconfig`
       ---@diagnostic disable: missing-fields
       config = {

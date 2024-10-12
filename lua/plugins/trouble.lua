@@ -21,6 +21,8 @@ return {
           maps.n[prefix .. "T"] =
             { "<cmd>Trouble todo filter={tag={TODO,FIX,FIXME}}<cr>", desc = "Trouble Todo/Fix/Fixme" }
         end
+        maps.n["<Leader>x"] = { function() vim.diagnostic.goto_next() end, desc = "Next diagnostic" }
+        maps.n["<Leader>X"] = { function() vim.diagnostic.goto_prev() end, desc = "Previous diagnostic" }
       end,
     },
   },

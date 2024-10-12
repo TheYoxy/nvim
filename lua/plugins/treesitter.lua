@@ -14,6 +14,8 @@ return {
       "nvim-treesitter/nvim-treesitter-textobjects",
       "nvim-treesitter/nvim-treesitter-context",
     },
+    --- comment
+    --- @param _ LazyPlugin
     opts = function(_, opts)
       local ensure_installed = {
         "vim",
@@ -45,10 +47,12 @@ return {
           keymaps = {
             ["af"] = { query = "@function.outer", desc = "Select full function" },
             ["if"] = { query = "@function.inner", desc = "Select inner function code" },
+
             ["ac"] = { query = "@class.outer", desc = "Select full class" },
             ["ic"] = { query = "@class.inner", desc = "Select inner class code" },
+
             ["aP"] = { query = "@parameter.outer", desc = "Select all parameters" },
-            ["iP"] = { query = "@parameter.inner", desc = "" },
+            ["iP"] = { query = "@parameter.inner", desc = "Select inner parts of parameters" },
           },
         },
       }

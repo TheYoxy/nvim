@@ -3,38 +3,55 @@ return {
   "AstroNvim/astrocommunity",
   { import = "astrocommunity.pack.typescript" },
   dependencies = {
-    "AstroNvim/astrolsp",
-    ---@type AstroLSPOpts
-    opts = {
-      -- customize language server configuration options passed to `lspconfig`
-      ---@diagnostic disable: missing-fields
-      config = {
-        vtsls = {
-          settings = {
-            typescript = {
-              updateImportsOnFileMove = { enabled = "always" },
-              inlayHints = {
-                parameterNames = { enabled = "literals" },
-                parameterTypes = { enabled = true },
-                variableTypes = { enabled = true },
-                propertyDeclarationTypes = { enabled = false },
-                functionLikeReturnTypes = { enabled = false },
-                enumMemberValues = { enabled = true },
+    dependencies = {
+      "marilari88/twoslash-queries.nvim",
+      event = "VeryLazy",
+      opts = {
+        multi_line = true,
+      },
+    },
+    {
+      "jay-babu/mason-null-ls.nvim",
+      optional = true,
+      opts = function(_, opts)
+        opts.ensure_installed = require("astrocore").list_insert_unique(opts.ensure_installed, { "biome" })
+      end,
+    },
+    {
+      "AstroNvim/astrolsp",
+      ---@type AstroLSPOpts
+      opts = {
+        -- customize language server configuration options passed to `lspconfig`
+        ---@diagnostic disable: missing-fields
+        config = {
+          vtsls = {
+            on_attach = function(client, bufnr) require("twoslash-queries").attach(client, bufnr) end,
+            settings = {
+              typescript = {
+                updateImportsOnFileMove = { enabled = "always" },
+                inlayHints = {
+                  parameterNames = { enabled = "literals" },
+                  parameterTypes = { enabled = true },
+                  variableTypes = { enabled = true },
+                  propertyDeclarationTypes = { enabled = false },
+                  functionLikeReturnTypes = { enabled = false },
+                  enumMemberValues = { enabled = true },
+                },
               },
-            },
-            javascript = {
-              updateImportsOnFileMove = { enabled = "always" },
-              inlayHints = {
-                parameterNames = { enabled = "literals" },
-                parameterTypes = { enabled = true },
-                variableTypes = { enabled = true },
-                propertyDeclarationTypes = { enabled = false },
-                functionLikeReturnTypes = { enabled = false },
-                enumMemberValues = { enabled = true },
+              javascript = {
+                updateImportsOnFileMove = { enabled = "always" },
+                inlayHints = {
+                  parameterNames = { enabled = "literals" },
+                  parameterTypes = { enabled = true },
+                  variableTypes = { enabled = true },
+                  propertyDeclarationTypes = { enabled = false },
+                  functionLikeReturnTypes = { enabled = false },
+                  enumMemberValues = { enabled = true },
+                },
               },
-            },
-            vtsls = {
-              enableMoveToFileCodeAction = true,
+              vtsls = {
+                enableMoveToFileCodeAction = true,
+              },
             },
           },
         },

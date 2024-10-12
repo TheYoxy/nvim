@@ -3,11 +3,10 @@ return {
   "AstroNvim/astrocommunity",
   { import = "astrocommunity.pack.tailwindcss" },
   dependencies = {
-    -- {
-    --   "themaxmarchuk/tailwindcss-colors.nvim",
-    -- },
-    {
+    "themaxmarchuk/tailwindcss-colors.nvim",
+    dependencies = {
       "AstroNvim/astrolsp",
+      optional = true,
       ---@type AstroLSPOpts
       opts = {
         -- customize language server configuration options passed to `lspconfig`

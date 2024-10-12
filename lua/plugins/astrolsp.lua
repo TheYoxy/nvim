@@ -23,7 +23,6 @@ return {
         allow_filetypes = { -- enable format on save for specified filetypes only
           -- "go",
           "lua",
-          "rust",
         },
         ignore_filetypes = { -- disable format on save for specified filetypes
           -- "python",
@@ -44,18 +43,6 @@ return {
     -- customize language server configuration options passed to `lspconfig`
     ---@diagnostic disable: missing-fields
     config = {
-      nil_ls = {
-        settings = {
-          ["nil"] = {
-            nix = {
-              maxMemoryMB = 16384,
-              flake = {
-                autoEvalInputs = true,
-              },
-            },
-          },
-        },
-      },
       -- clangd = { capabilities = { offsetEncoding = "utf-8" } },
     },
     -- customize how language servers are attached

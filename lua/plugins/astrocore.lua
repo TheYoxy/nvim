@@ -104,9 +104,6 @@ return {
           desc = "Switch Buffers",
         },
         gl = { function() vim.diagnostic.open_float() end, desc = "Hover diagnostics" },
-
-        ["<Leader>x"] = { function() vim.diagnostic.goto_next() end, desc = "Next diagnostic" },
-        ["<Leader>X"] = { function() vim.diagnostic.goto_prev() end, desc = "Previous diagnostic" },
         ["<Leader>bn"] = { "<cmd>tabnew<cr>", desc = "New tab" },
         ["<C-s>"] = { ":w!<cr>", desc = "Save File" },
         ["<Leader>e"] = { function() require("telescope.builtin").oldfiles() end, desc = "Find history" },
