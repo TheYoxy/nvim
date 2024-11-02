@@ -1,3 +1,4 @@
+if vim.g.vscode then return {} end -- NOTE: don't do anything in vscode instances
 -- fetched from https://github.com/AstroNvim/astrocommunity/blob/d4d3420b46f79c6ad8ac12451ce0817a7d737675/lua/astrocommunity/programming-language-support/rest-nvim/init.lua
 local prefix = "<Leader>R"
 ---@type LazySpec

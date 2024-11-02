@@ -1,3 +1,5 @@
+if vim.g.vscode then return {} end -- NOTE: don't do anything in vscode instances
+
 local dir = "notes"
 return {
   "epwalsh/obsidian.nvim",

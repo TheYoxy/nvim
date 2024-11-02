@@ -1,3 +1,4 @@
+if vim.g.vscode then return {} end -- NOTE: don't do anything in vscode instances
 -- Cloned from revision 081a98b0c14804c42c213e557ebe83512cb478c8
 -- https://github.com/AstroNvim/astrocommunity/blob/main/lua/astrocommunity/diagnostics/trouble-nvim/init.lua
 

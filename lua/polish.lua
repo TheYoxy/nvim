@@ -15,8 +15,6 @@ vim.filetype.add {
     ["Directory.[Bb]uild.props"] = "xml",
     ["Directory.[Bb]uild.target"] = "xml",
     ["*.csproj"] = "xml",
-    [".dotfiles/dot_zshrc"] = "sh",
-    [".dotfiles/dot_zshenv"] = "sh",
     ["*%.tmpl"] = "gotmpl",
   },
 }

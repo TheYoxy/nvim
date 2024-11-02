@@ -1,3 +1,4 @@
+if vim.g.vscode then return {} end -- NOTE: don't do anything in vscode instances
 -- You can also add or configure plugins by creating files in this `plugins/` folder
 -- Here are some examples:
 

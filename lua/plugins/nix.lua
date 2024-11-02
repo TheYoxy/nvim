@@ -1,6 +1,5 @@
 ---@type LazySpec
 return {
-
   "AstroNvim/astrocommunity",
   { import = "astrocommunity.pack.rust" },
   dependencies = {
@@ -16,8 +15,8 @@ return {
       optional = true,
       --- @type AstroLSPOpts
       opts = {
+        ---@diagnostic disable: missing-fields
         config = {
-          ---@diagnostic disable: missing-fields
           nil_ls = {
             settings = {
               ["nil"] = {

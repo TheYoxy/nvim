@@ -1,3 +1,4 @@
+if vim.g.vscode then return {} end -- NOTE: don't do anything in vscode instances
 -- Customize tree-sitter plugins
 
 ---@type LazySpec
