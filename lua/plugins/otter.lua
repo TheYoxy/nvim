@@ -33,9 +33,9 @@ return {
       -- otter files are deleted on quit or main buffer close
       write_to_disk = false,
     },
-    strip_wrapping_quote_characters = { "'", '"', "`" },
+    strip_wrapping_quote_characters = { "'", '"', "`", "''" },
     -- otter may not work the way you expect when entire code blocks are indented (eg. in Org files)
     -- When true, otter handles these cases fully.
-    handle_leading_whitespace = false,
+    handle_leading_whitespace = true,
   },
 }

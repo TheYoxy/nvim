@@ -16,7 +16,6 @@ return {
   "AstroNvim/astrocommunity",
   { import = "astrocommunity.recipes.vscode" },
   dependencies = {
-
     "AstroNvim/astrocore",
     opts = function(_, opts)
       local vscode = require "vscode-neovim"

@@ -46,7 +46,6 @@ return {
   { import = "astrocommunity.pack.kotlin" },
   -- { import = "astrocommunity.pack.go" },
   { import = "astrocommunity.pack.lua" },
-  { import = "astrocommunity.pack.nix" },
   { import = "astrocommunity.pack.prisma" },
   { import = "astrocommunity.pack.terraform" },
   { import = "astrocommunity.pack.yaml" },
@@ -57,6 +56,5 @@ return {
 
   { import = "astrocommunity.scrolling.neoscroll-nvim" },
 
-  { import = "astrocommunity.utility.noice-nvim" },
   -- { import = "astrocommunity.workflow.bad-practices-nvim" },
 }

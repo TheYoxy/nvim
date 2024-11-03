@@ -1,7 +1,7 @@
 ---@type LazySpec
 return {
   "AstroNvim/astrocommunity",
-  { import = "astrocommunity.pack.rust" },
+  { import = "astrocommunity.pack.nix" },
   dependencies = {
     {
       "jay-babu/mason-null-ls.nvim",
