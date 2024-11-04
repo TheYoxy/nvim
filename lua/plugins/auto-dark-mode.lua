@@ -1,4 +1,5 @@
 if vim.g.vscode then return {} end -- NOTE: don't do anything in vscode instances
+if true then return {} end -- NOTE: disabled for now
 
 ---@type LazySpec
 return {
