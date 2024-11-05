@@ -4,6 +4,7 @@ if vim.g.vscode then return {} end -- NOTE: don't do anything in vscode instance
 return {
   "AstroNvim/astrocommunity",
   { import = "astrocommunity.pack.typescript" },
+  { import = "astrocommunity.pack.astro" },
   dependencies = {
     dependencies = {
       "marilari88/twoslash-queries.nvim",

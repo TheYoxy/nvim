@@ -20,6 +20,8 @@ return {
     opts = function(_, opts)
       local vscode = require "vscode-neovim"
       replace(opts.mappings.n["<leader>fw"], function() vscode.action "workbench.action.quickTextSearch" end)
+      print "configuring vscode"
+
       opts.mappings = {
         n = {
           j = { "v:count == 0 ? 'gj' : 'j'", expr = true, desc = "Move cursor down" },
