@@ -7,17 +7,6 @@ return {
     { import = "astrocommunity.utility.noice-nvim" },
   },
   {
-    "nvim-treesitter/nvim-treesitter",
-    opts = function(_, opts)
-      if opts.ensure_installed ~= "all" then
-        opts.ensure_installed = require("astrocore").list_insert_unique(
-          opts.ensure_installed,
-          { "bash", "markdown", "markdown_inline", "regex", "vim", "lua" }
-        )
-      end
-    end,
-  },
-  {
     "folke/noice.nvim",
     event = "VeryLazy",
     dependencies = {
@@ -33,6 +22,17 @@ return {
           render = "compact",
           stages = "fade",
         },
+      },
+      {
+        "nvim-treesitter/nvim-treesitter",
+        opts = function(_, opts)
+          if opts.ensure_installed ~= "all" then
+            opts.ensure_installed = require("astrocore").list_insert_unique(
+              opts.ensure_installed,
+              { "bash", "markdown", "markdown_inline", "regex", "vim", "lua" }
+            )
+          end
+        end,
       },
     },
     --- @type NoiceConfig
