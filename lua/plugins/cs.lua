@@ -17,18 +17,18 @@ return {
     "jay-babu/mason-null-ls.nvim",
     optional = true,
     opts = function(_, opts)
-      opts.ensure_installed = require("astrocore").list_insert_unique(opts.ensure_installed, { "csharpier" })
+      -- opts.ensure_installed = require("astrocore").list_insert_unique(opts.ensure_installed, { "csharpier" })
     end,
   },
   {
     "williamboman/mason-lspconfig.nvim",
     optional = true,
     opts = function(_, opts)
-      opts.ensure_installed = require("astrocore").list_insert_unique(opts.ensure_installed, { "csharp_ls" })
+      opts.ensure_installed = require("astrocore").list_insert_unique(opts.ensure_installed, { "omnisharp" })
     end,
   },
   {
-    "Decodetalkers/csharpls-extended-lsp.nvim",
+    "Hoffs/omnisharp-extended-lsp.nvim",
     dependencies = {
       {
         "AstroNvim/astrolsp",
@@ -36,8 +36,14 @@ return {
           config = {
             csharp_ls = {
               handlers = {
-                ["textDocument/definition"] = function(...) require("csharpls_extended").handler(...) end,
-                ["textDocument/typeDefinition"] = function(...) require("csharpls_extended").handler(...) end,
+                ["textDocument/definition"] = function(...) require("omnisharp_extended").definition_handler(...) end,
+                ["textDocument/typeDefinition"] = function(...)
+                  require("omnisharp_extended").type_definition_handler(...)
+                end,
+                ["textDocument/references"] = function(...) require("omnisharp_extended").references_handler(...) end,
+                ["textDocument/implementation"] = function(...)
+                  require("omnisharp_extended").implementation_handler(...)
+                end,
               },
             },
           },
@@ -56,10 +62,8 @@ return {
     "WhoIsSethDaniel/mason-tool-installer.nvim",
     optional = true,
     opts = function(_, opts)
-      opts.ensure_installed = require("astrocore").list_insert_unique(
-        opts.ensure_installed,
-        { "csharp-language-server", "csharpier", "netcoredbg" }
-      )
+      opts.ensure_installed =
+        require("astrocore").list_insert_unique(opts.ensure_installed, { "omnisharp", "csharpier", "netcoredbg" })
     end,
   },
   {
