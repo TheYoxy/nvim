@@ -94,6 +94,16 @@ return {
         ["<leader>w"] = false, -- INFO: Disabling
         ["-"] = { "<c-x>", desc = "Descrement number" },
         ["+"] = { "<c-a>", desc = "Increment number" },
+        ["<Tab>"] = {
+          function()
+            if #vim.t.bufs > 1 then
+              require("telescope.builtin").buffers { sort_mru = true, ignore_current_buffer = true }
+            else
+              vim.notify("No other buffers open", vim.log.levels.WARN)
+            end
+          end,
+          desc = "Switch Buffers",
+        },
         gl = { function() vim.diagnostic.open_float() end, desc = "Hover diagnostics" },
         ["<Leader>bn"] = { "<cmd>tabnew<cr>", desc = "New tab" },
         ["<C-s>"] = { ":w!<cr>", desc = "Save File" },

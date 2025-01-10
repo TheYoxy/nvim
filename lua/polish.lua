@@ -6,6 +6,11 @@ if vim.g.vscode then return {} end -- NOTE: don't do anything in vscode instance
 
 -- Set up custom filetypes
 
+if vim.fn.getenv "TERM_PROGRAM" == "ghostty" then
+  vim.opt.title = true
+  vim.opt.titlestring = "%{fnamemodify(getcwd(), ':t')}"
+end
+
 vim.filetype.add {
   pattern = {
     [".*/hypr/.*%.conf"] = "hyprlang",

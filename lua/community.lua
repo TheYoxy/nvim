@@ -18,7 +18,7 @@ return {
 
   { import = "astrocommunity.markdown-and-latex.glow-nvim" },
 
-  { import = "astrocommunity.pack.ansible" },
+  -- { import = "astrocommunity.pack.ansible" },
   { import = "astrocommunity.pack.bash" },
   { import = "astrocommunity.pack.chezmoi" },
   { import = "astrocommunity.pack.docker" },
