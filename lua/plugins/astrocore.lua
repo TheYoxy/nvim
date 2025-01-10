@@ -67,7 +67,7 @@ return {
         wrap = true, -- sets vim.opt.wrap
 
         termguicolors = true,
-        scrolloff = 8,
+        scrolloff = 100,
         conceallevel = 2,
         foldenable = false,
         foldexpr = "nvim_treesitter#foldexpr()",
@@ -91,22 +91,12 @@ return {
       -- first key is the mode
       n = {
         -- better increment/decrement
+        ["<leader>w"] = false, -- INFO: Disabling
         ["-"] = { "<c-x>", desc = "Descrement number" },
         ["+"] = { "<c-a>", desc = "Increment number" },
-        ["<Tab>"] = {
-          function()
-            if #vim.t.bufs > 1 then
-              require("telescope.builtin").buffers { sort_mru = true, ignore_current_buffer = true }
-            else
-              vim.notify "No other buffers open"
-            end
-          end,
-          desc = "Switch Buffers",
-        },
         gl = { function() vim.diagnostic.open_float() end, desc = "Hover diagnostics" },
         ["<Leader>bn"] = { "<cmd>tabnew<cr>", desc = "New tab" },
         ["<C-s>"] = { ":w!<cr>", desc = "Save File" },
-        ["<Leader>e"] = { function() require("telescope.builtin").oldfiles() end, desc = "Find history" },
         -- second key is the lefthand side of the map
 
         -- navigate buffer tabs with `H` and `L`

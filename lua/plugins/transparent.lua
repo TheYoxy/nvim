@@ -1,5 +1,6 @@
 if vim.g.vscode then return {} end -- NOTE: don't do anything in vscode instances
 
+---@type LazySpec
 return {
   "xiyaowong/transparent.nvim",
   lazy = false,
@@ -32,7 +33,7 @@ return {
     {
       "AstroNvim/astrocore",
       opts = function(_, opts)
-        opts.mappings.n["<Leader>uT"] = { "<Cmd>TransparentToggle<CR>", desc = "Toggle transparency" }
+        opts.mappings.n["<Leader>ue"] = { "<Cmd>TransparentToggle<CR>", desc = "Toggle transparency" }
         if vim.tbl_get(opts, "autocmds", "heirline_colors") then
           table.insert(opts.autocmds.heirline_colors, {
             event = "User",
@@ -44,6 +45,15 @@ return {
           })
         end
       end,
+    },
+    {
+
+      "rcarriga/nvim-notify",
+      --- @type notify.Config
+      --- @diagnostic disable: missing-fields
+      opts = {
+        background_colour = "#000000",
+      },
     },
   },
 }

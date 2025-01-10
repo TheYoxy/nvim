@@ -1,6 +1,20 @@
 if not vim.g.neovide then return {} end -- NOTE: don't do anything in not vscode instances
-vim.g.neovide_transparency = 0.0
+vim.g.neovide_transparency = 0.2
 vim.g.transparency = 0.8
+vim.g.neovide_font_settings = {
+  ["GeistMono Nerd Font"] = {
+    features = {
+      "+ss07",
+      "cv49=16",
+      "cv94=1",
+      "VXLA=2",
+      "VXLC=2",
+      "cv34=12",
+      "cv31=13",
+    },
+  },
+}
+vim.o.guifont = "GeistMono Nerd Font,Symbols_Nerd_Font"
 
 ---@type LazySpec
 return {

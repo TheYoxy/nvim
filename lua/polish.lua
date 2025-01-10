@@ -15,8 +15,10 @@ vim.filetype.add {
     ["Directory.[Bb]uild.props"] = "xml",
     ["Directory.[Pp]ackages.props"] = "xml",
     ["Directory.[Bb]uild.target"] = "xml",
+    ["*.props"] = "xml",
     ["*.slnx"] = "xml",
     ["*.csproj"] = "xml",
     ["*%.tmpl"] = "gotmpl",
+    ["*.editorconfig"] = "editorconfig",
   },
 }

@@ -1,5 +1,7 @@
-if true then return {} end
---- @type LazySpec
+-- Last updated: 25/07/24
+if vim.g.vscode then return {} end -- NOTE: don't do anything in vscode instances
+
+---@type LazySpec
 return {
   -- CSharp support
   {
@@ -15,6 +17,7 @@ return {
     "jay-babu/mason-null-ls.nvim",
     optional = true,
     opts = function(_, opts)
+      -- NOTE: Csharpier is disbaled since i don't use the configuration from
       opts.ensure_installed = require("astrocore").list_insert_unique(opts.ensure_installed, { "" })
     end,
   },
@@ -23,11 +26,11 @@ return {
     ---@param opts AstroLSPOpts
     opts = function(_, opts)
       --NOTE: Install csharp_ls only if non nix os
-      if not os.getenv "NIX_PROFILE" ~= nil then
+      if vim.fn.executable "omnisharp" == 1 then
         -- safely extend the servers list
         opts.servers = opts.servers or {}
         vim.list_extend(opts.servers, {
-          "csharp_ls",
+          "omnisharp",
           -- add more servers as needed...
         })
       end
@@ -37,22 +40,28 @@ return {
     "williamboman/mason-lspconfig.nvim",
     optional = true,
     opts = function(_, opts)
-      if not os.getenv "NIX_PROFILE" ~= nil then --NOTE: Install csharp_ls only if non nix os
-        opts.ensure_installed = require("astrocore").list_insert_unique(opts.ensure_installed, { "csharp_ls" })
+      if vim.fn.executable "omnisharp" == 0 then
+        opts.ensure_installed = require("astrocore").list_insert_unique(opts.ensure_installed, { "omnisharp" })
       end
     end,
   },
   {
-    "Decodetalkers/csharpls-extended-lsp.nvim",
+    "Hoffs/omnisharp-extended-lsp.nvim",
     dependencies = {
       {
         "AstroNvim/astrolsp",
         opts = {
           config = {
-            csharp_ls = {
+            omnisharp = {
               handlers = {
-                ["textDocument/definition"] = function(...) require("csharpls_extended").handler(...) end,
-                ["textDocument/typeDefinition"] = function(...) require("csharpls_extended").handler(...) end,
+                ["textDocument/definition"] = function(...) require("omnisharp_extended").definition_handler(...) end,
+                ["textDocument/typeDefinition"] = function(...)
+                  require("omnisharp_extended").type_definition_handler(...)
+                end,
+                ["textDocument/references"] = function(...) require("omnisharp_extended").references_handler(...) end,
+                ["textDocument/implementation"] = function(...)
+                  require("omnisharp_extended").implementation_handler(...)
+                end,
               },
             },
           },
@@ -72,7 +81,7 @@ return {
     optional = true,
     opts = function(_, opts)
       opts.ensure_installed =
-        require("astrocore").list_insert_unique(opts.ensure_installed, { "csharp-language-server", "netcoredbg" })
+        require("astrocore").list_insert_unique(opts.ensure_installed, { "omnisharp", "netcoredbg" })
     end,
   },
   {
