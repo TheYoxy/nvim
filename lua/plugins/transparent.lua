@@ -10,6 +10,8 @@ return {
       "NvimTreeNormal",
     },
   },
+  --- @param _ any
+  --- @param opts transparent.Config
   config = function(_, opts)
     local transparent = require "transparent"
     transparent.setup(opts)
@@ -19,6 +21,9 @@ return {
     transparent.clear_prefix "TabLine"
     transparent.clear_prefix "TabLineSel"
     transparent.clear_prefix "TabLineFill"
+    transparent.clear_prefix "TelescopeNormal"
+    transparent.clear_prefix "TelescopeBorder"
+    transparent.clear_prefix "TelescopeBorder"
     transparent.clear_prefix "NotifyLogTime"
     transparent.clear_prefix "NotifyDEBUGBody"
     transparent.clear_prefix "NotifyDEBUGTitle"
@@ -47,7 +52,6 @@ return {
       end,
     },
     {
-
       "rcarriga/nvim-notify",
       --- @type notify.Config
       --- @diagnostic disable: missing-fields

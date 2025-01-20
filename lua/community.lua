@@ -38,5 +38,4 @@ return {
   -- { import = "astrocommunity.recipes.auto-session-restore" },
   -- { import = "astrocommunity.recipes.heirline-nvchad-statusline" },
   { import = "astrocommunity.recipes.telescope-lsp-mappings" },
-  { import = "astrocommunity.scrolling.neoscroll-nvim" },
 }

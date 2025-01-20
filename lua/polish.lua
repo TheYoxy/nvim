@@ -12,18 +12,17 @@ if vim.fn.getenv "TERM_PROGRAM" == "ghostty" then
 end
 
 vim.filetype.add {
+  extension = {
+    props = "xml",
+    csproj = "xml",
+    editorconfig = "editorconfig",
+    slnx = "xml",
+    tmpl = "gotmpl",
+  },
   pattern = {
     [".*/hypr/.*%.conf"] = "hyprlang",
     [".zsh"] = "sh",
     [".zshenv"] = "sh",
     [".zsh/.*%.zsh"] = "sh",
-    ["Directory.[Bb]uild.props"] = "xml",
-    ["Directory.[Pp]ackages.props"] = "xml",
-    ["Directory.[Bb]uild.target"] = "xml",
-    ["*.props"] = "xml",
-    ["*.slnx"] = "xml",
-    ["*.csproj"] = "xml",
-    ["*%.tmpl"] = "gotmpl",
-    ["*.editorconfig"] = "editorconfig",
   },
 }
