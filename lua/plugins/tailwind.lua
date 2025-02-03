@@ -17,7 +17,12 @@ return {
         ---@diagnostic disable: missing-fields
         config = {
           tailwindcss = {
-            on_attach = function(_, bufnr) require("tailwindcss-colors").buf_attach(bufnr) end,
+            on_attach = function(_, bufnr)
+              require("tailwindcss-colors").buf_attach(bufnr)
+              for _, server in ipairs(vim.lsp.get_clients { bufnr, name = "cssls" }) do
+                if server.name == "cssls" then vim.lsp.get_client_by_id(server.id).stop() end
+              end
+            end,
             settings = {
               tailwindCSS = {
                 experimental = {
