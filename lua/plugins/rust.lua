@@ -1,9 +1,11 @@
 if vim.g.vscode then return {} end -- NOTE: don't do anything in vscode instances
 ---@type LazySpec
 return {
-  "AstroNvim/astrocommunity",
-  { import = "astrocommunity.pack.rust" },
-  dependencies = {
+  {
+    "AstroNvim/astrocommunity",
+    { import = "astrocommunity.pack.rust" },
+  },
+  {
     "AstroNvim/astrolsp",
     ---@type AstroLSPOpts
     opts = {

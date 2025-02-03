@@ -1,10 +1,13 @@
 if vim.g.vscode then return {} end -- NOTE: don't do anything in vscode instances
 ---@type LazySpec
 return {
-  "AstroNvim/astrocommunity",
-  { import = "astrocommunity.pack.tailwindcss" },
-  dependencies = {
+  {
+    "AstroNvim/astrocommunity",
+    { import = "astrocommunity.pack.tailwindcss" },
+  },
+  {
     "themaxmarchuk/tailwindcss-colors.nvim",
+    event = "VeryLazy",
     dependencies = {
       "AstroNvim/astrolsp",
       optional = true,
