@@ -17,14 +17,12 @@ return {
         mappings = {
           n = {
             ["gf"] = {
-              function()
-                if require("obsidian").util.cursor_on_markdown_link() then
-                  return "<Cmd>ObsidianFollowLink<CR>"
-                else
-                  return "gf"
-                end
-              end,
-              desc = "Obsidian Follow Link",
+              function() return require("obsidian").util.gf_passthrough() end,
+              desc = "[Obsidian] Follow Link",
+            },
+            ["<leader>ch"] = {
+              function() require("obsidian").util.toggle_checkbox() end,
+              desc = "[Obsidian] Toggle Checkbox",
             },
           },
         },
