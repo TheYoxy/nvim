@@ -62,45 +62,7 @@ return {
         ["<Leader>xq"] = false,
         ["<Leader>xl"] = false,
         ["<Leader>w"] = false,
-        ["<Leader>r"] = { name = "Refactoring" },
-        ["<Leader>rr"] = {
-          function() vim.lsp.buf.rename() end,
-          desc = "Rename symbol",
-        },
-        ["<Leader>rd"] = {
-          function() vim.lsp.buf.delete() end,
-          desc = "Delete symbol",
-        },
-        ["<Leader>rf"] = {
-          function() vim.lsp.buf.format(require("astrolsp").format_opts) end,
-          desc = "Format buffer",
-          cond = "textDocument/formatting",
-        },
-        ["<Leader>rn"] = {
-          desc = "Inline variable",
-          cond = "textDocument/codeAction",
-          function()
-            vim.lsp.buf.code_action {
-              context = {
-                only = { "refactor.inline" },
-              },
-              apply = true,
-            }
-          end,
-        },
-        ["<Leader>ri"] = {
-          function()
-            -- Execute the "Remove Unused Imports" code action
-            vim.lsp.buf.code_action {
-              context = {
-                only = { "source.organizeImports" },
-              },
-              apply = true,
-            }
-          end,
-          desc = "Remove imports",
-          cond = "textDocument/codeAction",
-        },
+        -- ["<Leader>r"] = { name = require("astroui").get_icon("ActiveLSP", 1, true) .. "Refactoring" },
         -- [":"] = {
         --   function() require("fine-cmdline").open { default_value = "" } end,
         --   desc = "Fine commandline",
@@ -117,17 +79,10 @@ return {
         --   cond = function(client) return client.server_capabilities.semanticTokensProvider and vim.lsp.semantic_tokens end,
         -- },
       },
-      v = {
-        ["<Leader>rf"] = {
-          function() vim.lsp.buf.format(require("astrolsp").format_opts) end,
-          desc = "Format buffer",
-          cond = "textDocument/formatting",
-        },
-      },
     },
     -- A custom `on_attach` function to be run after the default `on_attach` function
     -- takes two parameters `client` and `bufnr`  (`:h lspconfig-setup`)
-    on_attach = function(client, bufnr)
+    on_attach = function(client, bfnr)
       -- this would disable semanticTokensProvider for all clients
       -- client.server_capabilities.semanticTokensProvider = nil
     end,

@@ -25,6 +25,9 @@ return {
             end,
             settings = {
               tailwindCSS = {
+                lint = {
+                  cssConflict = "error",
+                },
                 experimental = {
                   classRegex = {
                     {

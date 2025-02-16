@@ -1,5 +1,5 @@
 if not vim.g.neovide then return {} end -- NOTE: don't do anything in not vscode instances
-vim.g.neovide_transparency = 0.3
+vim.g.neovide_transparency = 0.6
 vim.g.neovide_window_blurred = true
 vim.g.transparency = 0.8
 vim.g.neovide_font_settings = {

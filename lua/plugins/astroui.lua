@@ -9,6 +9,7 @@ return {
   ---@type AstroUIOpts
   opts = {
     -- change colorscheme
+    colorscheme = "tokyonight",
     -- colorscheme = "catppuccin-mocha", -- "astrodark", -- github_dark_default
     -- colorscheme = "astrotheme", -- "astrodark", -- github_dark_default
     -- colorscheme = "astrotheme", -- "astrodark", -- github_dark_default

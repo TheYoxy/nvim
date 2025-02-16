@@ -3,6 +3,7 @@ return { -- override nvim-cmp plugin
   dependencies = {
     "hrsh7th/cmp-emoji", -- add cmp source as dependency of cmp
     "hrsh7th/cmp-cmdline", -- add cmp-cmdline as dependency of cmp
+    "hrsh7th/cmp-nvim-lsp-signature-help",
   },
   keys = { ":", "/", "?" }, -- lazy load cmp on more keys along with insert mode
   config = function(_, opts)
@@ -38,11 +39,23 @@ return { -- override nvim-cmp plugin
     local cmp = require "cmp"
     -- modify the sources part of the options table
     opts.sources = cmp.config.sources {
+      { name = "nvim_lsp_signature_help", priority = 1000 },
       { name = "nvim_lsp", priority = 1000 },
-      { name = "buffer", priority = 500 },
+      -- { name = "buffer", priority = 500 },
       { name = "path", priority = 250 },
       { name = "emoji", priority = 110 },
-      { name = "luasnip", priority = 100 },
+      -- { name = "luasnip", priority = 100 },
     }
+
+    -- opts.mapping["<Tab>"] = cmp.mapping(function(fallback)
+    --   -- This little snippet will confirm with tab, and if no entry is selected, will confirm the first item
+    --   if cmp.visible() then
+    --     local entry = cmp.get_selected_entry()
+    --     if not entry then cmp.select_next_item { behavior = cmp.SelectBehavior.Select } end
+    --     cmp.confirm()
+    --   else
+    --     fallback()
+    --   end
+    -- end, { "i", "s", "c" })
   end,
 }

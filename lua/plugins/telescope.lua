@@ -38,10 +38,19 @@ return {
             end,
             desc = "Switch Buffers",
           },
-          ["<Leader>e"] = { function() vim.notify "This keymap is replaced by [<Leader>fe]" end, desc = "Find history" },
           ["<Leader>fe"] = {
             function() require("telescope.builtin").oldfiles { only_cwd = true } end,
             desc = "Find history",
+          },
+          ["<Leader>fs"] = {
+            function()
+              if require('astrocore').is_available "aerial.nvim" then
+                require("telescope").extensions.aerial.aerial()
+              else
+                require("telescope.builtin").lsp_dynamic_workspace_symbols()
+              end
+            end,
+            desc = "Find workspace symbols",
           },
           ["<Leader>fE"] = {
             function() require("telescope.builtin").oldfiles {} end,

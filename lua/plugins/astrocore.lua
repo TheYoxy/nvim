@@ -67,12 +67,13 @@ return {
         wrap = true, -- sets vim.opt.wrap
 
         termguicolors = true,
-        scrolloff = 100,
+        -- scrolloff = 100,
         conceallevel = 2,
         foldenable = false,
         foldexpr = "nvim_treesitter#foldexpr()",
         foldmethod = "expr",
         updatetime = 50,
+        winblend = 10,
       }, powershell_vim),
       g = { -- vim.g.<key>
         mapleader = " ",

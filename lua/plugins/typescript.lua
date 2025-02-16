@@ -41,6 +41,9 @@ return {
                 functionLikeReturnTypes = { enabled = false },
                 enumMemberValues = { enabled = true },
               },
+              preferences = {
+                importModuleSpecifier = "shortest",
+              }
             },
             javascript = {
               updateImportsOnFileMove = { enabled = "always" },

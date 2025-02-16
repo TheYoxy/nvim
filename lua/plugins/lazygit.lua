@@ -21,7 +21,7 @@ return {
         opts = {
           mappings = {
             n = {
-              ["<Leader>gg"] = { ":LazyGit<cr>", desc = "Open lazygit" },
+              ["<Leader>gg"] = { function() require("lazygit").lazygit() end, desc = "Open lazygit" },
             },
           },
         },

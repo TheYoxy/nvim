@@ -26,8 +26,8 @@ return {
 
       opts.mappings = {
         n = {
-          j = { "v:count == 0 ? 'gj' : 'j'", expr = true, desc = "Move cursor down" },
-          k = { "v:count == 0 ? 'gk' : 'k'", expr = true, desc = "Move cursor up" },
+          -- j = { "v:count == 0 ? 'gj' : 'j'", expr = true, desc = "Move cursor down" },
+          -- k = { "v:count == 0 ? 'gk' : 'k'", expr = true, desc = "Move cursor up" },
 
           -- utils
           ["+"] = "<c-a>",
