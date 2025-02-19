@@ -17,17 +17,33 @@ return {
       "AstroNvim/astrolsp",
       opts = function(_, opts)
         local maps = opts.mappings
-        maps.n["K"] = { "<Cmd>Lspsaga hover_doc<CR>", desc = "Hover symbol details", cond = "textDocument/hover" }
-
+        maps.n["<Leader>rr"] = {
+          function() require("lspsaga.rename").do_rename {} end,
+          desc = "Rename symbol",
+          cond = "textDocument/references",
+        }
+        maps.n["K"] = {
+          function() require("lspsaga.hover").render_hover_doc {} end,
+          desc = "Hover symbol details",
+          cond = "textDocument/hover",
+        }
+        maps.n["gd"] = {
+          "<Cmd>Lspsaga goto_definition<CR>",
+          desc = "Preview definition",
+          cond = "textDocument/definition",
+        }
         -- call hierarchy
-        maps.n["<Leader>lc"] =
-          { "<Cmd>Lspsaga incoming_calls<CR>", desc = "Incoming calls", cond = "callHierarchy/incomingCalls" }
+        maps.n["<Leader>lc"] = {
+          "<Cmd>Lspsaga incoming_calls<CR>",
+          desc = "Incoming calls",
+          cond = "callHierarchy/incomingCalls",
+        }
         maps.n["<Leader>lC"] =
           { "<Cmd>Lspsaga outgoing_calls<CR>", desc = "Outgoing calls", cond = "callHierarchy/outgoingCalls" }
 
         -- code action
         maps.n["<Leader>la"] = {
-          "<Cmd>Lspsaga code_action<CR>",
+          function() require("lspsaga.codeaction").code_action {} end,
           desc = "LSP code action",
           cond = "textDocument/codeAction",
         }
@@ -35,7 +51,11 @@ return {
           { ":<C-U>Lspsaga code_action<CR>", desc = "LSP code action", cond = "textDocument/codeAction" }
 
         -- definition
-        maps.n["<Leader>lp"] = { "<Cmd>Lspsaga peek_definition<CR>", desc = "Peek definition", cond = "textDocument/definition" }
+        maps.n["<Leader>lp"] = {
+          function() require("lspsaga.definition").peek_handler {} end,
+          desc = "Peek definition",
+          cond = "textDocument/definition",
+        }
 
         -- outline
         maps.n["<Leader>lS"] =
@@ -76,9 +96,9 @@ return {
           close = "<Esc>",
           split = "s",
           vsplit = "v",
-        }
+        },
       },
-      
+
       lightbulb = { sign = false, enable_in_insert = false, virtual_text = true },
       ui = {
         code_action = get_icon "DiagnosticHint",

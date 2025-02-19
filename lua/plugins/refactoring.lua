@@ -30,10 +30,6 @@ return {
                 function() require("refactoring").refactor "Extract Block To File" end,
                 desc = "Extract Block To File",
               },
-              ["<Leader>rr"] = {
-                function() vim.lsp.buf.rename() end,
-                desc = "Rename symbol",
-              },
               ["<Leader>rd"] = {
                 function() vim.lsp.buf.delete() end,
                 desc = "Delete symbol",
