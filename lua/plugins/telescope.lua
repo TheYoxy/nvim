@@ -44,7 +44,7 @@ return {
           },
           ["<Leader>fs"] = {
             function()
-              if require('astrocore').is_available "aerial.nvim" then
+              if require("astrocore").is_available "aerial.nvim" then
                 require("telescope").extensions.aerial.aerial()
               else
                 require("telescope.builtin").lsp_dynamic_workspace_symbols()
@@ -56,17 +56,26 @@ return {
             function() require("telescope.builtin").oldfiles {} end,
             desc = "Find all history",
           },
-          ["<Leader>w"] = { desc = " Diagnostics" },
-          ["<Leader>wx"] = {
-            function() require("telescope.builtin").diagnostics { bufnr = 0 } end,
-            desc = "Show diagnostics (Current buffer)",
+          ["<Leader>ls"] = {
+            function()
+              require("telescope.builtin").lsp_workspace_symbols {
+                fname_width = 20,
+                symbol_width = 35,
+              }
+            end,
+            desc = "Search workspace symbols",
           },
-          ["<Leader>wX"] = {
-            function() require("telescope.builtin").diagnostics { bufnr = nil } end,
-            desc = "Show diagnostics (Workspace)",
-          },
-          ["[x"] = { function() vim.diagnostic.goto_next() end, desc = "Next diagnostic" },
-          ["]x"] = { function() vim.diagnostic.goto_prev() end, desc = "Previous diagnostic" },
+          -- ["<Leader>w"] = { desc = " Diagnostics" },
+          -- ["<Leader>wx"] = {
+          --   function() require("telescope.builtin").diagnostics { bufnr = 0 } end,
+          --   desc = "Show diagnostics (Current buffer)",
+          -- },
+          -- ["<Leader>wX"] = {
+          --   function() require("telescope.builtin").diagnostics { bufnr = nil } end,
+          --   desc = "Show diagnostics (Workspace)",
+          -- },
+          -- ["[x"] = { function() vim.diagnostic.goto_next() end, desc = "Next diagnostic" },
+          -- ["]x"] = { function() vim.diagnostic.goto_prev() end, desc = "Previous diagnostic" },
         },
       },
     },

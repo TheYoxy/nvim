@@ -66,6 +66,9 @@ return {
           enable = true,
           lookahead = true,
           keymaps = {
+            -- ["as"] = { query = "@string.outer", desc = "Select string with quotes" },
+            -- ["is"] = { query = "@string.inner", desc = "Select string w/o quotes" },
+
             ["af"] = { query = "@function.outer", desc = "Select full function" },
             ["if"] = { query = "@function.inner", desc = "Select inner function code" },
 

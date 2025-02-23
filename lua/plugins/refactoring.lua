@@ -30,6 +30,10 @@ return {
                 function() require("refactoring").refactor "Extract Block To File" end,
                 desc = "Extract Block To File",
               },
+              ["<Leader>rr"] = {
+                function() vim.lsp.buf.rename() end,
+                desc = "Rename symbol",
+              },
               ["<Leader>rd"] = {
                 function() vim.lsp.buf.delete() end,
                 desc = "Delete symbol",
@@ -73,7 +77,7 @@ return {
                 desc = "Extract Block To File",
               },
               ["<Leader>rr"] = {
-                function() require("refactoring").select_refactor({}) end,
+                function() require("refactoring").select_refactor {} end,
                 desc = "Select Refactor",
               },
               ["<Leader>rp"] = {
@@ -113,7 +117,6 @@ return {
               cond = "textDocument/codeAction",
             },
             ["<Leader>ri"] = {
-              desc = "Remove imports",
               function()
                 -- Execute the "Remove Unused Imports" code action
                 vim.lsp.buf.code_action {
@@ -123,6 +126,7 @@ return {
                   apply = true,
                 }
               end,
+              desc = "Remove imports",
               cond = "textDocument/codeAction",
             },
           },

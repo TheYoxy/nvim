@@ -18,12 +18,12 @@ return {
       opts = function(_, opts)
         local maps = opts.mappings
         maps.n["<Leader>rr"] = {
-          function() require("lspsaga.rename").do_rename {} end,
+          "<Cmd>Lspsaga rename<CR>",
           desc = "Rename symbol",
           cond = "textDocument/references",
         }
         maps.n["K"] = {
-          function() require("lspsaga.hover").render_hover_doc {} end,
+          "<Cmd>Lspsaga hover_doc<CR>",
           desc = "Hover symbol details",
           cond = "textDocument/hover",
         }
@@ -43,20 +43,20 @@ return {
 
         -- code action
         maps.n["<Leader>la"] = {
-          function() require("lspsaga.codeaction").code_action {} end,
+          "<Cmd>Lspsaga code_action<CR>",
           desc = "LSP code action",
           cond = "textDocument/codeAction",
         }
         maps.x["<Leader>la"] =
-          { ":<C-U>Lspsaga code_action<CR>", desc = "LSP code action", cond = "textDocument/codeAction" }
+          { "<Cmd>Lspsaga code_action<CR>", desc = "LSP code action", cond = "textDocument/codeAction" }
 
         -- definition
         maps.n["<Leader>lp"] = {
-          function() require("lspsaga.definition").peek_handler {} end,
+          "<Cmd>Lspsaga preview_definition<CR>",
           desc = "Peek definition",
           cond = "textDocument/definition",
         }
-
+        
         -- outline
         maps.n["<Leader>lS"] =
           { "<Cmd>Lspsaga outline<CR>", desc = "Symbols outline", cond = "textDocument/documentSymbol" }

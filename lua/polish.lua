@@ -26,6 +26,7 @@ vim.filetype.add {
     [".zsh/.*%.zsh"] = "sh",
   },
 }
+
 local blend = 20
 
 -- vim.api.nvim_create_autocmd("FileType", {

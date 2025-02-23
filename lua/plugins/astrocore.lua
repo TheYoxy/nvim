@@ -53,9 +53,11 @@ return {
     diagnostics = {
       virtual_text = true,
       virtual_lines = {
-        only_current_line = true,
+        current_line = true,
       },
       underline = true,
+      severity_sort = true,
+      update_in_insert = false,
     },
     -- vim options can be configured here
     options = {

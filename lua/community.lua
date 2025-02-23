@@ -11,7 +11,7 @@ return {
   { import = "astrocommunity.completion.copilot-lua-cmp" },
 
   { import = "astrocommunity.editing-support.rainbow-delimiters-nvim" },
-  -- { import = "astrocommunity.editing-support.text-case-nvim" },
+  { import = "astrocommunity.editing-support.text-case-nvim" },
 
   { import = "astrocommunity.media.vim-wakatime" },
 
