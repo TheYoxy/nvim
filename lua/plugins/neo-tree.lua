@@ -4,23 +4,35 @@ return {
   {
     "nvim-neo-tree/neo-tree.nvim",
     cmd = "Neotree",
+    dependencies = {
+      "saifulapm/neotree-file-nesting-config",
+    },
     keys = {
       {
-        "<leader>fe",
+        "<leader>e",
         function()
           require("neo-tree.command").execute({ toggle = true, dir = LazyVim.root() })
         end,
         desc = "Explorer NeoTree (Root Dir)",
       },
       {
-        "<leader>fE",
+        "<leader>E",
         function()
           require("neo-tree.command").execute({ toggle = true, dir = vim.uv.cwd() })
         end,
         desc = "Explorer NeoTree (cwd)",
       },
-      { "<leader>e", "<leader>fe", desc = "Explorer NeoTree (Root Dir)", remap = true },
-      { "<leader>E", "<leader>fE", desc = "Explorer NeoTree (cwd)", remap = true },
+      {
+        "<leader>o",
+        function()
+          if vim.bo.filetype == "neo-tree" then
+            vim.cmd.wincmd("p")
+          else
+            vim.cmd.Neotree("focus")
+          end
+        end,
+        desc = "Toggle Explorer Focus",
+      },
       {
         "<leader>ge",
         function()
@@ -114,6 +126,8 @@ return {
         { event = events.FILE_MOVED, handler = on_move },
         { event = events.FILE_RENAMED, handler = on_move },
       })
+      opts.nesting_rules = require("neotree-file-nesting-config").nesting_rules
+
       require("neo-tree").setup(opts)
       vim.api.nvim_create_autocmd("TermClose", {
         pattern = "*lazygit",

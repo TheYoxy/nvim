@@ -119,11 +119,11 @@ return {
 
       -- setup keymaps
       LazyVim.lsp.on_attach(function(client, buffer)
-        require("plugins.defaults.lsp.keymaps").on_attach(client, buffer)
+        require("my-lazy.plugins.lsp.keymaps").on_attach(client, buffer)
       end)
 
       LazyVim.lsp.setup()
-      LazyVim.lsp.on_dynamic_capability(require("plugins.defaults.lsp.keymaps").on_attach)
+      LazyVim.lsp.on_dynamic_capability(require("my-lazy.plugins.lsp.keymaps").on_attach)
 
       -- diagnostics signs
       if vim.fn.has("nvim-0.10.0") == 0 then
