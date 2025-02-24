@@ -8,7 +8,6 @@ if vim.fn.has("nvim-0.9.0") == 0 then
   return {}
 end
 
-vim.notify("Loading LazyVim...", "info", { title = "LazyVim" })
 require("my-lazy.config.init").init()
 
 --- @type LazySpec

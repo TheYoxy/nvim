@@ -38,7 +38,7 @@ return {
         desc = "Refactor",
       },
       {
-        "<leader>ri",
+        "<leader>rn",
         function()
           require("refactoring").refactor("Inline Variable")
         end,
@@ -46,14 +46,14 @@ return {
         desc = "Inline Variable",
       },
       {
-        "<leader>rb",
+        "<leader>rbb",
         function()
           require("refactoring").refactor("Extract Block")
         end,
         desc = "Extract Block",
       },
       {
-        "<leader>rf",
+        "<leader>rbf",
         function()
           require("refactoring").refactor("Extract Block To File")
         end,

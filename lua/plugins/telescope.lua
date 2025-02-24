@@ -106,9 +106,7 @@ return {
       { "<leader>fc", LazyVim.pick.config_files(), desc = "Find Config File" },
       {
         "<Leader>fe",
-        function()
-          LazyVim.pick("oldfiles", { cwd = vim.uv.cwd() })
-        end,
+        LazyVim.pick("oldfiles", { cwd = vim.uv.cwd() }),
         desc = "Recent (cwd)",
       },
       {

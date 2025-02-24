@@ -47,7 +47,7 @@ return {
     opts = {
       server = {
         on_attach = function(_, bufnr)
-          vim.keymap.set("n", "<leader>cR", function()
+          vim.keymap.set("n", "<leader>lR", function()
             vim.cmd.RustLsp("codeAction")
           end, { desc = "Code Action", buffer = bufnr })
           vim.keymap.set("n", "<leader>dr", function()

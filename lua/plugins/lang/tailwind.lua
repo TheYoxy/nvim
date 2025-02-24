@@ -8,7 +8,7 @@ return {
         event = "VeryLazy",
       },
     },
-    ---@diagnostic disable-line missing-fields
+    ---@diagnostic disable missing-fields
     ---@type PluginLspOpts
     opts = {
       ---@type lspconfig.options
@@ -21,7 +21,7 @@ return {
           -- to fully override the default_config, change the below
           -- filetypes = {}
           settings = {
-            tailwindcss = {
+            tailwindCSS = {
               lint = {
                 cssConflict = "error",
               },

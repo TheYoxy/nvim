@@ -3,6 +3,6 @@ return {
   "arnamak/stay-centered.nvim",
   event = "VeryLazy",
   opts = {
-    enabled = true,
+    enabled = false,
   },
 }

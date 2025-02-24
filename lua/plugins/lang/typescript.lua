@@ -1,9 +1,11 @@
+---@diagnostic disable: missing-fields
 return {
   -- correctly setup lspconfig
   {
     "neovim/nvim-lspconfig",
     opts = {
       -- make sure mason installs the server
+      ---@type lspconfig.options
       servers = {
         --- @deprecated -- tsserver renamed to ts_ls but not yet released, so keep this for now
         --- the proper approach is to check the nvim-lspconfig release version when it's released to determine the server name dynamically
@@ -30,8 +32,10 @@ return {
               enableMoveToFileCodeAction = true,
               autoUseWorkspaceTsdk = true,
               experimental = {
-                maxInlayHintLength = 30,
+                -- maxInlayHintLength = 30,
+                enableProjectDiagnostics = true,
                 completion = {
+                  entriesLimit = 10,
                   enableServerSideFuzzyMatch = true,
                 },
               },
@@ -78,7 +82,7 @@ return {
             {
               "<leader>ri",
               LazyVim.lsp.action["source.organizeImports"],
-              desc = "Organize Imports",
+              desc = "Remove unused imports + Organize Imports",
             },
             {
               "<leader>lo",
@@ -86,7 +90,7 @@ return {
               desc = "Add missing imports",
             },
             {
-              "<leader>ri",
+              "<leader>rI",
               LazyVim.lsp.action["source.removeUnused.ts"],
               desc = "Remove unused imports",
             },

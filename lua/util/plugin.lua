@@ -45,16 +45,6 @@ function M.setup()
   end)
 end
 
---- @deprecated
-function M.extra_idx(name)
-  local Config = require("lazy.core.config")
-  for i, extra in ipairs(Config.spec.modules) do
-    if extra == "lazyvim.plugins.extras." .. name then
-      return i
-    end
-  end
-end
-
 function M.lazy_file()
   -- Add support for the LazyFile event
   local Event = require("lazy.core.handler.event")
@@ -62,7 +52,6 @@ function M.lazy_file()
   Event.mappings.LazyFile = { id = "LazyFile", event = M.lazy_file_events }
   Event.mappings["User LazyFile"] = Event.mappings.LazyFile
 end
-
 
 function M.fix_renames()
   Plugin.Spec.add = LazyVim.inject.args(Plugin.Spec.add, function(self, plugin)
