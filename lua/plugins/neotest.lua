@@ -3,7 +3,7 @@ return {
   desc = "Neotest support. Requires language specific adapters to be configured. (see lang extras)",
   {
     "nvim-neotest/neotest",
-    dependencies = { "nvim-neotest/nvim-nio", "marilari88/neotest-vitest" },
+    dependencies = { "nvim-neotest/nvim-nio", },
     opts = {
       -- Can be a list of adapters like what neotest expects,
       -- or a list of adapter names,

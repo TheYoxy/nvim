@@ -1,4 +1,5 @@
 ---@diagnostic disable: missing-fields
+--- @type LazySpec
 return {
   -- correctly setup lspconfig
   {
@@ -265,6 +266,25 @@ return {
         ["tsconfig.json"] = { glyph = "", hl = "MiniIconsAzure" },
         ["tsconfig.build.json"] = { glyph = "", hl = "MiniIconsAzure" },
         ["yarn.lock"] = { glyph = "", hl = "MiniIconsBlue" },
+      },
+    },
+  },
+  {
+    "nvim-neotest/neotest",
+    optional = true,
+    dependencies = {
+      "marilari88/neotest-vitest",
+    },
+    ---@module 'neotest'
+    ---@type neotest.Config
+    opts = {
+      adapters = {
+        ["neotest-vitest"] = {
+          filter_dir = function(name)
+            return name ~= "node_modules"
+          end,
+          -- Here we can set options for neotest-vitest
+        },
       },
     },
   },
