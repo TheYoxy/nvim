@@ -1,9 +1,7 @@
 return {
-  recommended = true,
-  desc = "Neotest support. Requires language specific adapters to be configured. (see lang extras)",
   {
     "nvim-neotest/neotest",
-    dependencies = { "nvim-neotest/nvim-nio", },
+    dependencies = { "nvim-neotest/nvim-nio" },
     opts = {
       -- Can be a list of adapters like what neotest expects,
       -- or a list of adapter names,
@@ -105,7 +103,6 @@ return {
     end,
     -- stylua: ignore
     keys = {
-      {"<leader>t", "", desc = "+test"},
       { "<leader>tt", function() require("neotest").run.run(vim.fn.expand("%")) end, desc = "Run File (Neotest)" },
       { "<leader>tT", function() require("neotest").run.run(vim.uv.cwd()) end, desc = "Run All Test Files (Neotest)" },
       { "<leader>tr", function() require("neotest").run.run() end, desc = "Run Nearest (Neotest)" },
@@ -115,6 +112,14 @@ return {
       { "<leader>tO", function() require("neotest").output_panel.toggle() end, desc = "Toggle Output Panel (Neotest)" },
       { "<leader>tS", function() require("neotest").run.stop() end, desc = "Stop (Neotest)" },
       { "<leader>tw", function() require("neotest").watch.toggle(vim.fn.expand("%")) end, desc = "Toggle Watch (Neotest)" },
+    },
+  },
+  {
+    "folke/which-key.nvim",
+    opts = {
+      spec = {
+        { "<leader>t", desc = "+test" },
+      },
     },
   },
   {

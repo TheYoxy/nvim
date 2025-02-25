@@ -1,3 +1,4 @@
+--- @type LazySpec
 return {
   -- lspconfig
   {
@@ -7,6 +8,8 @@ return {
       "mason.nvim",
       { "williamboman/mason-lspconfig.nvim", config = function() end },
     },
+    --- @module "lspconfig"
+    --- @return lspconfig.Config
     opts = function()
       ---@class PluginLspOpts
       local ret = {
@@ -64,6 +67,7 @@ return {
         },
         -- LSP Server Settings
         ---@type lspconfig.options
+        ---@diagnostic disable-line: missing-fields
         servers = {
           lua_ls = {
             -- mason = false, -- set to false if you don't want this server to be installed with mason
@@ -139,7 +143,7 @@ return {
       if vim.fn.has("nvim-0.10") == 1 then
         -- inlay hints
         if opts.inlay_hints.enabled then
-          LazyVim.lsp.on_supports_method("textDocument/inlayHint", function(client, buffer)
+          LazyVim.lsp.on_supports_method("textDocument/inlayHint", function(_, buffer)
             if
               vim.api.nvim_buf_is_valid(buffer)
               and vim.bo[buffer].buftype == ""
@@ -152,7 +156,7 @@ return {
 
         -- code lens
         if opts.codelens.enabled and vim.lsp.codelens then
-          LazyVim.lsp.on_supports_method("textDocument/codeLens", function(client, buffer)
+          LazyVim.lsp.on_supports_method("textDocument/codeLens", function(_, buffer)
             vim.lsp.codelens.refresh()
             vim.api.nvim_create_autocmd({ "BufEnter", "CursorHold", "InsertLeave" }, {
               buffer = buffer,
@@ -231,6 +235,7 @@ return {
       end
 
       if have_mason then
+        ---@diagnostic disable-next-line: missing-fields
         mlsp.setup({
           ensure_installed = vim.tbl_deep_extend(
             "force",
@@ -259,7 +264,22 @@ return {
 
     "williamboman/mason.nvim",
     cmd = "Mason",
-    keys = { { "<leader>lm", "<cmd>Mason<cr>", desc = "Mason" } },
+    keys = {
+      {
+        "<leader>pm",
+        function()
+          require("mason.ui").open()
+        end,
+        desc = "Mason Installer",
+      },
+      {
+        "<leader>pM",
+        function()
+          require("astrocore.mason").update_all()
+        end,
+        desc = "Mason update",
+      },
+    },
     build = ":MasonUpdate",
     opts_extend = { "ensure_installed" },
     opts = {

@@ -49,4 +49,4 @@ require("lazy").setup({
       },
     },
   },
-})
+}--[[@as LazyConfig]])
