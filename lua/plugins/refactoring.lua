@@ -1,147 +1,149 @@
---- @type LazySpec
+local pick = function()
+  local refactoring = require("refactoring")
+  if LazyVim.pick.picker.name == "telescope" then
+    return require("telescope").extensions.refactoring.refactors()
+  elseif LazyVim.pick.picker.name == "fzf" then
+    local fzf_lua = require("fzf-lua")
+    local results = refactoring.get_refactors()
+
+    local opts = {
+      fzf_opts = {},
+      fzf_colors = true,
+      actions = {
+        ["default"] = function(selected)
+          refactoring.refactor(selected[1])
+        end,
+      },
+    }
+    fzf_lua.fzf_exec(results, opts)
+  else
+    refactoring.select_refactor()
+  end
+end
+
 return {
-  "ThePrimeagen/refactoring.nvim",
-  event = "User AstroFile",
-  dependencies = {
-    "nvim-lua/plenary.nvim",
-    "nvim-treesitter/nvim-treesitter",
-    {
-      "AstroNvim/astrocore",
-      ---@param opts AstroCoreOpts
-      opts = function(_, opts)
-        local get_icon = require("astroui").get_icon
-        return require("astrocore").extend_tbl(opts, {
-          mappings = {
-            n = {
-              ["<Leader>r"] = { desc = get_icon("Refactoring", 1, true) .. "Refactor" },
-              ["<Leader>rb"] = {
-                function() require("refactoring").refactor "Extract Block" end,
-                desc = "Extract Block",
-              },
-              ["<Leader>rp"] = {
-                function() require("refactoring").debug.printf { below = false } end,
-                desc = "Debug: Print Function",
-              },
-              ["<Leader>rc"] = {
-                function() require("refactoring").debug.cleanup {} end,
-                desc = "Debug: Clean Up",
-              },
-              ["<Leader>rbf"] = {
-                function() require("refactoring").refactor "Extract Block To File" end,
-                desc = "Extract Block To File",
-              },
-              ["<Leader>rr"] = {
-                function() vim.lsp.buf.rename() end,
-                desc = "Rename symbol",
-              },
-              ["<Leader>rd"] = {
-                function() vim.lsp.buf.delete() end,
-                desc = "Delete symbol",
-              },
-            },
-            x = {
-              ["<Leader>r"] = { desc = get_icon("Refactoring", 1, true) .. "Refactor" },
-              ["<Leader>re"] = {
-                function() require("refactoring").refactor "Extract Function" end,
-                desc = "Extract Function",
-              },
-              ["<Leader>rf"] = {
-                function() require("refactoring").refactor "Extract Function To File" end,
-                desc = "Extract Function To File",
-              },
-              ["<Leader>rv"] = {
-                function() require("refactoring").refactor "Extract Variable" end,
-                desc = "Extract Variable",
-              },
-            },
-            v = {
-              ["<Leader>r"] = { desc = get_icon("Refactoring", 1, true) .. "Refactor" },
-              ["<Leader>re"] = {
-                function() require("refactoring").refactor "Extract Function" end,
-                desc = "Extract Function",
-              },
-              ["<Leader>rf"] = {
-                function() require("refactoring").refactor "Extract Function To File" end,
-                desc = "Extract Function To File",
-              },
-              ["<Leader>rv"] = {
-                function() require("refactoring").refactor "Extract Variable" end,
-                desc = "Extract Variable",
-              },
-              ["<Leader>rb"] = {
-                function() require("refactoring").refactor "Extract Block" end,
-                desc = "Extract Block",
-              },
-              ["<Leader>rbf"] = {
-                function() require("refactoring").refactor "Extract Block To File" end,
-                desc = "Extract Block To File",
-              },
-              ["<Leader>rr"] = {
-                function() require("refactoring").select_refactor {} end,
-                desc = "Select Refactor",
-              },
-              ["<Leader>rp"] = {
-                function() require("refactoring").debug.printf { below = false } end,
-                desc = "Debug: Print Function",
-              },
-              ["<Leader>rc"] = {
-                function() require("refactoring").debug.cleanup {} end,
-                desc = "Debug: Clean Up",
-              },
-            },
-          },
-        } --[[@as AstroCoreOpts]])
-      end,
+  {
+    "ThePrimeagen/refactoring.nvim",
+    event = { "BufReadPre", "BufNewFile" },
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "nvim-treesitter/nvim-treesitter",
     },
-    {
-      "AstroNvim/astrolsp",
-      ---@type AstroLSPOpts
-      opts = {
-        mappings = {
-          n = {
-            ["<Leader>rf"] = {
-              function() vim.lsp.buf.format(require("astrolsp").format_opts) end,
-              desc = "Format buffer",
-              cond = "textDocument/formatting",
-            },
-            ["<Leader>rn"] = {
-              desc = "Inline variable",
-              function()
-                vim.lsp.buf.code_action {
-                  context = {
-                    only = { "refactor.inline" },
-                  },
-                  apply = true,
-                }
-              end,
-              cond = "textDocument/codeAction",
-            },
-            ["<Leader>ri"] = {
-              function()
-                -- Execute the "Remove Unused Imports" code action
-                vim.lsp.buf.code_action {
-                  context = {
-                    only = { "source.organizeImports" },
-                  },
-                  apply = true,
-                }
-              end,
-              desc = "Remove imports",
-              cond = "textDocument/codeAction",
-            },
-          },
-        },
+    keys = {
+      { "<leader>r", "", desc = "+refactor", mode = { "n", "v" } },
+      {
+        "<leader>rs",
+        pick,
+        mode = "v",
+        desc = "Refactor",
+      },
+      {
+        "<leader>rn",
+        function()
+          require("refactoring").refactor("Inline Variable")
+        end,
+        mode = { "n", "v" },
+        desc = "Inline Variable",
+      },
+      {
+        "<leader>rbb",
+        function()
+          require("refactoring").refactor("Extract Block")
+        end,
+        desc = "Extract Block",
+      },
+      {
+        "<leader>rbf",
+        function()
+          require("refactoring").refactor("Extract Block To File")
+        end,
+        desc = "Extract Block To File",
+      },
+      {
+        "<leader>rP",
+        function()
+          require("refactoring").debug.printf({ below = false })
+        end,
+        desc = "Debug Print",
+      },
+      {
+        "<leader>rp",
+        function()
+          require("refactoring").debug.print_var({ normal = true })
+        end,
+        desc = "Debug Print Variable",
+      },
+      {
+        "<leader>rc",
+        function()
+          require("refactoring").debug.cleanup({})
+        end,
+        desc = "Debug Cleanup",
+      },
+      {
+        "<leader>rf",
+        function()
+          require("refactoring").refactor("Extract Function")
+        end,
+        mode = "v",
+        desc = "Extract Function",
+      },
+      {
+        "<leader>rF",
+        function()
+          require("refactoring").refactor("Extract Function To File")
+        end,
+        mode = "v",
+        desc = "Extract Function To File",
+      },
+      {
+        "<leader>rx",
+        function()
+          require("refactoring").refactor("Extract Variable")
+        end,
+        mode = "v",
+        desc = "Extract Variable",
+      },
+      {
+        "<leader>rp",
+        function()
+          require("refactoring").debug.print_var()
+        end,
+        mode = "v",
+        desc = "Debug Print Variable",
       },
     },
-    {
-      "AstroNvim/astroui",
-      ---@type AstroUIOpts
-      opts = {
-        icons = {
-          Refactoring = "󰣪",
-        },
+    opts = {
+      prompt_func_return_type = {
+        go = false,
+        java = false,
+        cpp = false,
+        c = false,
+        h = false,
+        hpp = false,
+        cxx = false,
       },
+      prompt_func_param_type = {
+        go = false,
+        java = false,
+        cpp = false,
+        c = false,
+        h = false,
+        hpp = false,
+        cxx = false,
+      },
+      printf_statements = {},
+      print_var_statements = {},
+      show_success_message = true, -- shows a message with information about the refactor on success
+      -- i.e. [Refactor] Inlined 3 variable occurrences
     },
+    config = function(_, opts)
+      require("refactoring").setup(opts)
+      if LazyVim.has("telescope.nvim") then
+        LazyVim.on_load("telescope.nvim", function()
+          require("telescope").load_extension("refactoring")
+        end)
+      end
+    end,
   },
-  opts = {},
 }

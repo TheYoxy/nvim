@@ -1,98 +1,84 @@
-if not vim.g.vscode then return {} end -- NOTE: don't do anything in not vscode instances
-
----replace a key if it exists
----@param key any
----@param fn function
-local function replace(key, fn)
-  if key then
-    key[1] = fn
-  else
-    key = fn
-  end
+if not vim.g.vscode then
+  return {}
 end
 
----@type LazySpec
+local enabled = {
+  "LazyVim",
+  "dial.nvim",
+  "flit.nvim",
+  "lazy.nvim",
+  "leap.nvim",
+  "mini.ai",
+  "mini.comment",
+  "mini.move",
+  "mini.pairs",
+  "mini.surround",
+  "nvim-treesitter",
+  "nvim-treesitter-textobjects",
+  "nvim-ts-context-commentstring",
+  "snacks.nvim",
+  "ts-comments.nvim",
+  "vim-repeat",
+  "yanky.nvim",
+}
+
+local Config = require("lazy.core.config")
+Config.options.checker.enabled = false
+Config.options.change_detection.enabled = false
+Config.options.defaults.cond = function(plugin)
+  return vim.tbl_contains(enabled, plugin.name) or plugin.vscode
+end
+vim.g.snacks_animate = false
+
+-- Add some vscode specific keymaps
+vim.api.nvim_create_autocmd("User", {
+  pattern = "LazyVimKeymapsDefaults",
+  callback = function()
+    -- VSCode-specific keymaps for search and navigation
+    vim.keymap.set("n", "<leader><space>", "<cmd>Find<cr>")
+    vim.keymap.set("n", "<leader>/", [[<cmd>lua require('vscode').action('workbench.action.findInFiles')<cr>]])
+    vim.keymap.set("n", "<leader>fs", [[<cmd>lua require('vscode').action('workbench.action.gotoSymbol')<cr>]])
+
+    -- Keep undo/redo lists in sync with VsCode
+    vim.keymap.set("n", "u", "<Cmd>call VSCodeNotify('undo')<CR>")
+    vim.keymap.set("n", "<C-r>", "<Cmd>call VSCodeNotify('redo')<CR>")
+
+    -- Navigate VSCode tabs like lazyvim buffers
+    vim.keymap.set("n", "<S-h>", "<Cmd>call VSCodeNotify('workbench.action.previousEditor')<CR>")
+    vim.keymap.set("n", "<S-l>", "<Cmd>call VSCodeNotify('workbench.action.nextEditor')<CR>")
+  end,
+})
+
+function LazyVim.terminal()
+  require("vscode").action("workbench.action.terminal.toggleTerminal")
+end
+
 return {
   {
-    "AstroNvim/astrocommunity",
-    { import = "astrocommunity.recipes.vscode" },
+    "snacks.nvim",
+    opts = {
+      bigfile = { enabled = false },
+      dashboard = { enabled = false },
+      indent = { enabled = false },
+      input = { enabled = false },
+      notifier = { enabled = false },
+      picker = { enabled = false },
+      quickfile = { enabled = false },
+      scroll = { enabled = false },
+      statuscolumn = { enabled = false },
+    },
   },
   {
-    "AstroNvim/astrocore",
-    opts = function(_, opts)
-      local vscode = require "vscode-neovim"
-      replace(opts.mappings.n["<leader>fw"], function() vscode.action "workbench.action.quickTextSearch" end)
-      print "configuring vscode"
-
-      opts.mappings = {
-        n = {
-          -- j = { "v:count == 0 ? 'gj' : 'j'", expr = true, desc = "Move cursor down" },
-          -- k = { "v:count == 0 ? 'gk' : 'k'", expr = true, desc = "Move cursor up" },
-
-          -- utils
-          ["+"] = "<c-a>",
-          ["-"] = "<c-x>",
-
-          -- folding
-          za = function() vscode.action "editor.toggleFold" end,
-
-          si = function() vscode.action "vscode-neovim.restart" end,
-          gd = function() vscode.call "editor.action.revealDefinition" end,
-
-          -- tmux like action to navigate
-          ["<C-a> h"] = function() vscode.action "workbench.action.navigateLeft" end,
-          ["<C-a> l"] = function() vscode.action "workbench.action.navigateRight" end,
-          ["<C-a> k"] = function() vscode.action "workbench.action.navigateUp" end,
-          ["<C-a> j"] = function() vscode.action "workbench.action.navigateDown" end,
-
-          ["<leader>x"] = function() vscode.action "editor.action.marker.next" end,
-          ["<leader>X"] = function() vscode.action "editor.action.marker.prev" end,
-
-          ["<leader>:"] = function() vscode.action "workbench.action.showCommands" end,
-          ["<leader>ff"] = function() vscode.action "workbench.action.quickOpen" end,
-          ["<leader>fs"] = function() vscode.action "workbench.action.showAllSymbols" end,
-          ["<leader>fw"] = function() vscode.action "workbench.action.quickTextSearch" end,
-          ["<leader>rr"] = function() vscode.action "editor.action.rename" end,
-          ["<leader>rf"] = function() vscode.action "editor.action.formatDocument" end,
-          ["<leader>rv"] = function()
-            vscode.action("editor.action.codeAction", { args = { kind = "refactor.extract.variable" } })
-          end,
-          ["<leader>rn"] = function()
-            vscode.action("editor.action.codeAction", { args = { kind = "refactor.inline" } })
-          end,
-          ["<leader>rm"] = function()
-            vscode.action("editor.action.codeAction", { args = { kind = "refactor.extract.function" } })
-          end,
-          ["<leader>gg"] = function() vscode.action "workbench.action.output.show.vscode.git.Git" end,
-          ["<leader>ri"] = function() vscode.action "editor.action.organizeImports" end,
-          ["<leader>lR"] = function() vscode.action "editor.action.goToReferences" end,
-          ["<leader>lf"] = function() vscode.action "editor.action.formatDocument" end,
-          ["<leader>t"] = function() vscode.action "workbench.action.terminal.focus" end,
-          -- ["<leader>e"] = function() vscode.action "workbench.view.explorer" end,
-          ["<leader>e"] = function() vscode.action "workbench.action.quickOpen" end,
-          --
-          -- tabs actions
-          ["<leader>q"] = function() vscode.action "workbench.action.closeActiveEditor" end,
-          ["<leader>c"] = function() vscode.action "workbench.action.closeActiveEditor" end,
-          ["<leader>Q"] = function() vscode.action "workbench.action.reopenClosedEditor" end,
-          ["<leader>bc"] = function() vscode.action "workbench.action.closeOtherEditors" end,
-
-          ["<leader><leader>"] = function() vscode.action "workbench.action.previousEditor" end,
-          ["<leader>o"] = function() vscode.action "workbench.view.explorer" end,
-          ["<leader>wo"] = function() vscode.action "workbench.action.showNextWindowTab" end,
-          ["<leader>wp"] = function() vscode.action "workbench.action.showPreviousWindowTab" end,
-          ["<leader>ws"] = function() vscode.action "workbench.action.splitEditorLeft" end,
-          ["<leader>wv"] = function() vscode.action "workbench.action.splitEditorDown" end,
-          ["<leader>wf"] = function() vscode.action "workbench.action.toggleSidebarVisibility" end,
-
-          ["<leader>la"] = function() vscode.action "editor.action.quickFix" end,
-
-          ["<C-g>"] = function() vscode.action "editor.action.addSelectionToNextFindMatch" end,
-          [",c"] = function() vscode.action "csdevkit.rebuildSolution" end,
-          [",b"] = function() vscode.action "csdevkit.buildSolution" end,
-        },
-      }
-      return opts
+    "LazyVim/LazyVim",
+    config = function(_, opts)
+      opts = opts or {}
+      -- disable the colorscheme
+      opts.colorscheme = function() end
+      require("lazyvim").setup(opts)
     end,
+  },
+  {
+    "nvim-treesitter/nvim-treesitter",
+    opts = { highlight = { enable = false } },
   },
 }

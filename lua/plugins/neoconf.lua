@@ -1,9 +1,12 @@
----@type LazySpec
 return {
-  "folke/neoconf.nvim",
-  opts = {
-    import = {
-      vscode = true, -- local .vscode/settings.json
-    }
+  {
+    "neovim/nvim-lspconfig",
+    dependencies = {
+      {
+        "folke/neoconf.nvim",
+        cmd = "Neoconf",
+        opts = {},
+      },
+    },
   },
 }

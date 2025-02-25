@@ -1,6 +1,6 @@
-# Theyoxy Nvim config
+# [TheYoxy's](https://github.com/TheYoxy) nvim config
 
-A template for getting started with [AstroNvim](https://github.com/AstroNvim/AstroNvim)
+My own nvim configuration derived from lazyvim with adapted keybinds for me.
 
 ## 🛠️ Installation
 
@@ -12,12 +12,6 @@ mv ~/.local/share/nvim ~/.local/share/nvim.bak
 mv ~/.local/state/nvim ~/.local/state/nvim.bak
 mv ~/.cache/nvim ~/.cache/nvim.bak
 ```
-
-#### Create a new user repository from this template
-
-Press the "Use this template" button above to create a new repository to store your user configuration.
-
-You can also just clone this repository directly if you do not want to track your user configuration in GitHub.
 
 #### Clone the repository
 
