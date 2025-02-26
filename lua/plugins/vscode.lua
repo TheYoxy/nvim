@@ -46,6 +46,35 @@ vim.api.nvim_create_autocmd("User", {
     -- Navigate VSCode tabs like lazyvim buffers
     vim.keymap.set("n", "<S-h>", "<Cmd>call VSCodeNotify('workbench.action.previousEditor')<CR>")
     vim.keymap.set("n", "<S-l>", "<Cmd>call VSCodeNotify('workbench.action.nextEditor')<CR>")
+
+    local vscode = require("vscode-neovim")
+    vim.notify = require("vscode-neovim").notify
+
+    -- vim.keymap.set({ "n" }, "<leader>", function() vscode.action "whichkey.show" end, { noremap = false, remap = true })
+    -- vim.keymap.set({ "n", "x", "i" }, "<C-g>", function() vscode.action "editor.action.addSelectionToNextFindMatch" end)
+    -- vim.keymap.set("n", "j", "v:count == 0 ? 'gj' : 'j'", { expr = true, desc = "Move cursor down" })
+    -- vim.keymap.set("n", "k", "v:count == 0 ? 'gk' : 'k'", { expr = true, desc = "Move cursor up" })
+
+    -- vim.keymap.set("n", "+", "<c-a>", { desc = "Increment number", noremap = true })
+    -- vim.keymap.set("n", "-", "<c-x>", { desc = "Decrement number", noremap = true })
+
+    -- vim.keymap.set("n", "za", function()
+    --   vscode.action "editor.fold"
+    -- end, { desc = "Toggle fold" })
+
+    vim.keymap.set(
+      "n",
+      "<leader>si",
+      [[<cmd>lua require('vscode').action('vscode-neovim.restart')<cr>]],
+      { desc = "Restart vscode" }
+    )
+
+    vim.keymap.set(
+      "n",
+      "<leader>gg",
+      [[<cmd>lua require('vscode').action('lazygit-vscode.toggle')<cr>]],
+      { desc = "Toggle lazygit" }
+    )
   end,
 })
 
@@ -69,12 +98,13 @@ return {
     },
   },
   {
-    "LazyVim/LazyVim",
+    name = "my-lazy/custom_nvim",
+    dir = vim.fn.stdpath("config") .. "/lua/my-lazy",
     config = function(_, opts)
       opts = opts or {}
       -- disable the colorscheme
       opts.colorscheme = function() end
-      require("lazyvim").setup(opts)
+      require("my-lazy.init").setup(opts)
     end,
   },
   {
