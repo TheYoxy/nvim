@@ -32,17 +32,33 @@ return {
             vtsls = {
               enableMoveToFileCodeAction = true,
               autoUseWorkspaceTsdk = true,
+              typescript = {
+                disableAutomaticTypeAcquisition = true,
+                preferences = {
+                  autoImportFileExcludePatterns = {
+                    "node:test",
+                    "dirzzle-orm/pg-core",
+                    "dirzzle-orm/mysql-core",
+                    "dirzzle-orm/singlestore-core",
+                    "@radix-ui/*",
+                  },
+                  organizeImports = {},
+                },
+              },
               experimental = {
                 -- maxInlayHintLength = 30,
-                enableProjectDiagnostics = true,
+                enableProjectDiagnostics = false,
                 completion = {
-                  entriesLimit = 10,
+                  entriesLimit = 100,
                   enableServerSideFuzzyMatch = true,
                 },
               },
             },
             typescript = {
               updateImportsOnFileMove = { enabled = "always" },
+              validate = {
+                enable = true,
+              },
               suggest = {
                 completeFunctionCalls = true,
               },
@@ -82,18 +98,18 @@ return {
             },
             {
               "<leader>ri",
+              LazyVim.lsp.action["source.removeUnused.ts"],
+              desc = "Remove unused imports",
+            },
+            {
+              "<leader>rI",
               LazyVim.lsp.action["source.organizeImports"],
-              desc = "Remove unused imports + Organize Imports",
+              desc = "Organize Imports",
             },
             {
               "<leader>lo",
               LazyVim.lsp.action["source.addMissingImports.ts"],
               desc = "Add missing imports",
-            },
-            {
-              "<leader>rI",
-              LazyVim.lsp.action["source.removeUnused.ts"],
-              desc = "Remove unused imports",
             },
             {
               "<leader>rD",

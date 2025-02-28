@@ -5,6 +5,8 @@ return {
     "nvim-neo-tree/neo-tree.nvim",
     cmd = "Neotree",
     dependencies = {
+      "nvim-lua/plenary.nvim",
+      "MunifTanjim/nui.nvim",
       "saifulapm/neotree-file-nesting-config",
     },
     keys = {
@@ -78,7 +80,7 @@ return {
           if #wins <= 1 then
             return
           end
-          local sidebar_fts = { aerial = true, ["neo-tree"] = true }
+          local sidebar_fts = { aerial = true, ["neo-tree"] = true, noice = true }
           for _, winid in ipairs(wins) do
             if vim.api.nvim_win_is_valid(winid) then
               local bufnr = vim.api.nvim_win_get_buf(winid)
@@ -89,7 +91,9 @@ return {
                 -- If the visible window is a sidebar
               else
                 -- only count filetypes once, so remove a found sidebar from the detection
-                sidebar_fts[filetype] = nil
+                if filetype ~= "noice" then
+                  sidebar_fts[filetype] = nil
+                end
               end
             end
           end
@@ -102,6 +106,7 @@ return {
       })
     end,
     opts = {
+      hide_root_node = true,
       sources = { "filesystem", "buffers", "git_status" },
       open_files_do_not_replace_types = { "terminal", "Trouble", "trouble", "qf", "Outline" },
       filesystem = {
@@ -116,7 +121,7 @@ return {
       },
       window = {
         mappings = {
-          ["l"] = "open",
+          ["l"] = { "open", config = { expand_nested_files = true } },
           ["h"] = "close_node",
           ["<space>"] = "none",
           ["Y"] = {

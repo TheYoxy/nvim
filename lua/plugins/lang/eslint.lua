@@ -15,6 +15,9 @@ return {
             workingDirectories = { mode = "auto" },
             format = auto_format,
           },
+          -- keys = {
+          --   { "<leader>ll", LazyVim.lsp.action["EslintFixAll"], desc = "Eslint fix all" },
+          -- },
         },
       },
       setup = {

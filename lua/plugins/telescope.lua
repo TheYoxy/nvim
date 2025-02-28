@@ -115,11 +115,11 @@ return {
         desc = "Find Files (Root Dir)",
       },
       { "<leader>fF", LazyVim.pick("files", { root = false }), desc = "Find Files (cwd)" },
-      {
-        "<leader>fg",
-        "<cmd>Telescope git_files<cr>",
-        desc = "Find Files (git-files)",
-      },
+      -- {
+      --   "<leader>fg",
+      --   "<cmd>Telescope git_files<cr>",
+      --   desc = "Find Files (git-files)",
+      -- },
       { "<leader>fr", "<cmd>Telescope oldfiles<cr>", desc = "Recent" },
       { "<leader>fR", LazyVim.pick("oldfiles", { cwd = vim.uv.cwd() }), desc = "Recent (cwd)" },
       -- git
@@ -137,8 +137,8 @@ return {
         "<cmd>Telescope diagnostics<cr>",
         desc = "Workspace Diagnostics",
       },
-      { "<leader>fg", LazyVim.pick("live_grep"), desc = "Grep (Root Dir)" },
-      { "<leader>fG", LazyVim.pick("live_grep", { root = false }), desc = "Grep (cwd)" },
+      { "<leader>fw", LazyVim.pick("live_grep"), desc = "Grep (Root Dir)" },
+      { "<leader>fW", LazyVim.pick("live_grep", { root = false }), desc = "Grep (cwd)" },
       { "<leader>fh", "<cmd>Telescope help_tags<cr>", desc = "Help Pages" },
       {
         "<leader>fH",
@@ -153,8 +153,8 @@ return {
       { "<leader>fo", "<cmd>Telescope vim_options<cr>", desc = "Options" },
       { "<leader>fR", "<cmd>Telescope resume<cr>", desc = "Resume" },
       { "<leader>fq", "<cmd>Telescope quickfix<cr>", desc = "Quickfix List" },
-      { "<leader>fw", LazyVim.pick("grep_string", { word_match = "-w" }), desc = "Word (Root Dir)" },
-      { "<leader>fW", LazyVim.pick("grep_string", { root = false, word_match = "-w" }), desc = "Word (cwd)" },
+      -- { "<leader>fw", LazyVim.pick("grep_string", { word_match = "-w" }), desc = "Word (Root Dir)" },
+      -- { "<leader>fW", LazyVim.pick("grep_string", { root = false, word_match = "-w" }), desc = "Word (cwd)" },
       {
         "<leader>fw",
         LazyVim.pick("grep_string"),
