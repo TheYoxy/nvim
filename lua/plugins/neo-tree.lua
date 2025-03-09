@@ -1,5 +1,4 @@
 return {
-
   -- file explorer
   {
     "nvim-neo-tree/neo-tree.nvim",
@@ -107,6 +106,7 @@ return {
     end,
     opts = {
       hide_root_node = true,
+      retain_hidden_root_indent = true,
       sources = { "filesystem", "buffers", "git_status" },
       open_files_do_not_replace_types = { "terminal", "Trouble", "trouble", "qf", "Outline" },
       filesystem = {
@@ -117,6 +117,24 @@ return {
           hide_dotfiles = false,
           hide_gitignored = true,
           hide_hidden = false,
+          show_hidden_count = false,
+          never_show = {
+            ".DS_Store",
+          },
+        },
+      },
+      default_component_configs = {
+        indent = {
+          with_expanders = true, -- if nil and file nesting is enabled, will enable expanders
+          expander_collapsed = "",
+          expander_expanded = "",
+          expander_highlight = "NeoTreeExpander",
+        },
+        git_status = {
+          symbols = {
+            unstaged = "󰄱",
+            staged = "󰱒",
+          },
         },
       },
       window = {
@@ -139,20 +157,6 @@ return {
             desc = "Open with System Application",
           },
           ["P"] = { "toggle_preview", config = { use_float = false } },
-        },
-      },
-      default_component_configs = {
-        indent = {
-          with_expanders = true, -- if nil and file nesting is enabled, will enable expanders
-          expander_collapsed = "",
-          expander_expanded = "",
-          expander_highlight = "NeoTreeExpander",
-        },
-        git_status = {
-          symbols = {
-            unstaged = "󰄱",
-            staged = "󰱒",
-          },
         },
       },
     },
