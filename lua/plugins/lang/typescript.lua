@@ -31,7 +31,7 @@ return {
             complete_function_calls = true,
             vtsls = {
               enableMoveToFileCodeAction = true,
-              autoUseWorkspaceTsdk = false,
+              autoUseWorkspaceTsdk = true,
               typescript = {
                 disableAutomaticTypeAcquisition = true,
                 preferences = {

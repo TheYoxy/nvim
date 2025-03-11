@@ -34,6 +34,25 @@ return {
       local cmp = require("cmp")
       local defaults = require("cmp.config.default")()
       local auto_select = true
+      ---@type cmp.SourceConfig[]
+      local inner_sources = {
+        { name = "lazydev", priority = 1000 },
+        {
+          name = "nvim_lsp",
+          priority = 750,
+          --- @param entry cmp.Entry
+          --- @param ctx cmp.Context
+          --- @return boolean
+          entry_filter = function(entry, ctx)
+            local kind = require("cmp.types").lsp.CompletionItemKind[entry:get_kind()]
+            if kind == "Text" then
+              return false
+            end
+            return true
+          end,
+        },
+        { name = "path", priority = 250 },
+      }
       ---@type cmp.ConfigSchema
       return {
         auto_brackets = {}, -- configure any filetype to auto add brackets
@@ -62,11 +81,8 @@ return {
             return LazyVim.cmp.map({ "snippet_forward", "ai_accept" }, fallback)()
           end,
         }),
-        sources = cmp.config.sources({
-          { name = "lazydev", priority = 1000 },
-          { name = "nvim_lsp", priority = 1000 },
-          { name = "path", priority = 250 },
-        }),
+
+        sources = cmp.config.sources(inner_sources),
         formatting = {
           format = function(entry, item)
             local icons = LazyVim.config.icons.kinds
