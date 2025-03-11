@@ -254,6 +254,26 @@ return {
               ["q"] = actions.close,
             },
           },
+          vimgrep_arguments = {
+            "rg",
+            "--follow", -- Follow symbolic links
+            "--hidden", -- Search for hidden files
+            "--no-heading", -- Don't group matches by each file
+            "--with-filename", -- Print the file path with the matched lines
+            "--line-number", -- Show line numbers
+            "--column", -- Show column numbers
+            "--smart-case", -- Smart case search
+
+            -- Exclude some patterns from search
+            "--glob=!**/.git/*",
+            "--glob=!**/.idea/*",
+            "--glob=!**/.vscode/*",
+            "--glob=!**/build/*",
+            "--glob=!**/dist/*",
+            "--glob=!**/yarn.lock",
+            "--glob=!**/pnpm-lock.yaml",
+            "--glob=!**/package-lock.json",
+          },
         },
         pickers = {
           find_files = {
@@ -314,17 +334,41 @@ return {
       end
     end,
   },
-
   {
     "neovim/nvim-lspconfig",
     opts = function()
       local Keys = require("my-lazy.plugins.lsp.keymaps").get()
-      -- stylua: ignore
       vim.list_extend(Keys, {
-        { "gd", function() require("telescope.builtin").lsp_definitions({ reuse_win = true }) end,      desc = "Goto Definition",       has = "definition" },
-        { "gr", "<cmd>Telescope lsp_references<cr>",                                                    desc = "References",            nowait = true },
-        { "gI", function() require("telescope.builtin").lsp_implementations({ reuse_win = true }) end,  desc = "Goto Implementation" },
-        { "gy", function() require("telescope.builtin").lsp_type_definitions({ reuse_win = true }) end, desc = "Goto T[y]pe Definition" },
+        {
+          "gd",
+          function()
+            require("telescope.builtin").lsp_definitions({ reuse_win = true })
+          end,
+          desc = "Goto Definition",
+          has = "definition",
+        },
+        {
+          "gr",
+          function()
+            require("telescope.builtin").lsp_references({ reuse_win = true })
+          end,
+          desc = "References",
+          nowait = true,
+        },
+        {
+          "gI",
+          function()
+            require("telescope.builtin").lsp_implementations({ reuse_win = true })
+          end,
+          desc = "Goto Implementation",
+        },
+        {
+          "gy",
+          function()
+            require("telescope.builtin").lsp_type_definitions({ reuse_win = true })
+          end,
+          desc = "Goto T[y]pe Definition",
+        },
       })
     end,
   },

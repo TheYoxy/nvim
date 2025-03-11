@@ -31,7 +31,7 @@ return {
             complete_function_calls = true,
             vtsls = {
               enableMoveToFileCodeAction = true,
-              autoUseWorkspaceTsdk = true,
+              autoUseWorkspaceTsdk = false,
               typescript = {
                 disableAutomaticTypeAcquisition = true,
                 preferences = {
@@ -42,26 +42,17 @@ return {
                     "dirzzle-orm/singlestore-core",
                     "@radix-ui/*",
                   },
-                  organizeImports = {},
                 },
               },
               experimental = {
-                -- maxInlayHintLength = 30,
-                enableProjectDiagnostics = false,
                 completion = {
-                  entriesLimit = 100,
                   enableServerSideFuzzyMatch = true,
+                  entriesLimit = 100,
                 },
               },
             },
             typescript = {
               updateImportsOnFileMove = { enabled = "always" },
-              validate = {
-                enable = true,
-              },
-              suggest = {
-                completeFunctionCalls = true,
-              },
               inlayHints = {
                 enumMemberValues = { enabled = true },
                 functionLikeReturnTypes = { enabled = true },
@@ -267,7 +258,11 @@ return {
       end
     end,
   },
-
+  {
+    "dmmulroy/tsc.nvim",
+    cmd = "TSC",
+    opts = {},
+  },
   -- Filetype icons
   {
     "echasnovski/mini.icons",

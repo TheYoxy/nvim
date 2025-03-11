@@ -2,6 +2,7 @@ vim.g.lazyvim_eslint_auto_format = false
 
 local auto_format = vim.g.lazyvim_eslint_auto_format == nil or vim.g.lazyvim_eslint_auto_format
 
+---@diagnostic disable: missing-fields
 return {
   {
     "neovim/nvim-lspconfig",
@@ -15,9 +16,9 @@ return {
             workingDirectories = { mode = "auto" },
             format = auto_format,
           },
-          -- keys = {
-          --   { "<leader>ll", LazyVim.lsp.action["EslintFixAll"], desc = "Eslint fix all" },
-          -- },
+          keys = {
+            { "<leader>lf", "<Cmd>EslintFixAll<cr>", desc = "Eslint fix all" },
+          },
         },
       },
       setup = {

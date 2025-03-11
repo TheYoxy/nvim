@@ -274,9 +274,7 @@ return {
       },
       {
         "<leader>pM",
-        function()
-          require("astrocore.mason").update_all()
-        end,
+        ":MasonUpdate<CR>",
         desc = "Mason update",
       },
     },
