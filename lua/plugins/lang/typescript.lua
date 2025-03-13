@@ -4,6 +4,7 @@ return {
   -- correctly setup lspconfig
   {
     "neovim/nvim-lspconfig",
+    --- @module "lspconfig"
     opts = {
       -- make sure mason installs the server
       ---@type lspconfig.options
