@@ -181,7 +181,7 @@ vim.api.nvim_create_autocmd("User", {
     vim.keymap.set("n", "gy", function()
       vscode.action("editor.action.goToTypeDefinition")
     end, { desc = "Go to type definition" })
-    vim.keymap.set("n", "<leader>la", function()
+    vim.keymap.set({ "n", "v" }, "<leader>la", function()
       vscode.action("editor.action.quickFix")
     end, { desc = "Quick fix" })
     vim.keymap.set("n", "<leader>lG", function()
@@ -197,7 +197,7 @@ vim.api.nvim_create_autocmd("User", {
       vscode.action("workbench.action.gotoSymbol")
     end, { desc = "Go to symbol" })
     vim.keymap.set("n", "<leader>lf", function()
-      vscode.action("editor.action.formatDocument")
+      vscode.action("eslint.executeAutofix")
     end, { desc = "Format document" })
     vim.keymap.set("n", "<C-g>", function()
       vscode.action("editor.action.addSelectionToNextFindMatch")
@@ -224,6 +224,10 @@ vim.api.nvim_create_autocmd("User", {
     vim.keymap.set("n", ",t", function()
       vscode.action("test-explorer.run-this-test")
     end, { desc = "Run this test" })
+
+    vim.keymap.set({ "n", "i", "v", "x" }, "<C-i>", function()
+      vscode.action("inlineChat.start")
+    end, { desc = "Start inline chat" })
 
     vim.keymap.set(
       "n",

@@ -33,27 +33,18 @@ return {
             vtsls = {
               enableMoveToFileCodeAction = true,
               autoUseWorkspaceTsdk = true,
-              typescript = {
-                disableAutomaticTypeAcquisition = true,
-                preferences = {
-                  autoImportFileExcludePatterns = {
-                    "node:test",
-                    "dirzzle-orm/pg-core",
-                    "dirzzle-orm/mysql-core",
-                    "dirzzle-orm/singlestore-core",
-                    "@radix-ui/*",
-                  },
-                },
-              },
               experimental = {
+                maxInlayHintLength = 30,
                 completion = {
                   enableServerSideFuzzyMatch = true,
-                  entriesLimit = 100,
                 },
               },
             },
             typescript = {
               updateImportsOnFileMove = { enabled = "always" },
+              suggest = {
+                completeFunctionCalls = true,
+              },
               inlayHints = {
                 enumMemberValues = { enabled = true },
                 functionLikeReturnTypes = { enabled = true },

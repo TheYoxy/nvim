@@ -104,6 +104,8 @@ return {
         end,
       })
     end,
+    --- @module "neo-tree"
+    --- @type neotree.Config
     opts = {
       hide_root_node = true,
       retain_hidden_root_indent = true,

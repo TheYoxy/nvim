@@ -175,20 +175,20 @@ return {
       {
         "<leader>fs",
         function()
-          require("telescope.builtin").lsp_document_symbols({
-            symbols = LazyVim.config.get_kind_filter(),
-          })
-        end,
-        desc = "Goto Symbol",
-      },
-      {
-        "<leader>fS",
-        function()
           require("telescope.builtin").lsp_dynamic_workspace_symbols({
             symbols = LazyVim.config.get_kind_filter(),
           })
         end,
         desc = "Goto Symbol (Workspace)",
+      },
+      {
+        "<leader>fS",
+        function()
+          require("telescope.builtin").lsp_document_symbols({
+            symbols = LazyVim.config.get_kind_filter(),
+          })
+        end,
+        desc = "Goto Symbol",
       },
     },
     opts = function()
