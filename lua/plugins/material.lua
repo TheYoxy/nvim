@@ -44,7 +44,7 @@ return {
     },
     disable = {
       background = true,
-      term_colors = true,
+      -- term_colors = true,
     },
     lualine_style = "stealth",
   },
