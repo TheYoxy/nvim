@@ -1,7 +1,3 @@
-if true then
-  return {}
-end -- NOTE: Disabling this to use blink
-
 ---@type LazySpec
 return {
   {

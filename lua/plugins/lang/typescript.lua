@@ -29,7 +29,6 @@ return {
             "typescript.tsx",
           },
           settings = {
-            complete_function_calls = true,
             vtsls = {
               enableMoveToFileCodeAction = true,
               autoUseWorkspaceTsdk = true,
@@ -52,6 +51,10 @@ return {
                 parameterTypes = { enabled = true },
                 propertyDeclarationTypes = { enabled = true },
                 variableTypes = { enabled = false },
+              },
+              tsserver = {
+                enableTracing = true,
+                maxTsServerMemory = 8192,
               },
             },
           },
@@ -95,7 +98,7 @@ return {
               desc = "Add missing imports",
             },
             {
-              "<leader>rD",
+              "<leader>lD",
               LazyVim.lsp.action["source.fixAll.ts"],
               desc = "Fix all diagnostics",
             },
