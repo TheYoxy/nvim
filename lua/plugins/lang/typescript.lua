@@ -29,32 +29,38 @@ return {
             "typescript.tsx",
           },
           settings = {
+            javascript = {
+              updateImportsOnFileMove = { enabled = "always" },
+              inlayHints = {
+                parameterNames = { enabled = "literals" },
+                parameterTypes = { enabled = true },
+                variableTypes = { enabled = true },
+                propertyDeclarationTypes = { enabled = true },
+                functionLikeReturnTypes = { enabled = true },
+                enumMemberValues = { enabled = true },
+              },
+            },
+            typescript = {
+              updateImportsOnFileMove = { enabled = "always" },
+              inlayHints = {
+                parameterNames = { enabled = "all" },
+                parameterTypes = { enabled = true },
+                variableTypes = { enabled = true },
+                propertyDeclarationTypes = { enabled = true },
+                functionLikeReturnTypes = { enabled = true },
+                enumMemberValues = { enabled = true },
+              },
+              tsserver = {
+                maxTsServerMemory = 8192,
+              },
+            },
             vtsls = {
               enableMoveToFileCodeAction = true,
-              autoUseWorkspaceTsdk = true,
               experimental = {
                 maxInlayHintLength = 30,
                 completion = {
                   enableServerSideFuzzyMatch = true,
                 },
-              },
-            },
-            typescript = {
-              updateImportsOnFileMove = { enabled = "always" },
-              suggest = {
-                completeFunctionCalls = true,
-              },
-              inlayHints = {
-                enumMemberValues = { enabled = true },
-                functionLikeReturnTypes = { enabled = true },
-                parameterNames = { enabled = "literals" },
-                parameterTypes = { enabled = true },
-                propertyDeclarationTypes = { enabled = true },
-                variableTypes = { enabled = false },
-              },
-              tsserver = {
-                enableTracing = true,
-                maxTsServerMemory = 8192,
               },
             },
           },
@@ -257,6 +263,22 @@ return {
     "dmmulroy/tsc.nvim",
     cmd = "TSC",
     opts = {},
+  },
+  {
+    "yioneko/nvim-vtsls",
+    lazy = true,
+    config = function(_, opts)
+      require("vtsls").config(opts)
+      vim.api.nvim_create_autocmd({ "LspAttach" }, {
+        desc = "Load nvim-vtsls with vtsls",
+        callback = function(args)
+          if assert(vim.lsp.get_client_by_id(args.data.client_id)).name == "vtsls" then
+            require("vtsls")._on_attach(args.data.client_id, args.buf)
+            vim.api.nvim_del_augroup_by_name("nvim_vtsls")
+          end
+        end,
+      })
+    end,
   },
   -- Filetype icons
   {
