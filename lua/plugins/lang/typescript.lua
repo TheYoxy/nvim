@@ -187,7 +187,6 @@ return {
       },
     },
   },
-
   {
     "mfussenegger/nvim-dap",
     optional = true,
@@ -263,22 +262,6 @@ return {
     "dmmulroy/tsc.nvim",
     cmd = "TSC",
     opts = {},
-  },
-  {
-    "yioneko/nvim-vtsls",
-    lazy = true,
-    config = function(_, opts)
-      require("vtsls").config(opts)
-      vim.api.nvim_create_autocmd({ "LspAttach" }, {
-        desc = "Load nvim-vtsls with vtsls",
-        callback = function(args)
-          if assert(vim.lsp.get_client_by_id(args.data.client_id)).name == "vtsls" then
-            require("vtsls")._on_attach(args.data.client_id, args.buf)
-            vim.api.nvim_del_augroup_by_name("nvim_vtsls")
-          end
-        end,
-      })
-    end,
   },
   -- Filetype icons
   {
