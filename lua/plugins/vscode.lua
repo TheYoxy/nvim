@@ -17,6 +17,8 @@ local enabled = {
   "nvim-treesitter-textobjects",
   "nvim-ts-context-commentstring",
   "snacks.nvim",
+  "text-case.nvim",
+  "todo-comments.nvim",
   "ts-comments.nvim",
   "vim-repeat",
   "yanky.nvim",
@@ -68,11 +70,11 @@ vim.api.nvim_create_autocmd("User", {
       [[<cmd>lua require('vscode').action('vscode-neovim.restart')<cr>]],
       { desc = "Restart vscode" }
     )
-    vim.keymap.set("n", "[d", function()
+    vim.keymap.set("n", "]d", function()
       vscode.action("editor.action.marker.next")
     end, { desc = "Next diagnostic" })
 
-    vim.keymap.set("n", "]d", function()
+    vim.keymap.set("n", "[d", function()
       vscode.action("editor.action.marker.prev")
     end, { desc = "Previous diagnostic" })
     vim.keymap.set("n", "<leader>x", function()
