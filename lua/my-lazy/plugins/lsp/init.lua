@@ -264,6 +264,23 @@ return {
 
     "williamboman/mason.nvim",
     cmd = "Mason",
+    dependencies = {
+      {
+        "WhoIsSethDaniel/mason-tool-installer.nvim",
+        cmd = {
+          "MasonToolsInstall",
+          "MasonToolsInstallSync",
+          "MasonToolsUpdate",
+          "MasonToolsUpdateSync",
+          "MasonToolsClean",
+        },
+        opts_extend = { "ensure_installed" },
+        opts = {
+          ensure_installed = {},
+          integrations = { ["mason-lspconfig"] = false, ["mason-null-ls"] = false, ["mason-nvim-dap"] = false },
+        },
+      },
+    },
     keys = {
       {
         "<leader>pm",
@@ -274,8 +291,18 @@ return {
       },
       {
         "<leader>pM",
-        ":MasonUpdate<CR>",
+        "<Cmd>MasonToolsUpdate<CR>",
         desc = "Mason update",
+      },
+      {
+        "<leader>pa",
+        function()
+          require("lazy").sync({ wait = true })
+          if vim.fn.exists(":MasonToolsUpdate") > 0 then
+            vim.cmd.MasonToolsUpdate()
+          end
+        end,
+        desc = "Update Lazy and Mason",
       },
     },
     build = ":MasonUpdate",
