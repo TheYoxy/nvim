@@ -16,6 +16,7 @@ return {
             workingDirectories = { mode = "auto" },
             format = auto_format,
             eslint = {
+              enable = false,
               run = "onSave",
             },
           },

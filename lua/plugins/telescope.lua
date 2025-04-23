@@ -91,7 +91,7 @@ return {
       },
       { "<leader>/", LazyVim.pick("live_grep"), desc = "Grep (Root Dir)" },
       { "<leader>:", "<cmd>Telescope command_history<cr>", desc = "Command History" },
-      { "<leader><space>", LazyVim.pick("files"), desc = "Find Files (Root Dir)" },
+      { "<leader><space>", LazyVim.pick("files", { root = false }), desc = "Find Files (cwd)" },
       -- find
       {
         "<leader>fb",
@@ -137,8 +137,8 @@ return {
         "<cmd>Telescope diagnostics<cr>",
         desc = "Workspace Diagnostics",
       },
-      { "<leader>fw", LazyVim.pick("live_grep"), desc = "Grep (Root Dir)" },
-      { "<leader>fW", LazyVim.pick("live_grep", { root = false }), desc = "Grep (cwd)" },
+      { "<leader>fw", LazyVim.pick("live_grep", { root = false }), desc = "Grep (cwd)" },
+      { "<leader>fW", LazyVim.pick("live_grep"), desc = "Grep (Root Dir)" },
       { "<leader>fh", "<cmd>Telescope help_tags<cr>", desc = "Help Pages" },
       {
         "<leader>fH",

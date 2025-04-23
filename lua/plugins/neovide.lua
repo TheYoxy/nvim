@@ -20,7 +20,26 @@ vim.g.neovide_font_settings = {
   },
 }
 
-vim.o.guifont = "GeistMono Nerd Font,Symbols_Nerd_Font"
+local uname = io.popen("uname"):read("*l")
+if uname == "Linux" then
+  vim.o.guifont = "GeistMono Nerd Font,Symbols_Nerd_Font"
+else
+  vim.o.guifont = "GeistMono Nerd Font"
+end
+
+vim.api.nvim_set_keymap(
+  "n",
+  "<C-=>",
+  ":lua vim.g.neovide_scale_factor = vim.g.neovide_scale_factor + 0.1<CR>",
+  { silent = true }
+)
+vim.api.nvim_set_keymap(
+  "n",
+  "<C-->",
+  ":lua vim.g.neovide_scale_factor = vim.g.neovide_scale_factor - 0.1<CR>",
+  { silent = true }
+)
+vim.api.nvim_set_keymap("n", "<C-0>", ":lua vim.g.neovide_scale_factor = 1<CR>", { silent = true })
 
 vim.g.neovide_floating_shadow = true
 vim.g.neovide_floating_z_height = 10
