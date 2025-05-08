@@ -6,7 +6,7 @@ return {
     event = "LazyFile",
     dependencies = {
       "mason.nvim",
-      { "williamboman/mason-lspconfig.nvim", config = function() end },
+      { "williamboman/mason-lspconfig.nvim", config = function() end, version = "v1.x.x" },
     },
     --- @module "lspconfig"
     --- @return lspconfig.Config
@@ -305,6 +305,7 @@ return {
         desc = "Update Lazy and Mason",
       },
     },
+    version = "v1.x.x",
     build = ":MasonUpdate",
     opts_extend = { "ensure_installed" },
     opts = {
