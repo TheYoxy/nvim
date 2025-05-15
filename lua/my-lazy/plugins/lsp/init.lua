@@ -6,7 +6,7 @@ return {
     event = "LazyFile",
     dependencies = {
       "mason.nvim",
-      { "williamboman/mason-lspconfig.nvim", config = function() end, version = "v1.x.x" },
+      { "mason-org/mason-lspconfig.nvim", config = function() end, version = "v1.x.x" },
     },
     --- @module "lspconfig"
     --- @return lspconfig.Config
@@ -262,7 +262,7 @@ return {
   -- cmdline tools and lsp servers
   {
 
-    "williamboman/mason.nvim",
+    "mason-org/mason.nvim",
     cmd = "Mason",
     dependencies = {
       {
