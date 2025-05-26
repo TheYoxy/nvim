@@ -18,6 +18,7 @@ local supported = {
   -- "yaml",
 }
 
+--- @type LazySpec
 return {
   {
     "mason-org/mason.nvim",

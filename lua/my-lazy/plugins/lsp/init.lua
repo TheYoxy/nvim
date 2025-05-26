@@ -209,7 +209,13 @@ return {
             return
           end
         end
+        -- if vim.version >= 0.10 then
+        --   vim.lsp.config(server, {
+        --     server_opts,
+        --   })
+        -- else
         require("lspconfig")[server].setup(server_opts)
+        -- end
       end
 
       -- get all the servers that are available through mason-lspconfig
@@ -244,6 +250,12 @@ return {
           ),
           handlers = { setup },
         })
+      end
+
+      if LazyVim.lsp.is_enabled("cssls") and LazyVim.lsp.is_enabled("stylelint_lsp") then
+        LazyVim.lsp.disable("cssls", function()
+          return true
+        end)
       end
 
       if LazyVim.lsp.is_enabled("denols") and LazyVim.lsp.is_enabled("vtsls") then

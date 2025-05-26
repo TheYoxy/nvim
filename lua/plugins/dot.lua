@@ -6,6 +6,7 @@ local function have(path)
   return vim.uv.fs_stat(xdg_config .. "/" .. path) ~= nil
 end
 
+--- @type LazySpec
 return {
   recommended = true,
   desc = "Language support for dotfiles",

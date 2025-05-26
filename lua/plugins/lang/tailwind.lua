@@ -11,7 +11,6 @@ return {
     ---@diagnostic disable missing-fields
     ---@type PluginLspOpts
     opts = {
-      ---@type lspconfig.options
       servers = {
         tailwindcss = {
           -- exclude a filetype from the default_config
@@ -25,43 +24,36 @@ return {
           },
           -- to fully override the default_config, change the below
           -- filetypes = {}
-          settings = {
-            tailwindCSS = {
-              lint = {
-                cssConflict = "error",
-              },
-              classFunctions = {
-                "cva",
-                "cn",
-              },
-              experimental = {
-                classRegex = {
-                  {
-                    {
-                      "cva\\(([^)]*)\\)",
-                      "[\"'`]([^\"'`]*).*?[\"'`]",
-                    },
-                    {
-                      "cn\\(([^)]*)\\)",
-                      "[\"'`]([^\"'`]*).*?[\"'`]",
-                    },
-                  },
-                },
-              },
-            },
-          },
         },
       },
       setup = {
+        --- @param opts _.lspconfig.settings.tailwindcss.TailwindCSS
         tailwindcss = function(_, opts)
           local tw = LazyVim.lsp.get_raw_config("tailwindcss")
           opts.filetypes = opts.filetypes or {}
+          opts.lint = vim.list_extend(opts.lint or {}, {
+            cssConflict = "error",
+          })
+          opts.classFunctions = vim.list_extend(opts.classFunctions or {}, {
+            "cva",
+            "cn",
+          })
+          opts.experimental = opts.experimental or {}
+          opts.experimental.classRegex = vim.list_extend(opts.experimental.classRegex or {}, {
+            {
+              "cva\\(([^)]*)\\)",
+              "[\"'`]([^\"'`]*).*?[\"'`]",
+            },
+            {
+              "cn\\(([^)]*)\\)",
+              "[\"'`]([^\"'`]*).*?[\"'`]",
+            },
+          })
 
           LazyVim.lsp.on_attach(function(_, buffer)
             if vim.bo[buffer].filetype == "css" then
               vim.schedule(function()
                 require("tailwindcss-colors").buf_attach(buffer)
-                vim.cmd("LspStop ++force cssls")
               end)
             end
           end, "tailwindcss")

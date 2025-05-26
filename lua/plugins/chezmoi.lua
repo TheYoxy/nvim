@@ -44,6 +44,7 @@ local pick_chezmoi = function()
   end
 end
 
+--- @type LazySpec
 return {
   {
     -- highlighting for chezmoi files template files
@@ -115,21 +116,21 @@ return {
     "folke/snacks.nvim",
     optional = true,
     opts = function(_, opts)
-      local chezmoi_entry = {
-        icon = " ",
-        key = "c",
-        desc = "Config",
-        action = pick_chezmoi,
-      }
-      local config_index
-      for i = #opts.dashboard.preset.keys, 1, -1 do
-        if opts.dashboard.preset.keys[i].key == "c" then
-          table.remove(opts.dashboard.preset.keys, i)
-          config_index = i
-          break
-        end
-      end
-      table.insert(opts.dashboard.preset.keys, config_index, chezmoi_entry)
+      -- local chezmoi_entry = {
+      --   icon = " ",
+      --   key = "c",
+      --   desc = "Config",
+      --   action = pick_chezmoi,
+      -- }
+      -- local config_index
+      -- for i = #opts.dashboard.preset.keys, 1, -1 do
+      --   if opts.dashboard.preset.keys[i].key == "c" then
+      --     table.remove(opts.dashboard.preset.keys, i)
+      --     config_index = i
+      --     break
+      --   end
+      -- end
+      -- table.insert(opts.dashboard.preset.keys, config_index, chezmoi_entry)
     end,
   },
 

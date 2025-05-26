@@ -11,11 +11,14 @@ return {
       ---@type lspconfig.options
       servers = {
         eslint = {
+          --- @type _.lspconfig.settings.eslint.Eslint
           settings = {
             -- helps eslint find the eslintrc when it's placed in a subfolder instead of the cwd root
             workingDirectories = { mode = "auto" },
             format = auto_format,
-            run = "onSave",
+            eslint = {
+              run = "onSave",
+            },
           },
           keys = {
             { "<leader>lf", "<Cmd>EslintFixAll<cr>", desc = "Eslint fix all" },
@@ -23,7 +26,8 @@ return {
         },
       },
       setup = {
-        eslint = function()
+        --- @param opts _.lspconfig.settings.eslint.Eslint
+        eslint = function(_, opts)
           if not auto_format then
             return
           end
