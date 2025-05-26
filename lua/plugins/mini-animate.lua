@@ -1,4 +1,9 @@
+if true then -- NOTE: DISABLED FOR NOW
+  return {}
+end
+
 -- animations
+--- @module "lazy"
 --- @type LazySpec
 return {
   -- disable snacks scroll when animate is enabled
