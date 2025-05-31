@@ -286,9 +286,17 @@ return {
           "MasonToolsUpdateSync",
           "MasonToolsClean",
         },
+        enabled = false,
+        keys = {
+          {
+            "<leader>pM",
+            "<Cmd>MasonToolsUpdate<CR>",
+            desc = "Mason update",
+          },
+        },
         opts_extend = { "ensure_installed" },
         opts = {
-          ensure_installed = {},
+          ensure_installed = LazyVim.opts("mason-lspconfig.nvim").ensure_installed,
           integrations = { ["mason-lspconfig"] = false, ["mason-null-ls"] = false, ["mason-nvim-dap"] = false },
         },
       },
@@ -300,11 +308,6 @@ return {
           require("mason.ui").open()
         end,
         desc = "Mason Installer",
-      },
-      {
-        "<leader>pM",
-        "<Cmd>MasonToolsUpdate<CR>",
-        desc = "Mason update",
       },
       {
         "<leader>pa",
