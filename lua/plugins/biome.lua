@@ -24,6 +24,20 @@ return {
     "mason-org/mason.nvim",
     opts = { ensure_installed = { "biome" } },
   },
+  {
+    "neovim/nvim-lspconfig",
+    opts = {
+      --- @module "lspconfig"
+      ---@type lspconfig.options
+      servers = {
+        biome = {},
+      },
+    },
+    --- --- @return lspconfig.Config
+    --- opts = function()
+    ---   vim.lsp.enable("oxlint")
+    --- end,
+  },
 
   {
     "stevearc/conform.nvim",

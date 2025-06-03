@@ -22,9 +22,9 @@ return {
             run = "onSave",
             enable = false,
           },
-          keys = {
-            { "<leader>lf", "<Cmd>EslintFixAll<cr>", desc = "Eslint fix all" },
-          },
+          -- keys = {
+          --   { "<leader>lf", "<Cmd>EslintFixAll<cr>", desc = "Eslint fix all" },
+          -- },
         },
       },
       setup = {

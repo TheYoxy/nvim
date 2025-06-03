@@ -2,6 +2,7 @@
 -- @type LazyPluginSpec
 return {
   "sphamba/smear-cursor.nvim",
+  enabled = false,
   event = "VeryLazy",
   cond = vim.g.neovide == nil and vim.g.vscode == nil,
   opts = {

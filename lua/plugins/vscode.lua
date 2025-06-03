@@ -49,6 +49,9 @@ vim.api.nvim_create_autocmd("User", {
     vim.keymap.set("n", "<S-h>", "<Cmd>call VSCodeNotify('workbench.action.previousEditor')<CR>")
     vim.keymap.set("n", "<S-l>", "<Cmd>call VSCodeNotify('workbench.action.nextEditor')<CR>")
 
+    --- @class NvimVscode
+    --- @field action fun(action: string, opts?: { args?: any[], range: [number| number] | [number, string, number, string], restore_selection: boolean, callback: fun(err: string | nil, ret: any) })
+    --- @field notify fun(message: string)
     local vscode = require("vscode-neovim")
     vim.notify = vscode.notify
 
@@ -64,12 +67,9 @@ vim.api.nvim_create_autocmd("User", {
     --   vscode.action "editor.fold"
     -- end, { desc = "Toggle fold" })
 
-    vim.keymap.set(
-      { "n", "x" },
-      "<leader>si",
-      [[<cmd>lua require('vscode').action('vscode-neovim.restart')<cr>]],
-      { desc = "Restart vscode" }
-    )
+    vim.keymap.set({ "n", "x" }, "<leader>si", function()
+      vscode.action("vscode-neovim.restart")
+    end, { desc = "Restart vscode" })
     vim.keymap.set("n", "]d", function()
       vscode.action("editor.action.marker.next")
     end, { desc = "Next diagnostic" })
@@ -200,6 +200,7 @@ vim.api.nvim_create_autocmd("User", {
     end, { desc = "Go to symbol" })
     vim.keymap.set("n", "<leader>lf", function()
       vscode.action("eslint.executeAutofix")
+      vscode.action("oxc.applyAllFixesFile")
     end, { desc = "Format document" })
     vim.keymap.set("n", "<C-g>", function()
       vscode.action("editor.action.addSelectionToNextFindMatch")
@@ -231,17 +232,18 @@ vim.api.nvim_create_autocmd("User", {
       vscode.action("inlineChat.start")
     end, { desc = "Start inline chat" })
 
-    vim.keymap.set(
-      "n",
-      "<leader>gg",
-      [[<cmd>lua require('vscode').action('lazygit-vscode.toggle')<cr>]],
-      { desc = "Toggle lazygit" }
-    )
+    vim.keymap.set("n", "<leader>gg", function()
+      vscode.action("lazygit-vscode.toggle")
+    end, { desc = "Toggle lazygit" })
   end,
 })
 
 function LazyVim.terminal()
-  require("vscode").action("workbench.action.terminal.toggleTerminal")
+  --- @class NvimVscode
+  --- @field action fun(action: string, opts?: { args?: any[], range: [number| number] | [number, string, number, string], restore_selection: boolean, callback: fun(err: string | nil, ret: any) })
+  --- @field notify fun(message: string)
+  local vscode = require("vscode-neovim")
+  vscode.action("workbench.action.terminal.toggleTerminal")
 end
 
 return {
