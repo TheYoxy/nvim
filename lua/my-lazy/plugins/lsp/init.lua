@@ -105,6 +105,11 @@ return {
         -- return true if you don't want this server to be setup with lspconfig
         ---@type table<string, fun(server:string, opts:_.lspconfig.options):boolean?>
         setup = {
+          qmlls = function(_, opts)
+            opts.cmd = { "/usr/lib/qt6/bin/qmlls", "-E" }
+            return true
+          end,
+
           -- example to setup with typescript.nvim
           -- tsserver = function(_, opts)
           --   require("typescript").setup({ server = opts })
@@ -209,7 +214,8 @@ return {
             return
           end
         end
-        -- if vim.version >= 0.10 then
+
+        -- if vim.fn.has("nvim-0.10") == 1 then
         --   vim.lsp.config(server, {
         --     server_opts,
         --   })
@@ -226,12 +232,14 @@ return {
       end
 
       local ensure_installed = {} ---@type string[]
+
       for server, server_opts in pairs(servers) do
         if server_opts then
           server_opts = server_opts == true and {} or server_opts
           if server_opts.enabled ~= false then
             -- run manual setup if mason=false or if this is a server that cannot be installed with mason-lspconfig
             if server_opts.mason == false or not vim.tbl_contains(all_mslp_servers, server) then
+              print("Setting up LSP server: " .. vim.inspect(server))
               setup(server)
             else
               ensure_installed[#ensure_installed + 1] = server

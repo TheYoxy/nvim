@@ -21,6 +21,7 @@ return {
             "javascript.jsx",
             "typescriptreact",
             "typescript.tsx",
+            "astro",
           },
           -- to fully override the default_config, change the below
           -- filetypes = {}
@@ -83,6 +84,10 @@ return {
         end,
       },
     },
+  },
+  {
+    "norcalli/nvim-colorizer.lua",
+    event = "BufRead",
   },
   {
     "hrsh7th/nvim-cmp",

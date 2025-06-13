@@ -48,4 +48,9 @@ vim.g.neovide_light_radius = 5
 
 --- @module "lazy"
 --- @type LazyVim
-return {}
+return {
+  "snacks.nvim",
+  opts = {
+    scroll = { enabled = false },
+  },
+}

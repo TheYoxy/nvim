@@ -1,3 +1,5 @@
+vim.g.ai_cmp = false
+
 --- @type LazySpec
 return {
   recommended = true,
@@ -7,6 +9,9 @@ return {
     cmd = "Copilot",
     build = ":Copilot auth",
     event = "BufReadPost",
+    --- @module "copilot"
+    --- @type CopilotConfig
+    --- @diagnostic disable: missing-fields
     opts = {
       suggestion = {
         enabled = not vim.g.ai_cmp,
