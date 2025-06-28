@@ -239,7 +239,6 @@ return {
           if server_opts.enabled ~= false then
             -- run manual setup if mason=false or if this is a server that cannot be installed with mason-lspconfig
             if server_opts.mason == false or not vim.tbl_contains(all_mslp_servers, server) then
-              print("Setting up LSP server: " .. vim.inspect(server))
               setup(server)
             else
               ensure_installed[#ensure_installed + 1] = server

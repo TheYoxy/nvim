@@ -16,7 +16,7 @@ return {
       vim.api.nvim_set_option_value("background", "light", {
         scope = "global",
       })
-      vim.cmd("colorscheme material-lighter")
+      vim.cmd("colorscheme tokyonight-day")
     end,
   },
 }

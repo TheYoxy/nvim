@@ -28,7 +28,7 @@ function M.get()
       { "<leader>rR", function() Snacks.rename.rename_file() end, desc = "Rename File", mode ={"n"}, has = { "workspace/didRenameFiles", "workspace/willRenameFiles" } },
       { "<leader>rr", vim.lsp.buf.rename, desc = "Rename", has = "rename" },
       { "<leader>lA", LazyVim.lsp.action.source, desc = "Source Action", has = "codeAction" },
-      { "<leader>lf", function() if vim.fn.exists(":OxcFixAll") > 0 then vim.notify("Running OxcFixAll...") vim.cmd("OxcFixAll") end if vim.fn.exists(":EslintFixAll") > 0 then vim.notify("Running EslintFixAll...") vim.cmd("EslintFixAll") end end, desc = "Fix all" }, 
+      { "<leader>lf", function() if vim.fn.exists(":OxcFixAll") > 0 then  vim.cmd("OxcFixAll") end if vim.fn.exists(":EslintFixAll") > 0 then  vim.cmd("EslintFixAll") end end, desc = "Fix all" }, 
       { "]]", function() Snacks.words.jump(vim.v.count1) end, has = "documentHighlight",
         desc = "Next Reference", cond = function() return Snacks.words.is_enabled() end },
       { "[[", function() Snacks.words.jump(-vim.v.count1) end, has = "documentHighlight",
