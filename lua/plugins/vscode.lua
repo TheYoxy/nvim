@@ -36,6 +36,14 @@ vim.g.snacks_animate = false
 vim.api.nvim_create_autocmd("User", {
   pattern = "LazyVimKeymapsDefaults",
   callback = function()
+    --- @class NvimVscode
+    --- @field action fun(action: string, opts?: { args?: any[], range: [number| number] | [number, string, number, string], restore_selection: boolean, callback: fun(err: string | nil, ret: any) })
+    --- @field notify fun(message: string)
+    local vscode = require("vscode-neovim")
+    vim.notify = vscode.notify
+
+    vim.keymap.set("n", "j", "gj")
+    vim.keymap.set("n", "k", "gk")
     -- VSCode-specific keymaps for search and navigation
     vim.keymap.set("n", "<leader><space>", "<cmd>Find<cr>")
     vim.keymap.set("n", "<leader>/", [[<cmd>lua require('vscode').action('workbench.action.findInFiles')<cr>]])
@@ -49,16 +57,8 @@ vim.api.nvim_create_autocmd("User", {
     vim.keymap.set("n", "<S-h>", "<Cmd>call VSCodeNotify('workbench.action.previousEditor')<CR>")
     vim.keymap.set("n", "<S-l>", "<Cmd>call VSCodeNotify('workbench.action.nextEditor')<CR>")
 
-    --- @class NvimVscode
-    --- @field action fun(action: string, opts?: { args?: any[], range: [number| number] | [number, string, number, string], restore_selection: boolean, callback: fun(err: string | nil, ret: any) })
-    --- @field notify fun(message: string)
-    local vscode = require("vscode-neovim")
-    vim.notify = vscode.notify
-
     -- vim.keymap.set({ "n" }, "<leader>", function() vscode.action "whichkey.show" end, { noremap = false, remap = true })
     -- vim.keymap.set({ "n", "x", "i" }, "<C-g>", function() vscode.action "editor.action.addSelectionToNextFindMatch" end)
-    -- vim.keymap.set("n", "j", "v:count == 0 ? 'gj' : 'j'", { expr = true, desc = "Move cursor down" })
-    -- vim.keymap.set("n", "k", "v:count == 0 ? 'gk' : 'k'", { expr = true, desc = "Move cursor up" })
 
     -- vim.keymap.set("n", "+", "<c-a>", { desc = "Increment number", noremap = true })
     -- vim.keymap.set("n", "-", "<c-x>", { desc = "Decrement number", noremap = true })

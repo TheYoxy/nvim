@@ -8,6 +8,7 @@ return {
       "mason.nvim",
       { "mason-org/mason-lspconfig.nvim", config = function() end, version = "v1.x.x" },
     },
+    version = "v1.x.x",
     --- @module "lspconfig"
     --- @return lspconfig.Config
     opts = function()
@@ -327,7 +328,6 @@ return {
         desc = "Update Lazy and Mason",
       },
     },
-    version = "v1.x.x",
     build = ":MasonUpdate",
     opts_extend = { "ensure_installed" },
     opts = {
