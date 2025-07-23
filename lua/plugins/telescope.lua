@@ -263,6 +263,7 @@ return {
             "--line-number", -- Show line numbers
             "--column", -- Show column numbers
             "--smart-case", -- Smart case search
+            "--multiline", -- Allow multiline matches
 
             -- Exclude some patterns from search
             "--glob=!**/.git/*",

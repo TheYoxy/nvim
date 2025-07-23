@@ -15,6 +15,7 @@ return {
   { "folke/lazy.nvim", version = "*" },
   {
     name = "my-lazy/custom_nvim",
+    url = "https://github.com/theyoxy/nvim-config",
     dir = vim.fn.stdpath("config") .. "/lua/my-lazy",
     priority = 10000,
     lazy = false,

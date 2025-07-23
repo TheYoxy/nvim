@@ -5,10 +5,9 @@ return {
     "neovim/nvim-lspconfig",
     event = "LazyFile",
     dependencies = {
-      "mason.nvim",
-      { "mason-org/mason-lspconfig.nvim", config = function() end, version = "v1.x.x" },
+      { "mason.nvim" },
+      { "mason-org/mason-lspconfig.nvim", config = function() end },
     },
-    version = "v1.x.x",
     --- @module "lspconfig"
     --- @return lspconfig.Config
     opts = function()
@@ -26,6 +25,10 @@ return {
             -- this will set set the prefix to a function that returns the diagnostics icon based on the severity
             -- this only works on a recent 0.10.0 build. Will be set to "●" when not supported
             -- prefix = "icons",
+          },
+          virtual_lines = {
+            severity = "ERROR",
+            current_line = true,
           },
           severity_sort = true,
           signs = {
@@ -68,7 +71,7 @@ return {
         },
         -- LSP Server Settings
         ---@type lspconfig.options
-        ---@diagnostic disable-line: missing-fields
+        ---@diagnostic disable: missing-fields
         servers = {
           lua_ls = {
             -- mason = false, -- set to false if you don't want this server to be installed with mason
@@ -360,4 +363,8 @@ return {
       end)
     end,
   },
+
+  -- pin to v1 for now
+  { "mason-org/mason.nvim", version = "v1.x.x" },
+  { "mason-org/mason-lspconfig.nvim", version = "v1.x.x" },
 }

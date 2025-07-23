@@ -16,40 +16,15 @@ return {
           -- exclude a filetype from the default_config
           filetypes_exclude = { "markdown" },
           -- add additional filetypes to the default_config
-          filetypes_include = {
-            "javascriptreact",
-            "javascript.jsx",
-            "typescriptreact",
-            "typescript.tsx",
-            "astro",
-          },
+          filetypes_include = {},
           -- to fully override the default_config, change the below
           -- filetypes = {}
         },
       },
       setup = {
-        --- @param opts _.lspconfig.settings.tailwindcss.TailwindCSS
         tailwindcss = function(_, opts)
           local tw = LazyVim.lsp.get_raw_config("tailwindcss")
           opts.filetypes = opts.filetypes or {}
-          opts.lint = vim.list_extend(opts.lint or {}, {
-            cssConflict = "error",
-          })
-          opts.classFunctions = vim.list_extend(opts.classFunctions or {}, {
-            "cva",
-            "cn",
-          })
-          opts.experimental = opts.experimental or {}
-          opts.experimental.classRegex = vim.list_extend(opts.experimental.classRegex or {}, {
-            {
-              "cva\\(([^)]*)\\)",
-              "[\"'`]([^\"'`]*).*?[\"'`]",
-            },
-            {
-              "cn\\(([^)]*)\\)",
-              "[\"'`]([^\"'`]*).*?[\"'`]",
-            },
-          })
 
           LazyVim.lsp.on_attach(function(_, buffer)
             if vim.bo[buffer].filetype == "css" then
@@ -70,11 +45,31 @@ return {
 
           -- Additional settings for Phoenix projects
           opts.settings = {
+            --- @type _.lspconfig.settings.tailwindcss.TailwindCSS
             tailwindCSS = {
               includeLanguages = {
                 elixir = "html-eex",
                 eelixir = "html-eex",
                 heex = "html-eex",
+              },
+              lint = {
+                cssConflict = "error",
+              },
+              classFunctions = {
+                "cva",
+                "cn",
+              },
+              experimental = {
+                classRegex = {
+                  {
+                    "cva\\(([^)]*)\\)",
+                    "[\"'`]([^\"'`]*).*?[\"'`]",
+                  },
+                  {
+                    "cn\\(([^)]*)\\)",
+                    "[\"'`]([^\"'`]*).*?[\"'`]",
+                  },
+                },
               },
             },
           }

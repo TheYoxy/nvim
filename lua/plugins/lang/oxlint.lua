@@ -1,5 +1,9 @@
 return {
   {
+    "mason-org/mason.nvim",
+    opts = { ensure_installed = { "oxlint" } },
+  },
+  {
     "neovim/nvim-lspconfig",
     opts = {
       --- @module "lspconfig"

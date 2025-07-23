@@ -291,9 +291,20 @@ return {
       { "<leader>un", function() Snacks.notifier.hide() end, desc = "Dismiss All Notifications" },
     },
   },
+  {
+    "snacks.nvim",
+    --- @module "snacks"
+    --- @type snacks.config
+    opts = {
+      scroll = {
+        debug = true,
+      },
+    },
+  },
 
   {
     "snacks.nvim",
+    --- @type snacks.config
     opts = {
       dashboard = {
         -- sections = {
