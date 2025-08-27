@@ -6,6 +6,7 @@ if vim.fn.getenv("TERM_PROGRAM") == "ghostty" then
   vim.opt.titlestring = "%{fnamemodify(getcwd(), ':t')}"
 end
 
+vim.keymap.set("n", "<leader>po", ":update<CR> :source<CR>", { desc = "Update and source" })
 vim.filetype.add({
   extension = {
     props = "xml",

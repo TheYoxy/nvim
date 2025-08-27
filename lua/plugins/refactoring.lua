@@ -30,6 +30,7 @@ return {
       "nvim-treesitter/nvim-treesitter",
     },
     keys = {
+      { "<leader>r", desc = "+refactor", mode = { "n", "v" } },
       {
         "<leader>rs",
         pick,
@@ -144,13 +145,5 @@ return {
         end)
       end
     end,
-  },
-  {
-    "folke/which-key.nvim",
-    opts = {
-      spec = {
-        { "<leader>r", desc = "+refactor", mode = { "n", "v" } },
-      },
-    },
   },
 }
