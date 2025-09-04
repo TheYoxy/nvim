@@ -91,7 +91,9 @@ return {
         },
         sections = {
           lualine_a = { "mode" },
-          lualine_b = { "branch" },
+          lualine_b = {
+            "branch",
+          },
 
           lualine_c = {
             LazyVim.lualine.root_dir(),
@@ -106,7 +108,17 @@ return {
             },
             { "filetype", icon_only = true, separator = "", padding = { left = 1, right = 0 } },
             { LazyVim.lualine.pretty_path() },
+            {
+              require("my-lazy.plugins.wakatime.fn").wakatime,
+              cond = function()
+                return vim.g["loaded_wakatime"] == 1
+              end,
+              color = function()
+                return { fg = Snacks.util.color("Normal") }
+              end,
+            },
           },
+
           lualine_x = {
             Snacks.profiler.status(),
             -- stylua: ignore
@@ -291,17 +303,6 @@ return {
       { "<leader>un", function() Snacks.notifier.hide() end, desc = "Dismiss All Notifications" },
     },
   },
-  {
-    "snacks.nvim",
-    --- @module "snacks"
-    --- @type snacks.config
-    opts = {
-      scroll = {
-        debug = true,
-      },
-    },
-  },
-
   {
     "snacks.nvim",
     --- @type snacks.config

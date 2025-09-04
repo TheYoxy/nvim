@@ -17,7 +17,7 @@ local enabled = {
   "nvim-treesitter-textobjects",
   "nvim-ts-context-commentstring",
   "snacks.nvim",
-  "text-case.nvim",
+  -- "text-case.nvim",
   "todo-comments.nvim",
   "ts-comments.nvim",
   "vim-repeat",
