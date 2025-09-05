@@ -14,6 +14,7 @@ vim.filetype.add({
     editorconfig = "editorconfig",
     slnx = "xml",
     tmpl = "gotmpl",
+    cod = "coda",
   },
   pattern = {
     [".*/hypr/.*%.conf"] = "hyprlang",

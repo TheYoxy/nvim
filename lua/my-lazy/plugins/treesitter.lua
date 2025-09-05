@@ -1,3 +1,5 @@
+-- look how to get a treesitter from a github repository
+
 return {
   {
     "folke/which-key.nvim",
