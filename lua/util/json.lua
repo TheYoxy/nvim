@@ -63,38 +63,38 @@ function M.migrate()
       json.data.hashes = nil
     end
     json.data.extras = vim.tbl_map(function(extra)
-      return "lazyvim.plugins.extras." .. extra
+      return "my-lazy.plugins.extras." .. extra
     end, json.data.extras or {})
   elseif json.data.version == 1 then
     json.data.extras = vim.tbl_map(function(extra)
       -- replace double extras module name
-      return extra:gsub("^lazyvim%.plugins%.extras%.lazyvim%.plugins%.extras%.", "lazyvim.plugins.extras.")
+      return extra:gsub("^my-lazy%.plugins%.extras%.my-lazy%.plugins%.extras%.", "my-lazy.plugins.extras.")
     end, json.data.extras or {})
   elseif json.data.version == 2 then
     json.data.extras = vim.tbl_map(function(extra)
-      return extra == "lazyvim.plugins.extras.editor.symbols-outline" and "lazyvim.plugins.extras.editor.outline"
-        or extra
+      return extra == "my-lazy.plugins.extras.editor.symbols-outline" and "my-lazy.plugins.extras.editor.outline"
+          or extra
     end, json.data.extras or {})
   elseif json.data.version == 3 then
     json.data.extras = vim.tbl_filter(function(extra)
       return not (
-        extra == "lazyvim.plugins.extras.coding.mini-ai"
-        or extra == "lazyvim.plugins.extras.ui.treesitter-rewrite"
+        extra == "my-lazy.plugins.extras.coding.mini-ai"
+        or extra == "my-lazy.plugins.extras.ui.treesitter-rewrite"
       )
     end, json.data.extras or {})
   elseif json.data.version == 4 then
     json.data.extras = vim.tbl_filter(function(extra)
-      return not (extra == "lazyvim.plugins.extras.lazyrc")
+      return not (extra == "my-lazy.plugins.extras.lazyrc")
     end, json.data.extras or {})
   elseif json.data.version == 5 then
     json.data.extras = vim.tbl_filter(function(extra)
-      return not (extra == "lazyvim.plugins.extras.editor.trouble-v3")
+      return not (extra == "my-lazy.plugins.extras.editor.trouble-v3")
     end, json.data.extras or {})
   elseif json.data.version == 6 then
     local ai = { "copilot", "codeium", "copilot-chat", "tabnine" }
     json.data.extras = vim.tbl_map(function(extra)
-      return extra:gsub("^lazyvim%.plugins%.extras%.coding%.(.*)$", function(name)
-        return vim.tbl_contains(ai, name) and ("lazyvim.plugins.extras.ai." .. name) or extra
+      return extra:gsub("^my-lazy%.plugins%.extras%.coding%.(.*)$", function(name)
+        return vim.tbl_contains(ai, name) and ("my-lazy.plugins.extras.ai." .. name) or extra
       end)
     end, json.data.extras or {})
   elseif json.data.version == 7 then

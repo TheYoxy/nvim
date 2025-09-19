@@ -5,16 +5,16 @@ return {
     "akinsho/bufferline.nvim",
     event = "VeryLazy",
     keys = {
-      { "<leader>bp", "<Cmd>BufferLineTogglePin<CR>", desc = "Toggle Pin" },
+      { "<leader>bp", "<Cmd>BufferLineTogglePin<CR>",            desc = "Toggle Pin" },
       { "<leader>bP", "<Cmd>BufferLineGroupClose ungrouped<CR>", desc = "Delete Non-Pinned Buffers" },
-      { "<leader>br", "<Cmd>BufferLineCloseRight<CR>", desc = "Delete Buffers to the Right" },
-      { "<leader>bl", "<Cmd>BufferLineCloseLeft<CR>", desc = "Delete Buffers to the Left" },
-      { "<S-h>", "<cmd>BufferLineCyclePrev<cr>", desc = "Prev Buffer" },
-      { "<S-l>", "<cmd>BufferLineCycleNext<cr>", desc = "Next Buffer" },
-      { "[b", "<cmd>BufferLineCyclePrev<cr>", desc = "Prev Buffer" },
-      { "]b", "<cmd>BufferLineCycleNext<cr>", desc = "Next Buffer" },
-      { "[B", "<cmd>BufferLineMovePrev<cr>", desc = "Move buffer prev" },
-      { "]B", "<cmd>BufferLineMoveNext<cr>", desc = "Move buffer next" },
+      { "<leader>br", "<Cmd>BufferLineCloseRight<CR>",           desc = "Delete Buffers to the Right" },
+      { "<leader>bl", "<Cmd>BufferLineCloseLeft<CR>",            desc = "Delete Buffers to the Left" },
+      { "<S-h>",      "<cmd>BufferLineCyclePrev<cr>",            desc = "Prev Buffer" },
+      { "<S-l>",      "<cmd>BufferLineCycleNext<cr>",            desc = "Next Buffer" },
+      { "[b",         "<cmd>BufferLineCyclePrev<cr>",            desc = "Prev Buffer" },
+      { "]b",         "<cmd>BufferLineCycleNext<cr>",            desc = "Next Buffer" },
+      { "[B",         "<cmd>BufferLineMovePrev<cr>",             desc = "Move buffer prev" },
+      { "]B",         "<cmd>BufferLineMoveNext<cr>",             desc = "Move buffer next" },
     },
     opts = {
       options = {
@@ -27,7 +27,7 @@ return {
         diagnostics_indicator = function(_, _, diag)
           local icons = LazyVim.config.icons.diagnostics
           local ret = (diag.error and icons.Error .. diag.error .. " " or "")
-            .. (diag.warning and icons.Warn .. diag.warning or "")
+              .. (diag.warning and icons.Warn .. diag.warning or "")
           return vim.trim(ret)
         end,
         offsets = {
@@ -60,7 +60,8 @@ return {
     end,
   },
 
-  -- statusline
+  -- Displays a fancy status line with git status,
+  -- LSP diagnostics, filetype information, and more.
   {
     "nvim-lualine/lualine.nvim",
     event = "VeryLazy",
@@ -91,9 +92,7 @@ return {
         },
         sections = {
           lualine_a = { "mode" },
-          lualine_b = {
-            "branch",
-          },
+          lualine_b = { "branch" },
 
           lualine_c = {
             LazyVim.lualine.root_dir(),
@@ -106,7 +105,7 @@ return {
                 hint = icons.diagnostics.Hint,
               },
             },
-            { "filetype", icon_only = true, separator = "", padding = { left = 1, right = 0 } },
+            { "filetype",                   icon_only = true, separator = "", padding = { left = 1, right = 0 } },
             { LazyVim.lualine.pretty_path() },
             {
               require("my-lazy.plugins.wakatime.fn").wakatime,
@@ -118,7 +117,6 @@ return {
               end,
             },
           },
-
           lualine_x = {
             Snacks.profiler.status(),
             -- stylua: ignore
@@ -165,7 +163,7 @@ return {
             },
           },
           lualine_y = {
-            { "progress", separator = " ", padding = { left = 1, right = 0 } },
+            { "progress", separator = " ",                  padding = { left = 1, right = 0 } },
             { "location", padding = { left = 0, right = 1 } },
           },
           lualine_z = {
@@ -234,15 +232,15 @@ return {
     },
     -- stylua: ignore
     keys = {
-      { "<leader>sn", "", desc = "+noice"},
-      { "<S-Enter>", function() require("noice").redirect(vim.fn.getcmdline()) end, mode = "c", desc = "Redirect Cmdline" },
-      { "<leader>snl", function() require("noice").cmd("last") end, desc = "Noice Last Message" },
-      { "<leader>snh", function() require("noice").cmd("history") end, desc = "Noice History" },
-      { "<leader>sna", function() require("noice").cmd("all") end, desc = "Noice All" },
-      { "<leader>snd", function() require("noice").cmd("dismiss") end, desc = "Dismiss All" },
-      { "<leader>snt", function() require("noice").cmd("pick") end, desc = "Noice Picker (Telescope/FzfLua)" },
-      { "<c-f>", function() if not require("noice.lsp").scroll(4) then return "<c-f>" end end, silent = true, expr = true, desc = "Scroll Forward", mode = {"i", "n", "s"} },
-      { "<c-b>", function() if not require("noice.lsp").scroll(-4) then return "<c-b>" end end, silent = true, expr = true, desc = "Scroll Backward", mode = {"i", "n", "s"}},
+      { "<leader>sn",  "",                                                                            desc = "+noice" },
+      { "<S-Enter>",   function() require("noice").redirect(vim.fn.getcmdline()) end,                 mode = "c",                              desc = "Redirect Cmdline" },
+      { "<leader>snl", function() require("noice").cmd("last") end,                                   desc = "Noice Last Message" },
+      { "<leader>snh", function() require("noice").cmd("history") end,                                desc = "Noice History" },
+      { "<leader>sna", function() require("noice").cmd("all") end,                                    desc = "Noice All" },
+      { "<leader>snd", function() require("noice").cmd("dismiss") end,                                desc = "Dismiss All" },
+      { "<leader>snt", function() require("noice").cmd("pick") end,                                   desc = "Noice Picker (Telescope/FzfLua)" },
+      { "<c-f>",       function() if not require("noice.lsp").scroll(4) then return "<c-f>" end end,  silent = true,                           expr = true,              desc = "Scroll Forward",  mode = { "i", "n", "s" } },
+      { "<c-b>",       function() if not require("noice.lsp").scroll(-4) then return "<c-b>" end end, silent = true,                           expr = true,              desc = "Scroll Backward", mode = { "i", "n", "s" } },
     },
     config = function(_, opts)
       -- HACK: noice shows messages from before it was enabled,
@@ -257,7 +255,7 @@ return {
 
   -- icons
   {
-    "echasnovski/mini.icons",
+    "nvim-mini/mini.icons",
     lazy = true,
     opts = {
       file = {
@@ -293,13 +291,17 @@ return {
     },
     -- stylua: ignore
     keys = {
-      { "<leader>n", function()
-        if Snacks.config.picker and Snacks.config.picker.enabled then
-          Snacks.picker.notifications()
-        else
-          Snacks.notifier.show_history()
-        end
-      end, desc = "Notification History" },
+      {
+        "<leader>n",
+        function()
+          if Snacks.config.picker and Snacks.config.picker.enabled then
+            Snacks.picker.notifications()
+          else
+            Snacks.notifier.show_history()
+          end
+        end,
+        desc = "Notification History"
+      },
       { "<leader>un", function() Snacks.notifier.hide() end, desc = "Dismiss All Notifications" },
     },
   },
@@ -349,11 +351,11 @@ return {
           end,
           header = [[
           ██╗      █████╗ ███████╗██╗   ██╗██╗   ██╗██╗███╗   ███╗          Z
-          ██║     ██╔══██╗╚══███╔╝╚██╗ ██╔╝██║   ██║██║████╗ ████║      Z    
-          ██║     ███████║  ███╔╝  ╚████╔╝ ██║   ██║██║██╔████╔██║   z       
-          ██║     ██╔══██║ ███╔╝    ╚██╔╝  ╚██╗ ██╔╝██║██║╚██╔╝██║ z         
-          ███████╗██║  ██║███████╗   ██║    ╚████╔╝ ██║██║ ╚═╝ ██║           
-          ╚══════╝╚═╝  ╚═╝╚══════╝   ╚═╝     ╚═══╝  ╚═╝╚═╝     ╚═╝           
+          ██║     ██╔══██╗╚══███╔╝╚██╗ ██╔╝██║   ██║██║████╗ ████║      Z
+          ██║     ███████║  ███╔╝  ╚████╔╝ ██║   ██║██║██╔████╔██║   z
+          ██║     ██╔══██║ ███╔╝    ╚██╔╝  ╚██╗ ██╔╝██║██║╚██╔╝██║ z
+          ███████╗██║  ██║███████╗   ██║    ╚████╔╝ ██║██║ ╚═╝ ██║
+          ╚══════╝╚═╝  ╚═╝╚══════╝   ╚═╝     ╚═══╝  ╚═╝╚═╝     ╚═╝
    ]],
           -- stylua: ignore
           ---@type snacks.dashboard.Item[]

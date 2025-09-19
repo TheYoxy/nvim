@@ -16,7 +16,7 @@ return {
       "hrsh7th/cmp-buffer",
       "hrsh7th/cmp-path",
 
-      "hrsh7th/cmp-emoji", -- add cmp source as dependency of cmp
+      "hrsh7th/cmp-emoji",   -- add cmp source as dependency of cmp
       "hrsh7th/cmp-cmdline", -- add cmp-cmdline as dependency of cmp
       "hrsh7th/cmp-nvim-lsp-signature-help",
     },
@@ -31,6 +31,9 @@ return {
     -- ```
     ---@module 'cmp'
     opts = function()
+      -- Register nvim-cmp lsp capabilities
+      vim.lsp.config("*", { capabilities = require("cmp_nvim_lsp").default_capabilities() })
+
       vim.api.nvim_set_hl(0, "CmpGhostText", { link = "Comment", default = true })
       local cmp = require("cmp")
       local defaults = require("cmp.config.default")()
@@ -52,7 +55,7 @@ return {
             return true
           end,
         },
-        { name = "path", priority = 250 },
+        { name = "path",    priority = 250 },
       }
       ---@type cmp.ConfigSchema
       return {
@@ -70,7 +73,7 @@ return {
           ["<C-f>"] = cmp.mapping.scroll_docs(4),
           ["<C-n>"] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Insert }),
           ["<C-p>"] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Insert }),
-          ["<C-Space>"] = cmp.mapping(cmp.mapping.complete(), { "i", "c" }),
+          ["<C-Space>"] = cmp.mapping.complete(),
           ["<CR>"] = LazyVim.cmp.confirm({ select = auto_select }),
           ["<C-y>"] = LazyVim.cmp.confirm({ select = true }),
           ["<S-CR>"] = LazyVim.cmp.confirm({ behavior = cmp.ConfirmBehavior.Replace }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.

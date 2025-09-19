@@ -3,7 +3,7 @@ _G.LazyVim = require("util")
 ---@class LazyVimConfig: LazyVimOptions
 local M = {}
 
-M.version = "14.14.0" -- x-release-please-version
+M.version = "15.1.1" -- x-release-please-version
 LazyVim.config = M
 
 ---@class LazyVimOptions
@@ -14,7 +14,7 @@ local defaults = {
   -- load the default settings
   defaults = {
     autocmds = true, -- lazyvim.config.autocmds
-    keymaps = true, -- lazyvim.config.keymaps
+    keymaps = true,  -- lazyvim.config.keymaps
     -- lazyvim.config.options can't be configured here since that's loaded before lazyvim setup
     -- if you want to disable loading options, add `package.loaded["lazyvim.config.options"] = true` to the top of your init.lua
   },
@@ -130,38 +130,6 @@ local defaults = {
       "Struct",
       "Trait",
     },
-    typescript = {
-      "Class",
-      "Constructor",
-      "Enum",
-      "Field",
-      "Function",
-      "Interface",
-      "Method",
-      "Module",
-      "Namespace",
-      "Package",
-      "Property",
-      "Struct",
-      "Trait",
-      "Constant",
-    },
-    typescriptreact = {
-      "Class",
-      "Constructor",
-      "Enum",
-      "Field",
-      "Function",
-      "Interface",
-      "Method",
-      "Module",
-      "Namespace",
-      "Package",
-      "Property",
-      "Struct",
-      "Trait",
-      "Constant",
-    },
   },
 }
 
@@ -225,10 +193,21 @@ function M.setup(opts)
       LazyVim.format.setup()
       LazyVim.root.setup()
 
+      vim.api.nvim_create_user_command("LazyExtras", function()
+        LazyVim.extras.show()
+      end, { desc = "Manage LazyVim extras" })
+
       vim.api.nvim_create_user_command("LazyHealth", function()
         vim.cmd([[Lazy! load all]])
         vim.cmd([[checkhealth]])
       end, { desc = "Load all plugins and run :checkhealth" })
+
+      local health = require("lazy.health")
+      vim.list_extend(health.valid, {
+        "recommended",
+        "desc",
+        "vscode",
+      })
     end,
   })
 
@@ -247,21 +226,6 @@ function M.setup(opts)
     end,
   })
   LazyVim.track()
-
-  local parser_config = require("nvim-treesitter.parsers").get_parser_configs()
-  parser_config.coda = {
-    install_info = {
-      url = "https://github.com/theyoxy/tree-sitter-coda",
-      files = { "src/parser.c" },
-      -- development mode
-      -- url = vim.env.HOME .. "/dev/tree-sitter-coda",
-      -- generate_requires_npm = true,
-      -- requires_generate_from_grammar = true,
-    },
-    filetype = "coda",
-  }
-
-  vim.opt.rtp:append("/Users/theyoxy/dev/tree-sitter-coda")
 end
 
 ---@param buf? number
@@ -297,8 +261,7 @@ function M.load(name)
     _load("my-lazy.config." .. name)
     vim.api.nvim_exec_autocmds("User", { pattern = pattern .. "Defaults", modeline = false })
   end
-  local pattern = "LazyVim" .. name:sub(1, 1):upper() .. name:sub(2)
-  _load("config." .. name)
+  _load("my-lazy.config." .. name)
   if vim.bo.filetype == "lazy" then
     -- HACK: LazyVim may have overwritten options of the Lazy ui, so reset this here
     vim.cmd([[do VimResized]])
@@ -317,6 +280,12 @@ function M.init()
     vim.opt.rtp:append(plugin.dir)
   end
 
+  package.preload["my-lazy.plugins.lsp.format"] = function()
+    LazyVim.deprecate([[require("my-lazy.plugins.lsp.format")]], [[LazyVim.format]])
+    return LazyVim.format
+  end
+
+  -- delay notifications till vim.notify was replaced or after 500ms
   LazyVim.lazy_notify()
 
   -- load options here, before lazy init while sourcing plugin modules
@@ -336,6 +305,15 @@ function M.init()
 end
 
 ---@alias LazyVimDefault {name: string, extra: string, enabled?: boolean, origin?: "global" | "default" | "extra" }
+local default_extras ---@type table<string, LazyVimDefault>
+function M.get_defaults()
+  if default_extras then
+    return default_extras
+  end
+
+  default_extras = {}
+  return default_extras
+end
 
 setmetatable(M, {
   __index = function(_, key)

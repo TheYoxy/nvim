@@ -23,3 +23,20 @@ vim.filetype.add({
     [".zsh/.*%.zsh"] = "sh",
   },
 })
+
+require("colorify").run()
+
+-- local parser_config = require("nvim-treesitter.parsers").get_parser_configs()
+-- parser_config.coda = {
+--   install_info = {
+--     url = "https://github.com/theyoxy/tree-sitter-coda",
+--     files = { "src/parser.c" },
+--     -- development mode
+--     -- url = vim.env.HOME .. "/dev/tree-sitter-coda",
+--     -- generate_requires_npm = true,
+--     -- requires_generate_from_grammar = true,
+--   },
+--   filetype = "coda",
+-- }
+
+-- vim.opt.rtp:append(vim.env.HOME .. "/dev/tree-sitter-coda")

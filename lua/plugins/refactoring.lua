@@ -30,34 +30,39 @@ return {
       "nvim-treesitter/nvim-treesitter",
     },
     keys = {
-      { "<leader>r", desc = "+refactor", mode = { "n", "v" } },
+      { "<leader>r", "", desc = "+refactor", mode = { "n", "x" } },
       {
         "<leader>rs",
         pick,
-        mode = "v",
+        mode = { "n", "x" },
         desc = "Refactor",
       },
       {
         "<leader>rn",
         function()
-          require("refactoring").refactor("Inline Variable")
+          return require("refactoring").refactor("Inline Variable")
         end,
-        mode = { "n", "v" },
+        mode = { "n", "x" },
         desc = "Inline Variable",
+        expr = true,
       },
       {
         "<leader>rbb",
         function()
-          require("refactoring").refactor("Extract Block")
+          return require("refactoring").refactor("Extract Block")
         end,
+        mode = { "n", "x" },
         desc = "Extract Block",
+        expr = true,
       },
       {
         "<leader>rbf",
         function()
-          require("refactoring").refactor("Extract Block To File")
+          return require("refactoring").refactor("Extract Block To File")
         end,
+        mode = { "n", "x" },
         desc = "Extract Block To File",
+        expr = true,
       },
       {
         "<leader>rP",
@@ -71,6 +76,7 @@ return {
         function()
           require("refactoring").debug.print_var({ normal = true })
         end,
+        mode = { "n", "x" },
         desc = "Debug Print Variable",
       },
       {
@@ -81,35 +87,38 @@ return {
         desc = "Debug Cleanup",
       },
       {
-        "<leader>rf",
+        "<leader>rm",
         function()
-          require("refactoring").refactor("Extract Function")
+          return require("refactoring").refactor("Extract Function")
         end,
-        mode = "v",
+        mode = { "n", "x" },
         desc = "Extract Function",
+        expr = true,
       },
       {
-        "<leader>rF",
+        "<leader>rM",
         function()
-          require("refactoring").refactor("Extract Function To File")
+          return require("refactoring").refactor("Extract Function To File")
         end,
-        mode = "v",
+        mode = { "n", "x" },
         desc = "Extract Function To File",
+        expr = true,
       },
       {
         "<leader>rx",
         function()
-          require("refactoring").refactor("Extract Variable")
+          return require("refactoring").refactor("Extract Variable")
         end,
-        mode = "v",
+        mode = { "n", "x" },
         desc = "Extract Variable",
+        expr = true,
       },
       {
         "<leader>rp",
         function()
           require("refactoring").debug.print_var()
         end,
-        mode = "v",
+        mode = { "n", "x" },
         desc = "Debug Print Variable",
       },
     },

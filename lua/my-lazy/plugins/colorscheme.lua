@@ -9,7 +9,6 @@ return {
   -- catppuccin
   {
     "catppuccin/nvim",
-    optional = true,
     lazy = true,
     name = "catppuccin",
     opts = {
@@ -58,7 +57,7 @@ return {
         optional = true,
         opts = function(_, opts)
           if (vim.g.colors_name or ""):find("catppuccin") then
-            opts.highlights = require("catppuccin.groups.integrations.bufferline").get()
+            opts.highlights = require("catppuccin.groups.integrations.bufferline").get_theme()
           end
         end,
       },
