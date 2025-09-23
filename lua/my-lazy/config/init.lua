@@ -14,7 +14,7 @@ local defaults = {
   -- load the default settings
   defaults = {
     autocmds = true, -- lazyvim.config.autocmds
-    keymaps = true,  -- lazyvim.config.keymaps
+    keymaps = true, -- lazyvim.config.keymaps
     -- lazyvim.config.options can't be configured here since that's loaded before lazyvim setup
     -- if you want to disable loading options, add `package.loaded["lazyvim.config.options"] = true` to the top of your init.lua
   },
@@ -261,7 +261,7 @@ function M.load(name)
     _load("my-lazy.config." .. name)
     vim.api.nvim_exec_autocmds("User", { pattern = pattern .. "Defaults", modeline = false })
   end
-  _load("my-lazy.config." .. name)
+  _load("config." .. name)
   if vim.bo.filetype == "lazy" then
     -- HACK: LazyVim may have overwritten options of the Lazy ui, so reset this here
     vim.cmd([[do VimResized]])
