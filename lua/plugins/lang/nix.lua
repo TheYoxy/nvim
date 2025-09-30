@@ -1,8 +1,8 @@
+if true then
+  return {}
+end
+
 return {
-  recommended = {
-    ft = "nix",
-    root = "flake.nix",
-  },
   {
     "nvim-treesitter/nvim-treesitter",
     opts = { ensure_installed = { "nix" } },

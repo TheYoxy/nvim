@@ -16,7 +16,7 @@ return {
       "hrsh7th/cmp-buffer",
       "hrsh7th/cmp-path",
 
-      "hrsh7th/cmp-emoji",   -- add cmp source as dependency of cmp
+      "hrsh7th/cmp-emoji", -- add cmp source as dependency of cmp
       "hrsh7th/cmp-cmdline", -- add cmp-cmdline as dependency of cmp
       "hrsh7th/cmp-nvim-lsp-signature-help",
     },
@@ -55,7 +55,7 @@ return {
             return true
           end,
         },
-        { name = "path",    priority = 250 },
+        { name = "path", priority = 250 },
       }
       ---@type cmp.ConfigSchema
       return {
@@ -82,7 +82,7 @@ return {
             fallback()
           end,
           ["<tab>"] = function(fallback)
-            return LazyVim.cmp.map({ "snippet_forward", "ai_accept" }, fallback)()
+            return LazyVim.cmp.map({ "snippet_forward", "ai_nes", "ai_accept" }, fallback)()
           end,
         }),
 

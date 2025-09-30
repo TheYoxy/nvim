@@ -30,9 +30,22 @@ function M.get()
       { "<leader>rr", vim.lsp.buf.rename, desc = "Rename", has = "rename" },
       { "<leader>lA", LazyVim.lsp.action.source, desc = "Source Action", has = "codeAction" },
       { "<leader>lf", function() 
-      if vim.fn.exists(":OxcFixAll") > 0 then vim.cmd("OxcFixAll") end 
-      if vim.fn.exists(":EslintFixAll") > 0 then vim.cmd("EslintFixAll") end 
-    end, desc = "Fix all" }, 
+      vim.notify("This doesn't works anymore. I should have a better look for a fix");
+      -- local oxlint = vim.lsp.get_clients({
+      --   name = "oxlint"
+      -- })
+      -- vim.notify(vim.inspect(oxlint))
+--       vim.lsp.buf.code_action({
+-- apply = true,
+--         filter = function(code_action) 
+-- vim.print(vim.inspect(code_action))
+--           return string.find(code_action.command, "source.fixAll.oxc")
+--         end
+--       })
+      -- if vim.fn.exists(":OxcFixAll") > 0 then vim.cmd("OxcFixAll") end 
+      -- if vim.fn.exists(":EslintFixAll") > 0 then vim.cmd("EslintFixAll") end 
+    end, 
+      desc = "Fix all" }, 
       { "]]", function() Snacks.words.jump(vim.v.count1) end, has = "documentHighlight",
         desc = "Next Reference", cond = function() return Snacks.words.is_enabled() end },
       { "[[", function() Snacks.words.jump(-vim.v.count1) end, has = "documentHighlight",

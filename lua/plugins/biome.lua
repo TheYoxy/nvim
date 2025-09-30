@@ -1,3 +1,7 @@
+if true then
+  return {}
+end -- Diable for now
+
 vim.g.lazyvim_prettier_needs_config = true
 
 -- https://biomejs.dev/internals/language-support/

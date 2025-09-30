@@ -1,3 +1,6 @@
+if vim.lsp.inline_completion then -- NOTE: disable when nvim 12 is released
+  return {}
+end
 vim.g.ai_cmp = false
 
 --- @type LazySpec
@@ -24,6 +27,17 @@ return {
       filetypes = {
         markdown = true,
         help = true,
+      },
+    },
+  },
+
+  -- copilot-language-server
+  {
+    "neovim/nvim-lspconfig",
+    opts = {
+      servers = {
+        -- copilot.lua only works with its own copilot lsp server
+        copilot = { enabled = false },
       },
     },
   },
@@ -101,15 +115,14 @@ return {
         {
           "saghen/blink.cmp",
           optional = true,
-          dependencies = { "giuxtaposition/blink-cmp-copilot" },
+          dependencies = { "fang2hou/blink-copilot" },
           opts = {
             sources = {
               default = { "copilot" },
               providers = {
                 copilot = {
                   name = "copilot",
-                  module = "blink-cmp-copilot",
-                  kind = "Copilot",
+                  module = "blink-copilot",
                   score_offset = 100,
                   async = true,
                 },

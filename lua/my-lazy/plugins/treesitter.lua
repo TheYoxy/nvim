@@ -58,6 +58,21 @@ return {
     config = function(_, opts)
       local TS = require("nvim-treesitter")
 
+      setmetatable(require("nvim-treesitter.install"), {
+        __newindex = function(_, k)
+          if k == "compilers" then
+            vim.schedule(function()
+              LazyVim.error({
+                "Setting custom compilers for `nvim-treesitter` is no longer supported.",
+                "",
+                "For more info, see:",
+                "- [compilers](https://docs.rs/cc/latest/cc/#compile-time-requirements)",
+              })
+            end)
+          end
+        end,
+      })
+
       -- some quick sanity checks
       if not TS.get_installed then
         return LazyVim.error("Please use `:Lazy` and update `nvim-treesitter`")
@@ -94,12 +109,12 @@ return {
           end
 
           -- indents
-          if vim.tbl_get(opts, "indent", "enable") ~= false then
+          if vim.tbl_get(opts, "indent", "enable") ~= false and LazyVim.treesitter.have(ev.match, "indents") then
             LazyVim.set_default("indentexpr", "v:lua.LazyVim.treesitter.indentexpr()")
           end
 
           -- folds
-          if vim.tbl_get(opts, "folds", "enable") ~= false then
+          if vim.tbl_get(opts, "folds", "enable") ~= false and LazyVim.treesitter.have(ev.match, "folds") then
             if LazyVim.set_default("foldmethod", "expr") then
               LazyVim.set_default("foldexpr", "v:lua.LazyVim.treesitter.foldexpr()")
             end
@@ -113,38 +128,19 @@ return {
     "nvim-treesitter/nvim-treesitter-textobjects",
     branch = "main",
     event = "VeryLazy",
-    opts = {},
-    keys = function()
-      local moves = {
-        goto_next_start = { ["]f"] = "@function.outer", ["]c"] = "@class.outer", ["]a"] = "@parameter.inner" },
-        goto_next_end = { ["]F"] = "@function.outer", ["]C"] = "@class.outer", ["]A"] = "@parameter.inner" },
-        goto_previous_start = { ["[f"] = "@function.outer", ["[c"] = "@class.outer", ["[a"] = "@parameter.inner" },
-        goto_previous_end = { ["[F"] = "@function.outer", ["[C"] = "@class.outer", ["[A"] = "@parameter.inner" },
-      }
-      local ret = {} ---@type LazyKeysSpec[]
-      for method, keymaps in pairs(moves) do
-        for key, query in pairs(keymaps) do
-          local desc = query:gsub("@", ""):gsub("%..*", "")
-          desc = desc:sub(1, 1):upper() .. desc:sub(2)
-          desc = (key:sub(1, 1) == "[" and "Prev " or "Next ") .. desc
-          desc = desc .. (key:sub(2, 2) == key:sub(2, 2):upper() and " End" or " Start")
-          ret[#ret + 1] = {
-            key,
-            function()
-              -- don't use treesitter if in diff mode and the key is one of the c/C keys
-              if vim.wo.diff and key:find("[cC]") then
-                return vim.cmd("normal! " .. key)
-              end
-              require("nvim-treesitter-textobjects.move")[method](query, "textobjects")
-            end,
-            desc = desc,
-            mode = { "n", "x", "o" },
-            silent = true,
-          }
-        end
-      end
-      return ret
-    end,
+    opts = {
+      move = {
+        enable = true,
+        set_jumps = true, -- whether to set jumps in the jumplist
+        -- LazyVim extention to create buffer-local keymaps
+        keys = {
+          goto_next_start = { ["]f"] = "@function.outer", ["]c"] = "@class.outer", ["]a"] = "@parameter.inner" },
+          goto_next_end = { ["]F"] = "@function.outer", ["]C"] = "@class.outer", ["]A"] = "@parameter.inner" },
+          goto_previous_start = { ["[f"] = "@function.outer", ["[c"] = "@class.outer", ["[a"] = "@parameter.inner" },
+          goto_previous_end = { ["[F"] = "@function.outer", ["[C"] = "@class.outer", ["[A"] = "@parameter.inner" },
+        },
+      },
+    },
     config = function(_, opts)
       local TS = require("nvim-treesitter-textobjects")
       if not TS.setup then
@@ -152,6 +148,35 @@ return {
         return
       end
       TS.setup(opts)
+
+      vim.api.nvim_create_autocmd("FileType", {
+        group = vim.api.nvim_create_augroup("lazyvim_treesitter_textobjects", { clear = true }),
+        callback = function(ev)
+          if not (vim.tbl_get(opts, "move", "enable") and LazyVim.treesitter.have(ev.match, "textobjects")) then
+            return
+          end
+          ---@type table<string, table<string, string>>
+          local moves = vim.tbl_get(opts, "move", "keys") or {}
+
+          for method, keymaps in pairs(moves) do
+            for key, query in pairs(keymaps) do
+              local desc = query:gsub("@", ""):gsub("%..*", "")
+              desc = desc:sub(1, 1):upper() .. desc:sub(2)
+              desc = (key:sub(1, 1) == "[" and "Prev " or "Next ") .. desc
+              desc = desc .. (key:sub(2, 2) == key:sub(2, 2):upper() and " End" or " Start")
+              if not (vim.wo.diff and key:find("[cC]")) then
+                vim.keymap.set({ "n", "x", "o" }, key, function()
+                  require("nvim-treesitter-textobjects.move")[method](query, "textobjects")
+                end, {
+                  buffer = ev.buf,
+                  desc = desc,
+                  silent = true,
+                })
+              end
+            end
+          end
+        end,
+      })
     end,
   },
 
