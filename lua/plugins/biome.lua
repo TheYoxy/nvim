@@ -1,7 +1,3 @@
-if true then
-  return {}
-end -- Diable for now
-
 vim.g.lazyvim_prettier_needs_config = true
 
 -- https://biomejs.dev/internals/language-support/
@@ -22,6 +18,24 @@ local supported = {
   -- "yaml",
 }
 
+---@alias ConformCtx {buf: number, filename: string, dirname: string}
+local M = {}
+
+--- Checks if a Prettier config file exists for the given context
+---@param ctx conform.Context
+function M.has_config(ctx)
+  return ctx.dirname
+    and vim.fn.globpath(
+        ctx.dirname,
+        "{.biomerc,.biomerc.json,.biomerc.jsonc,.biomerc.js,.biomerc.cjs,.biomerc.mjs,.biome.json,.biome.jsonc}",
+        true,
+        true
+      )
+      ~= ""
+end
+
+M.has_config = LazyVim.memoize(M.has_config)
+
 --- @type LazySpec
 return {
   {
@@ -29,25 +43,9 @@ return {
     opts = { ensure_installed = { "biome" } },
   },
   {
-    "neovim/nvim-lspconfig",
-    opts = {
-      --- @module "lspconfig"
-      ---@type lspconfig.options
-      servers = {
-        biome = {},
-      },
-    },
-    --- --- @return lspconfig.Config
-    --- opts = function()
-    ---   vim.lsp.enable("oxlint")
-    --- end,
-  },
-
-  {
     "stevearc/conform.nvim",
     optional = true,
-    ---@module "conform"
-    ---@param opts ConformOpts
+    ---@param opts conform.setupOpts
     opts = function(_, opts)
       opts.formatters_by_ft = opts.formatters_by_ft or {}
       for _, ft in ipairs(supported) do
@@ -58,6 +56,9 @@ return {
       opts.formatters = opts.formatters or {}
       opts.formatters.biome = {
         require_cwd = true,
+        condition = function(_, ctx)
+          return M.has_config(ctx)
+        end,
       }
     end,
   },

@@ -1,4 +1,3 @@
----@alias ConformCtx {buf: number, filename: string, dirname: string}
 local M = {}
 
 local supported = {
@@ -22,7 +21,7 @@ local supported = {
 }
 
 --- Checks if a Prettier config file exists for the given context
----@param ctx ConformCtx
+---@param ctx conform.Context
 function M.has_config(ctx)
   vim.fn.system({ "prettier", "--find-config-path", ctx.filename })
   return vim.v.shell_error == 0
@@ -31,7 +30,7 @@ end
 --- Checks if a parser can be inferred for the given context:
 --- * If the filetype is in the supported list, return true
 --- * Otherwise, check if a parser can be inferred
----@param ctx ConformCtx
+---@param ctx conform.Context
 function M.has_parser(ctx)
   local ft = vim.bo[ctx.buf].filetype --[[@as string]]
   -- default filetypes are always supported
@@ -60,7 +59,7 @@ return {
   {
     "stevearc/conform.nvim",
     optional = true,
-    ---@param opts ConformOpts
+    ---@param opts conform.setupOpts
     opts = function(_, opts)
       opts.formatters_by_ft = opts.formatters_by_ft or {}
       for _, ft in ipairs(supported) do
