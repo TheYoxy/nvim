@@ -98,11 +98,7 @@ return {
         "<cmd>Telescope buffers sort_mru=true sort_lastused=true ignore_current_buffer=true<cr>",
         desc = "Buffers",
       },
-      {
-        "<Tab>",
-        "<cmd>Telescope buffers sort_mru=true sort_lastused=true ignore_current_buffer=true<cr>",
-        desc = "Switch Buffers",
-      },
+      -- { "<Tab>", "<cmd>Telescope buffers sort_mru=true sort_lastused=true ignore_current_buffer=true<cr>", desc = "Switch Buffers", },
       { "<leader>fc", LazyVim.pick.config_files(), desc = "Find Config File" },
       {
         "<Leader>fe",

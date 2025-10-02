@@ -21,9 +21,10 @@ return {
           virtual_text = {
             spacing = 4,
             source = "if_many",
-            prefix = "●",
+            -- prefix = "●",
+            virt_text_pos = "eol_right_align",
             -- this will set set the prefix to a function that returns the diagnostics icon based on the severity
-            -- prefix = "icons",
+            prefix = "icons",
           },
           virtual_lines = {
             severity = "ERROR",
