@@ -43,6 +43,20 @@ return {
     opts = { ensure_installed = { "biome" } },
   },
   {
+    "neovim/nvim-lspconfig",
+    --- @module "lspconfig"
+    opts = {
+      ---@type table<string, vim.lsp.Config>
+      servers = {
+        biome = {},
+      },
+
+      setup = {
+        biome = function(arg, opts) end,
+      },
+    },
+  },
+  {
     "stevearc/conform.nvim",
     optional = true,
     ---@param opts conform.setupOpts
