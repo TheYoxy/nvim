@@ -3,6 +3,7 @@ LazyVim.on_very_lazy(function()
     extension = { mdx = "markdown.mdx" },
   })
 end)
+--- @type LazySpec
 return {
   {
     "stevearc/conform.nvim",
@@ -88,6 +89,8 @@ return {
 
   {
     "MeanderingProgrammer/render-markdown.nvim",
+    ---@module 'render-markdown'
+    ---@type render.md.UserConfig
     opts = {
       code = {
         sign = false,
@@ -102,7 +105,7 @@ return {
         enabled = false,
       },
     },
-    ft = { "markdown", "norg", "rmd", "org", "codecompanion" },
+    ft = { "markdown", "markdown.mdx", "norg", "rmd", "org", "codecompanion" },
     config = function(_, opts)
       require("render-markdown").setup(opts)
       Snacks.toggle({

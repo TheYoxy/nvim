@@ -40,3 +40,6 @@ require("colorify").run()
 -- }
 
 -- vim.opt.rtp:append(vim.env.HOME .. "/dev/tree-sitter-coda")
+--
+
+table.insert(vim.opt.spelllang, "fr")

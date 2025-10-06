@@ -10,7 +10,7 @@ local supported = {
   "javascriptreact",
   "json",
   "jsonc",
-  -- "markdown",
+  "markdown",
   "svelte",
   "typescript",
   "typescriptreact",
