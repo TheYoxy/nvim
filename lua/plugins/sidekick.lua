@@ -4,11 +4,13 @@ return {
   -- copilot-language-server
   {
     "neovim/nvim-lspconfig",
-    opts = {
-      servers = {
-        copilot = {},
-      },
-    },
+    opts = function(_, opts)
+      local sk = LazyVim.opts("sidekick.nvim") ---@type sidekick.Config|{}
+      if vim.tbl_get(sk, "nes", "enabled") ~= false then
+        opts.servers = opts.servers or {}
+        opts.servers.copilot = opts.servers.copilot or {}
+      end
+    end,
   },
 
   -- lualine
@@ -51,41 +53,56 @@ return {
         end
       end
     end,
+    -- stylua: ignore
     keys = {
       -- nes is also useful in normal mode
       { "<tab>", LazyVim.cmp.map({ "ai_nes" }, "<tab>"), mode = { "n" }, expr = true },
       { "<leader>a", "", desc = "+ai", mode = { "n", "v" } },
       {
-        "<leader>aa",
-        function()
-          require("sidekick.cli").toggle()
-        end,
-        mode = { "n" },
-        desc = "Sidekick Toggle",
-      },
-      {
-        "<leader>an",
-        function()
-          require("sidekick.cli").select_tool()
-        end,
-        mode = { "n" },
-        desc = "Sidekick New Tool",
-      },
-      {
         "<c-.>",
-        function()
-          require("sidekick.cli").focus()
-        end,
-        mode = { "n", "x", "i", "t" },
-        desc = "Sidekick Switch Focus",
+        function() require("sidekick.cli").toggle() end,
+        desc = "Sidekick Toggle",
+        mode = { "n", "t", "i", "x" },
+      },
+      {
+        "<leader>aa",
+        function() require("sidekick.cli").toggle() end,
+        desc = "Sidekick Toggle CLI",
+      },
+      {
+        "<leader>as",
+        function() require("sidekick.cli").select() end,
+        -- Or to select only installed tools:
+        -- require("sidekick.cli").select({ filter = { installed = true } })
+        desc = "Select CLI",
+      },
+      {
+        "<leader>ad",
+        function() require("sidekick.cli").close() end,
+        desc = "Detach a CLI Session",
+      },
+      {
+        "<leader>at",
+        function() require("sidekick.cli").send({ msg = "{this}" }) end,
+        mode = { "x", "n" },
+        desc = "Send This",
+      },
+      {
+        "<leader>af",
+        function() require("sidekick.cli").send({ msg = "{file}" }) end,
+        desc = "Send File",
+      },
+      {
+        "<leader>av",
+        function() require("sidekick.cli").send({ msg = "{selection}" }) end,
+        mode = { "x" },
+        desc = "Send Visual Selection",
       },
       {
         "<leader>ap",
-        function()
-          require("sidekick.cli").select_prompt()
-        end,
-        desc = "Sidekick Ask Prompt",
-        mode = { "n", "v" },
+        function() require("sidekick.cli").prompt() end,
+        mode = { "n", "x" },
+        desc = "Sidekick Select Prompt",
       },
     },
   },
