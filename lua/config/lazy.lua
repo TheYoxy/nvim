@@ -16,8 +16,9 @@ vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
   spec = {
+    -- add LazyVim and import its plugins
+    { "LazyVim/LazyVim", import = "lazyvim.plugins" },
     -- import/override with your plugins
-    { import = "my-lazy.plugins" },
     { import = "plugins" },
   },
   defaults = {
@@ -41,7 +42,7 @@ require("lazy").setup({
         "gzip",
         -- "matchit",
         -- "matchparen",
-        "netrwPlugin",
+        -- "netrwPlugin",
         "tarPlugin",
         "tohtml",
         "tutor",
@@ -49,4 +50,4 @@ require("lazy").setup({
       },
     },
   },
-}--[[@as LazyConfig]])
+})
