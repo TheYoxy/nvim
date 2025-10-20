@@ -24,6 +24,7 @@ vim.filetype.add({
   },
 })
 
+require("lazyvim.plugins.lsp.keymaps")._keys = 
 require("colorify").run()
 
 table.insert(vim.opt.spelllang, "fr")
