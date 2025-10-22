@@ -6,6 +6,9 @@ if vim.fn.getenv("TERM_PROGRAM") == "ghostty" then
   vim.opt.titlestring = "%{fnamemodify(getcwd(), ':t')}"
 end
 
+vim.opt.scrolloff = 20 -- Lines of context
+vim.opt.sidescrolloff = 0 -- Columns of context
+
 vim.keymap.set("n", "<leader>po", ":update<CR> :source<CR>", { desc = "Update and source" })
 vim.filetype.add({
   extension = {
@@ -24,7 +27,6 @@ vim.filetype.add({
   },
 })
 
-require("lazyvim.plugins.lsp.keymaps")._keys = 
 require("colorify").run()
 
 table.insert(vim.opt.spelllang, "fr")

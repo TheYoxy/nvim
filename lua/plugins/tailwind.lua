@@ -10,6 +10,7 @@ return {
       ---@diagnostic disable missing-fields
       ---@type PluginLspOpts
       servers = {
+        tailwindcss = { enabled = false },
         tailwindCSS = {
           validate = true,
           lint = {
@@ -35,6 +36,10 @@ return {
         },
       },
       setup = {
+        tailwindcss = function(_, _)
+          -- Disable default tailwindcss setup
+          return false
+        end,
         tailwindCSS = function(_, opts)
           opts.filetypes = opts.filetypes or {}
 

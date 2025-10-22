@@ -73,7 +73,7 @@ return {
         end,
         desc = "Command History",
       },
-      { "<leader><space>", LazyVim.pick("files"), desc = "Find Files (Root Dir)" },
+      { "<leader><space>", LazyVim.pick("files", { root = false }), desc = "Find Files (cwd)" },
       {
         "<leader>n",
         function()
@@ -100,14 +100,14 @@ return {
       { "<leader>ff", LazyVim.pick("files"), desc = "Find Files (Root Dir)" },
       { "<leader>fF", LazyVim.pick("files", { root = false }), desc = "Find Files (cwd)" },
       -- { "<leader>fg", function() Snacks.picker.git_files() end, desc = "Find Files (git-files)" },
+      { "<leader>fe", LazyVim.pick("oldfiles"), desc = "Recent (cwd)" },
       {
-        "<leader>fe",
+        "<leader>fE",
         function()
           Snacks.picker.recent({ filter = { cwd = true } })
         end,
-        desc = "Recent (cwd)",
+        desc = "Recent",
       },
-      { "<leader>fE", LazyVim.pick("oldfiles"), desc = "Recent" },
       {
         "<leader>fp",
         function()
@@ -899,6 +899,34 @@ return {
           vim.schedule(require("chezmoi.commands.__edit").watch)
         end,
       })
+    end,
+  },
+
+  {
+    "nvim-mini/mini.ai",
+    optional = true,
+    opts = function()
+      local ai = require("mini.ai")
+      return {
+        n_lines = 500,
+        custom_textobjects = {
+          o = ai.gen_spec.treesitter({ -- code block
+            a = { "@block.outer", "@conditional.outer", "@loop.outer" },
+            i = { "@block.inner", "@conditional.inner", "@loop.inner" },
+          }),
+          f = ai.gen_spec.treesitter({ a = "@function.outer", i = "@function.inner" }), -- function
+          c = ai.gen_spec.treesitter({ a = "@class.outer", i = "@class.inner" }), -- class
+          -- t = { "<([%p%w]-)%f[^<%w][^<>]->.-</%1>", "^<.->().*()</[^/]->$" }, -- tags
+          d = { "%f[%d]%d+" }, -- digits
+          e = { -- Word with case
+            { "%u[%l%d]+%f[^%l%d]", "%f[%S][%l%d]+%f[^%l%d]", "%f[%P][%l%d]+%f[^%l%d]", "^[%l%d]+%f[^%l%d]" },
+            "^().*()$",
+          },
+          g = LazyVim.mini.ai_buffer, -- buffer
+          u = ai.gen_spec.function_call(), -- u for "Usage"
+          U = ai.gen_spec.function_call({ name_pattern = "[%w_]" }), -- without dot in function name
+        },
+      }
     end,
   },
 }
