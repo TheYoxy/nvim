@@ -19,14 +19,6 @@ return {
         files = {
           hidden = true,
         },
-        explorer = {
-          hidden = true,
-          include = {
-            "package-lock.json",
-            "pnpm-lock.yaml",
-            "yarn.lock",
-          },
-        },
       },
     },
   },

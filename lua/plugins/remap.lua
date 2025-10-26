@@ -59,6 +59,13 @@ return {
         desc = "Explorer Snacks (cwd)",
       },
       {
+        "<leader>o",
+        function()
+          Snacks.explorer.reveal()
+        end,
+        desc = "Reveal in Explorer Snacks",
+      },
+      {
         "<leader>,",
         function()
           Snacks.picker.buffers()
@@ -100,14 +107,14 @@ return {
       { "<leader>ff", LazyVim.pick("files"), desc = "Find Files (Root Dir)" },
       { "<leader>fF", LazyVim.pick("files", { root = false }), desc = "Find Files (cwd)" },
       -- { "<leader>fg", function() Snacks.picker.git_files() end, desc = "Find Files (git-files)" },
-      { "<leader>fe", LazyVim.pick("oldfiles"), desc = "Recent (cwd)" },
       {
-        "<leader>fE",
+        "<leader>fe",
         function()
           Snacks.picker.recent({ filter = { cwd = true } })
         end,
         desc = "Recent",
       },
+      { "<leader>fE", LazyVim.pick("oldfiles"), desc = "Recent (cwd)" },
       {
         "<leader>fp",
         function()
