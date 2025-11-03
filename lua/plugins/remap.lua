@@ -336,6 +336,8 @@ return {
       { "<leader>sR", false },
       { "<leader>sq", false },
       { "<leader>su", false },
+      { "<leader>ss", false },
+      { "<leader>sS", false },
       -- ui
       { "<leader>uC", false },
     },
@@ -443,235 +445,226 @@ return {
   {
     "neovim/nvim-lspconfig",
     optional = true,
-    opts = function(_, opts)
-      local keys = require("lazyvim.plugins.lsp.keymaps").get()
-
-      --- @parma tab table
-      local function empty_table(tab)
-        local next = next
-        local k = next(tab)
-        while k ~= nil do
-          tab[k] = nil
-          k = next(tab, k)
-        end
-      end
-      empty_table(keys)
-
-      local new_mappings = {
-        { "gd", vim.lsp.buf.definition, desc = "Goto Definition", has = "definition" },
-        { "gr", vim.lsp.buf.references, desc = "References", nowait = true },
-        { "gI", vim.lsp.buf.implementation, desc = "Goto Implementation" },
-        { "gy", vim.lsp.buf.type_definition, desc = "Goto T[y]pe Definition" },
-        { "gD", vim.lsp.buf.declaration, desc = "Goto Declaration" },
-        {
-          "K",
-          function()
-            return vim.lsp.buf.hover()
-          end,
-          desc = "Hover",
-        },
-        {
-          "gK",
-          function()
-            return vim.lsp.buf.signature_help()
-          end,
-          desc = "Signature Help",
-          has = "signatureHelp",
-        },
-        {
-          "<c-k>",
-          function()
-            return vim.lsp.buf.signature_help()
-          end,
-          mode = "i",
-          desc = "Signature Help",
-          has = "signatureHelp",
-        },
-        { "<leader>l", "", desc = "+lsp", mode = { "n", "v" } },
-        {
-          "<leader>li",
-          function()
-            Snacks.picker.lsp_config()
-          end,
-          desc = "Lsp Info",
-        },
-        { "<leader>la", vim.lsp.buf.code_action, desc = "Code Action", mode = { "n", "v" }, has = "codeAction" },
-        { "<leader>lc", vim.lsp.codelens.run, desc = "Run Codelens", mode = { "n", "v" }, has = "codeLens" },
-        { "<leader>lC", vim.lsp.codelens.refresh, desc = "Refresh & Display Codelens", mode = { "n" }, has = "codeLens" },
-        {
-          "<leader>rR",
-          function()
-            Snacks.rename.rename_file()
-          end,
-          desc = "Rename File",
-          mode = { "n" },
-          has = { "workspace/didRenameFiles", "workspace/willRenameFiles" },
-        },
-        { "<leader>rr", vim.lsp.buf.rename, desc = "Rename", has = "rename" },
-        { "<leader>lA", LazyVim.lsp.action.source, desc = "Source Action", has = "codeAction" },
-        {
-          "<leader>lf",
-          function()
-            vim.notify("This doesn't works anymore. I should have a better look for a fix")
-            -- local oxlint = vim.lsp.get_clients({
-            --   name = "oxlint"
-            -- })
-            -- vim.notify(vim.inspect(oxlint))
-            --       vim.lsp.buf.code_action({
-            -- apply = true,
-            --         filter = function(code_action)
-            -- vim.print(vim.inspect(code_action))
-            --           return string.find(code_action.command, "source.fixAll.oxc")
-            --         end
-            --       })
-            -- if vim.fn.exists(":OxcFixAll") > 0 then vim.cmd("OxcFixAll") end
-            -- if vim.fn.exists(":EslintFixAll") > 0 then vim.cmd("EslintFixAll") end
-          end,
-          desc = "Fix all",
-        },
-        {
-          "]]",
-          function()
-            Snacks.words.jump(vim.v.count1)
-          end,
-          has = "documentHighlight",
-          desc = "Next Reference",
-          cond = function()
-            return Snacks.words.is_enabled()
-          end,
-        },
-        {
-          "[[",
-          function()
-            Snacks.words.jump(-vim.v.count1)
-          end,
-          has = "documentHighlight",
-          desc = "Prev Reference",
-          cond = function()
-            return Snacks.words.is_enabled()
-          end,
-        },
-        {
-          "<a-n>",
-          function()
-            Snacks.words.jump(vim.v.count1, true)
-          end,
-          has = "documentHighlight",
-          desc = "Next Reference",
-          cond = function()
-            return Snacks.words.is_enabled()
-          end,
-        },
-        {
-          "<a-p>",
-          function()
-            Snacks.words.jump(-vim.v.count1, true)
-          end,
-          has = "documentHighlight",
-          desc = "Prev Reference",
-          cond = function()
-            return Snacks.words.is_enabled()
-          end,
-        },
-        {
-          "<leader>lr",
-          function()
-            local inc_rename = require("inc_rename")
-            return ":" .. inc_rename.config.cmd_name .. " " .. vim.fn.expand("<cword>")
-          end,
-          expr = true,
-          desc = "Rename (inc-rename.nvim)",
-          has = "rename",
-        },
-        {
-          "gd",
-          function()
-            Snacks.picker.lsp_definitions()
-          end,
-          desc = "Goto Definition",
-          has = "definition",
-        },
-        {
-          "gr",
-          function()
-            Snacks.picker.lsp_references()
-          end,
-          nowait = true,
-          desc = "References",
-        },
-        {
-          "gI",
-          function()
-            Snacks.picker.lsp_implementations()
-          end,
-          desc = "Goto Implementation",
-        },
-        {
-          "gy",
-          function()
-            Snacks.picker.lsp_type_definitions()
-          end,
-          desc = "Goto T[y]pe Definition",
-        },
-        {
-          "<leader>fs",
-          function()
-            Snacks.picker.lsp_symbols({ filter = LazyVim.config.kind_filter })
-          end,
-          desc = "LSP Symbols",
-          has = "documentSymbol",
-        },
-        {
-          "<leader>fS",
-          function()
-            Snacks.picker.lsp_workspace_symbols({ filter = LazyVim.config.kind_filter })
-          end,
-          desc = "LSP Workspace Symbols",
-          has = "workspace/symbols",
-        },
-      }
-
-      for _, mapping in ipairs(new_mappings) do
-        keys[#keys + 1] = mapping
-      end
-      if opts.servers.vtsls ~= nil then
-        opts.servers.vtsls.keys = {
-          { "<leader>co", false },
-          { "<leader>cM", false },
-          { "<leader>cu", false },
-          { "<leader>cD", false },
-          { "<leader>cV", false },
-
-          {
-            "<leader>ri",
-            LazyVim.lsp.action["source.removeUnused.ts"],
-            desc = "Remove unused imports",
+    opts = {
+      servers = {
+        ["*"] = {
+          keys = {
+            { "gd", vim.lsp.buf.definition, desc = "Goto Definition", has = "definition" },
+            { "gr", vim.lsp.buf.references, desc = "References", nowait = true },
+            { "gI", vim.lsp.buf.implementation, desc = "Goto Implementation" },
+            { "gy", vim.lsp.buf.type_definition, desc = "Goto T[y]pe Definition" },
+            { "gD", vim.lsp.buf.declaration, desc = "Goto Declaration" },
+            {
+              "K",
+              function()
+                return vim.lsp.buf.hover()
+              end,
+              desc = "Hover",
+            },
+            {
+              "gK",
+              function()
+                return vim.lsp.buf.signature_help()
+              end,
+              desc = "Signature Help",
+              has = "signatureHelp",
+            },
+            {
+              "<c-k>",
+              function()
+                return vim.lsp.buf.signature_help()
+              end,
+              mode = "i",
+              desc = "Signature Help",
+              has = "signatureHelp",
+            },
+            { "<leader>l", "", desc = "+lsp", mode = { "n", "v" } },
+            {
+              "<leader>li",
+              function()
+                Snacks.picker.lsp_config()
+              end,
+              desc = "Lsp Info",
+            },
+            { "<leader>la", vim.lsp.buf.code_action, desc = "Code Action", mode = { "n", "v" }, has = "codeAction" },
+            { "<leader>lc", vim.lsp.codelens.run, desc = "Run Codelens", mode = { "n", "v" }, has = "codeLens" },
+            { "<leader>lC", vim.lsp.codelens.refresh, desc = "Refresh & Display Codelens", mode = { "n" }, has = "codeLens" },
+            {
+              "<leader>rR",
+              function()
+                Snacks.rename.rename_file()
+              end,
+              desc = "Rename File",
+              mode = { "n" },
+              has = { "workspace/didRenameFiles", "workspace/willRenameFiles" },
+            },
+            { "<leader>rr", vim.lsp.buf.rename, desc = "Rename", has = "rename" },
+            { "<leader>lA", LazyVim.lsp.action.source, desc = "Source Action", has = "codeAction" },
+            {
+              "<leader>lf",
+              function()
+                vim.notify("This doesn't works anymore. I should have a better look for a fix")
+                -- local oxlint = vim.lsp.get_clients({
+                --   name = "oxlint"
+                -- })
+                -- vim.notify(vim.inspect(oxlint))
+                --       vim.lsp.buf.code_action({
+                -- apply = true,
+                --         filter = function(code_action)
+                -- vim.print(vim.inspect(code_action))
+                --           return string.find(code_action.command, "source.fixAll.oxc")
+                --         end
+                --       })
+                -- if vim.fn.exists(":OxcFixAll") > 0 then vim.cmd("OxcFixAll") end
+                -- if vim.fn.exists(":EslintFixAll") > 0 then vim.cmd("EslintFixAll") end
+              end,
+              desc = "Fix all",
+            },
+            {
+              "]]",
+              function()
+                Snacks.words.jump(vim.v.count1)
+              end,
+              has = "documentHighlight",
+              desc = "Next Reference",
+              cond = function()
+                return Snacks.words.is_enabled()
+              end,
+            },
+            {
+              "[[",
+              function()
+                Snacks.words.jump(-vim.v.count1)
+              end,
+              has = "documentHighlight",
+              desc = "Prev Reference",
+              cond = function()
+                return Snacks.words.is_enabled()
+              end,
+            },
+            {
+              "<a-n>",
+              function()
+                Snacks.words.jump(vim.v.count1, true)
+              end,
+              has = "documentHighlight",
+              desc = "Next Reference",
+              cond = function()
+                return Snacks.words.is_enabled()
+              end,
+            },
+            {
+              "<a-p>",
+              function()
+                Snacks.words.jump(-vim.v.count1, true)
+              end,
+              has = "documentHighlight",
+              desc = "Prev Reference",
+              cond = function()
+                return Snacks.words.is_enabled()
+              end,
+            },
+            {
+              "<leader>lr",
+              function()
+                local inc_rename = require("inc_rename")
+                return ":" .. inc_rename.config.cmd_name .. " " .. vim.fn.expand("<cword>")
+              end,
+              expr = true,
+              desc = "Rename (inc-rename.nvim)",
+              has = "rename",
+            },
+            {
+              "gd",
+              function()
+                Snacks.picker.lsp_definitions()
+              end,
+              desc = "Goto Definition",
+              has = "definition",
+            },
+            {
+              "gr",
+              function()
+                Snacks.picker.lsp_references()
+              end,
+              nowait = true,
+              desc = "References",
+            },
+            {
+              "gI",
+              function()
+                Snacks.picker.lsp_implementations()
+              end,
+              desc = "Goto Implementation",
+            },
+            {
+              "gy",
+              function()
+                Snacks.picker.lsp_type_definitions()
+              end,
+              desc = "Goto T[y]pe Definition",
+            },
+            {
+              "<leader>fs",
+              function()
+                Snacks.picker.lsp_symbols({ filter = LazyVim.config.kind_filter })
+              end,
+              desc = "LSP Symbols",
+              has = "documentSymbol",
+            },
+            {
+              "<leader>fS",
+              function()
+                Snacks.picker.lsp_workspace_symbols({ filter = LazyVim.config.kind_filter })
+              end,
+              desc = "LSP Workspace Symbols",
+              has = "workspace/symbols",
+            },
           },
-          {
-            "<leader>rI",
-            LazyVim.lsp.action["source.organizeImports"],
-            desc = "Organize Imports",
+        },
+        vtsls = {
+          keys = {
+            { "<leader>co", false },
+            { "<leader>cM", false },
+            { "<leader>cu", false },
+            { "<leader>cD", false },
+            { "<leader>cV", false },
+            {
+              "<leader>ri",
+              LazyVim.lsp.action["source.removeUnused.ts"],
+              desc = "Remove unused imports",
+            },
+            {
+              "<leader>rI",
+              LazyVim.lsp.action["source.organizeImports"],
+              desc = "Organize Imports",
+            },
+            {
+              "<leader>lo",
+              LazyVim.lsp.action["source.addMissingImports.ts"],
+              desc = "Add missing imports",
+            },
+            {
+              "<leader>lD",
+              LazyVim.lsp.action["source.fixAll.ts"],
+              desc = "Fix all diagnostics",
+            },
+            {
+              "<leader>rN",
+              LazyVim.lsp.action["refactor.move.newFile"],
+              desc = "Move to new file",
+            },
+            {
+              "<leader>rV",
+              function()
+                LazyVim.lsp.execute({ command = "typescript.selectTypeScriptVersion" })
+              end,
+              desc = "Select TS workspace version",
+            },
           },
-          {
-            "<leader>lo",
-            LazyVim.lsp.action["source.addMissingImports.ts"],
-            desc = "Add missing imports",
-          },
-          {
-            "<leader>lD",
-            LazyVim.lsp.action["source.fixAll.ts"],
-            desc = "Fix all diagnostics",
-          },
-          {
-            "<leader>rV",
-            function()
-              LazyVim.lsp.execute({ command = "typescript.selectTypeScriptVersion" })
-            end,
-            desc = "Select TS workspace version",
-          },
-        }
-      end
-    end,
+        },
+      },
+    },
   },
   {
     "stevearc/conform.nvim",
@@ -683,7 +676,7 @@ return {
         function()
           require("conform").format({ formatters = { "injected" }, timeout_ms = 3000 })
         end,
-        mode = { "n", "v" },
+        mode = { "n", "x" },
         desc = "Format Injected Langs",
       },
     },

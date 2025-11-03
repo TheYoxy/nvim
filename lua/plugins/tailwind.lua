@@ -43,13 +43,16 @@ return {
         tailwindCSS = function(_, opts)
           opts.filetypes = opts.filetypes or {}
 
-          LazyVim.lsp.on_attach(function(_, buffer)
+          local snacks = require("snacks")
+          snacks.util.lsp.on({
+            name = "tailwindCSS",
+          }, function(_, buffer)
             if vim.bo[buffer].filetype == "css" then
               vim.schedule(function()
                 require("tailwindcss-colors").buf_attach(buffer)
               end)
             end
-          end, "tailwindCSS")
+          end)
 
           -- Add default filetypes
           vim.list_extend(opts.filetypes, vim.lsp.config.tailwindcss.filetypes)
