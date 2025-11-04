@@ -1,17 +1,15 @@
+--- @module "lspconfig"
+--- @module "lspconfig.configs"
+--- @module "lspconfig.configs.tailwindcss"
 --- @type LazySpec
 return {
   {
     "neovim/nvim-lspconfig",
     opts = {
-      --- @module "lspconfig"
-      --- @module "lspconfig.configs"
-      --- @module "lspconfig.configs.tailwindcss"
-      --- @type _.lspconfig.settings.tailwindcss.TailwindCSS
       ---@diagnostic disable missing-fields
       ---@type PluginLspOpts
       servers = {
-        tailwindcss = { enabled = false },
-        tailwindCSS = {
+        tailwindcss = {
           validate = true,
           lint = {
             cssConflict = "error",
@@ -36,15 +34,8 @@ return {
         },
       },
       setup = {
-        tailwindcss = function(_, _)
-          -- Disable default tailwindcss setup
-          return false
-        end,
-        tailwindCSS = function(_, opts)
-          opts.filetypes = opts.filetypes or {}
-
-          local snacks = require("snacks")
-          snacks.util.lsp.on({
+        tailwindcss = function(_, opts)
+          require("snacks").util.lsp.on({
             name = "tailwindCSS",
           }, function(_, buffer)
             if vim.bo[buffer].filetype == "css" then
@@ -53,29 +44,6 @@ return {
               end)
             end
           end)
-
-          -- Add default filetypes
-          vim.list_extend(opts.filetypes, vim.lsp.config.tailwindcss.filetypes)
-
-          -- Remove excluded filetypes
-          --- @param ft string
-          opts.filetypes = vim.tbl_filter(function(ft)
-            return not vim.tbl_contains(opts.filetypes_exclude or {}, ft)
-          end, opts.filetypes)
-
-          -- Additional settings for Phoenix projects
-          opts.settings = {
-            tailwindCSS = {
-              includeLanguages = {
-                elixir = "html-eex",
-                eelixir = "html-eex",
-                heex = "html-eex",
-              },
-            },
-          }
-
-          -- Add additional filetypes
-          vim.list_extend(opts.filetypes, opts.filetypes_include or {})
         end,
       },
     },

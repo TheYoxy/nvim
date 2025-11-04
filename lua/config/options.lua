@@ -6,8 +6,9 @@ if vim.fn.getenv("TERM_PROGRAM") == "ghostty" then
   vim.opt.titlestring = "%{fnamemodify(getcwd(), ':t')}"
 end
 
-vim.opt.scrolloff = 20 -- Lines of context
+vim.opt.scrolloff = 30 -- Lines of context
 vim.opt.sidescrolloff = 0 -- Columns of context
+vim.g.snacks_animate = false -- disable all animations
 
 vim.keymap.set("n", "<leader>po", ":update<CR> :source<CR>", { desc = "Update and source" })
 vim.filetype.add({

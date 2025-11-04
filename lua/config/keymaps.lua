@@ -4,6 +4,13 @@
 vim.keymap.set("n", "+", "<C-a>", { desc = "Increment number" })
 vim.keymap.set("n", "-", "<C-x>", { desc = "Decrement number" })
 
+-- vim.keymap.set({ "n", "x" }, "j", "v:count == 0 ? 'gjzz' : 'jzz'", { desc = "Down", expr = true, silent = true })
+-- vim.keymap.set({ "n", "x" }, "<Down>", "v:count == 0 ? 'gjzz' : 'jzz'", { desc = "Down", expr = true, silent = true })
+-- vim.keymap.set({ "n", "x" }, "k", "v:count == 0 ? 'gkzz' : 'kzz'", { desc = "Up", expr = true, silent = true })
+-- vim.keymap.set({ "n", "x" }, "<Up>", "v:count == 0 ? 'gkzz' : 'kzz'", { desc = "Up", expr = true, silent = true })
+-- vim.keymap.set("n", "G", "'Gzz'", { expr = true, silent = true })
+-- vim.keymap.set("n", "gg", "'ggzz'", { expr = true, silent = true })
+
 vim.keymap.set("n", "<leader>c", function()
   Snacks.bufdelete()
 end, { desc = "Delete Buffer" })
