@@ -45,27 +45,6 @@ return {
     optional = true,
     keys = {
       {
-        "<leader>e",
-        function()
-          Snacks.explorer({ cwd = LazyVim.root() })
-        end,
-        desc = "Explorer Snacks (root dir)",
-      },
-      {
-        "<leader>E",
-        function()
-          Snacks.explorer()
-        end,
-        desc = "Explorer Snacks (cwd)",
-      },
-      {
-        "<leader>o",
-        function()
-          Snacks.explorer.reveal()
-        end,
-        desc = "Reveal in Explorer Snacks",
-      },
-      {
         "<leader>,",
         function()
           Snacks.picker.buffers()
@@ -928,5 +907,42 @@ return {
         },
       }
     end,
+  },
+
+  {
+    "nvim-neo-tree/neo-tree.nvim",
+    cmd = "Neotree",
+    keys = {
+      { "<leader>fe", false },
+      { "<leader>fE", false },
+      {
+        "<leader>e",
+        function()
+          require("neo-tree.command").execute({ toggle = true, dir = LazyVim.root() })
+        end,
+        desc = "Explorer NeoTree (Root Dir)",
+      },
+      {
+        "<leader>E",
+        function()
+          require("neo-tree.command").execute({ toggle = true, dir = vim.uv.cwd() })
+        end,
+        desc = "Explorer NeoTree (cwd)",
+      },
+      {
+        "<leader>ge",
+        function()
+          require("neo-tree.command").execute({ source = "git_status", toggle = true })
+        end,
+        desc = "Git Explorer",
+      },
+      {
+        "<leader>be",
+        function()
+          require("neo-tree.command").execute({ source = "buffers", toggle = true })
+        end,
+        desc = "Buffer Explorer",
+      },
+    },
   },
 }
