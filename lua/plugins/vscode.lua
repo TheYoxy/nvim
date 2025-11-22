@@ -17,14 +17,13 @@ local enabled = {
   "nvim-treesitter-textobjects",
   "nvim-ts-context-commentstring",
   "snacks.nvim",
-  -- "text-case.nvim",
-  "todo-comments.nvim",
   "ts-comments.nvim",
   "vim-repeat",
   "yanky.nvim",
 }
 
 local Config = require("lazy.core.config")
+local vscode = require("vscode")
 Config.options.checker.enabled = false
 Config.options.change_detection.enabled = false
 Config.options.defaults.cond = function(plugin)
@@ -39,23 +38,30 @@ vim.api.nvim_create_autocmd("User", {
     --- @class NvimVscode
     --- @field action fun(action: string, opts?: { args?: any[], range: [number| number] | [number, string, number, string], restore_selection: boolean, callback: fun(err: string | nil, ret: any) })
     --- @field notify fun(message: string)
-    local vscode = require("vscode-neovim")
+    --- @field call fun(action: string, args?: any[])
     vim.notify = vscode.notify
 
-    vim.keymap.set("n", "j", "gj")
-    vim.keymap.set("n", "k", "gk")
+    -- vim.keymap.set("n", "j", "gj")
+    -- vim.keymap.set({ "n", "x" }, "k", "gk")
     -- VSCode-specific keymaps for search and navigation
     vim.keymap.set("n", "<leader><space>", "<cmd>Find<cr>")
     vim.keymap.set("n", "<leader>/", [[<cmd>lua require('vscode').action('workbench.action.findInFiles')<cr>]])
-    vim.keymap.set("n", "<leader>fs", [[<cmd>lua require('vscode').action('workbench.action.gotoSymbol')<cr>]])
+    vim.keymap.set("n", "<leader>fs", function()
+      vscode.call("workbench.action.gotoSymbol")
+    end)
 
     -- Keep undo/redo lists in sync with VsCode
     vim.keymap.set("n", "u", "<Cmd>call VSCodeNotify('undo')<CR>")
     vim.keymap.set("n", "<C-r>", "<Cmd>call VSCodeNotify('redo')<CR>")
 
     -- Navigate VSCode tabs like lazyvim buffers
-    vim.keymap.set("n", "<S-h>", "<Cmd>call VSCodeNotify('workbench.action.previousEditor')<CR>")
-    vim.keymap.set("n", "<S-l>", "<Cmd>call VSCodeNotify('workbench.action.nextEditor')<CR>")
+    -- Navigate VSCode tabs like lazyvim buffers
+    vim.keymap.set("n", "<S-h>", function()
+      vscode.call("workbench.action.previousEditor")
+    end)
+    vim.keymap.set("n", "<S-l>", function()
+      vscode.call("workbench.action.nextEditor")
+    end)
 
     -- vim.keymap.set({ "n" }, "<leader>", function() vscode.action "whichkey.show" end, { noremap = false, remap = true })
     -- vim.keymap.set({ "n", "x", "i" }, "<C-g>", function() vscode.action "editor.action.addSelectionToNextFindMatch" end)
@@ -232,9 +238,9 @@ vim.api.nvim_create_autocmd("User", {
       vscode.action("inlineChat.start")
     end, { desc = "Start inline chat" })
 
-    vim.keymap.set("n", "<leader>gg", function()
-      vscode.action("lazygit-vscode.toggle")
-    end, { desc = "Toggle lazygit" })
+    -- vim.keymap.set("n", "<leader>gg", function()
+    --   vscode.action("lazygit-vscode.toggle")
+    -- end, { desc = "Toggle lazygit" })
   end,
 })
 
@@ -262,13 +268,12 @@ return {
     },
   },
   {
-    name = "my-lazy/custom_nvim",
-    dir = vim.fn.stdpath("config") .. "/lua/my-lazy",
+    "LazyVim/LazyVim",
     config = function(_, opts)
       opts = opts or {}
       -- disable the colorscheme
       opts.colorscheme = function() end
-      require("my-lazy.init").setup(opts)
+      require("lazyvim").setup(opts)
     end,
   },
   {
