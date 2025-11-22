@@ -23,4 +23,21 @@ return {
       end,
     })
   end,
+  opts = {
+    lsp = {
+      -- `:h events` that cause the diagnostics to update. Set to:
+      -- { "BufWritePost", "InsertLeave", "TextChanged" } for less performant
+      -- but more instant diagnostic updates
+      diagnostic_update_events = { "BufWritePost" },
+      -- function to find the root dir where the otter-ls is started
+      root_dir = function(_, bufnr)
+        return vim.fs.root(bufnr or 0, {
+          ".git",
+          ".obsidian",
+          "_quarto.yml",
+          "package.json",
+        }) or vim.fn.getcwd(0)
+      end,
+    },
+  },
 }
