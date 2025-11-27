@@ -23,7 +23,6 @@ local enabled = {
 }
 
 local Config = require("lazy.core.config")
-local vscode = require("vscode")
 Config.options.checker.enabled = false
 Config.options.change_detection.enabled = false
 Config.options.defaults.cond = function(plugin)
@@ -39,6 +38,7 @@ vim.api.nvim_create_autocmd("User", {
     --- @field action fun(action: string, opts?: { args?: any[], range: [number| number] | [number, string, number, string], restore_selection: boolean, callback: fun(err: string | nil, ret: any) })
     --- @field notify fun(message: string)
     --- @field call fun(action: string, args?: any[])
+    local vscode = require("vscode")
     vim.notify = vscode.notify
 
     -- vim.keymap.set("n", "j", "gj")
@@ -47,7 +47,7 @@ vim.api.nvim_create_autocmd("User", {
     vim.keymap.set("n", "<leader><space>", "<cmd>Find<cr>")
     vim.keymap.set("n", "<leader>/", [[<cmd>lua require('vscode').action('workbench.action.findInFiles')<cr>]])
     vim.keymap.set("n", "<leader>fs", function()
-      vscode.call("workbench.action.gotoSymbol")
+      vscode.action("workbench.action.gotoSymbol")
     end)
 
     -- Keep undo/redo lists in sync with VsCode
@@ -76,10 +76,10 @@ vim.api.nvim_create_autocmd("User", {
     vim.keymap.set({ "n", "x" }, "<leader>si", function()
       vscode.action("vscode-neovim.restart")
     end, { desc = "Restart vscode" })
+
     vim.keymap.set("n", "]d", function()
       vscode.action("editor.action.marker.next")
     end, { desc = "Next diagnostic" })
-
     vim.keymap.set("n", "[d", function()
       vscode.action("editor.action.marker.prev")
     end, { desc = "Previous diagnostic" })
@@ -142,7 +142,7 @@ vim.api.nvim_create_autocmd("User", {
     vim.keymap.set("n", "<leader>Q", function()
       vscode.action("workbench.action.reopenClosedEditor")
     end, { desc = "Reopen closed editor" })
-    vim.keymap.set("n", "<leader>bc", function()
+    vim.keymap.set({ "n", "x" }, "<leader>bc", function()
       vscode.action("workbench.action.closeOtherEditors")
     end, { desc = "Close other editors" })
 
@@ -171,6 +171,12 @@ vim.api.nvim_create_autocmd("User", {
       vscode.action("search.action.focusNextSearchResult")
     end, { desc = "Focus next search result" })
 
+    vim.keymap.set("n", ",a", function()
+      vscode.action("workbench.action.showCommands")
+    end, { desc = "Show commands" })
+    vim.keymap.set("n", ",t", function()
+      vscode.action("test-explorer.run-this-test")
+    end, { desc = "Run this test" })
     vim.keymap.set("n", "K", function()
       vscode.action("editor.action.showHover")
     end, { desc = "Show hover" })
