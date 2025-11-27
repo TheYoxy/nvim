@@ -132,9 +132,9 @@ vim.api.nvim_create_autocmd("User", {
     vim.keymap.set({ "n", "x" }, "<leader>ri", function()
       vscode.action("editor.action.organizeImports")
     end, { desc = "Organize imports" })
-    vim.keymap.set({ "n", "x" }, "<leader>t", function()
-      vscode.action("workbench.action.terminal.focus")
-    end, { desc = "Focus terminal" })
+    -- vim.keymap.set({ "n", "x" }, "<leader>t", function()
+    --   vscode.action("workbench.action.terminal.focus")
+    -- end, { desc = "Focus terminal" })
     vim.keymap.set({ "n", "x" }, "<leader>e", function()
       vscode.action("workbench.view.explorer")
     end, { desc = "Explorer" })
@@ -184,9 +184,33 @@ vim.api.nvim_create_autocmd("User", {
     vim.keymap.set({ "n", "x" }, ",a", function()
       vscode.action("workbench.action.showCommands")
     end, { desc = "Show commands" })
-    vim.keymap.set({ "n", "x" }, ",t", function()
-      vscode.action("test-explorer.run-this-test")
+
+    --- NOTE: testing keymaps
+    vim.keymap.set({ "n", "x" }, "<leader>ta", function()
+      vscode.action("testing.debugAtCursor")
+    end, { desc = "Toggle watch" })
+    vim.keymap.set({ "n", "x" }, "<leader>tl", function()
+      vscode.action("testing.showMostRecentOutput")
+    end, { desc = "Run last tests" })
+    vim.keymap.set({ "n", "x" }, "<leader>tt", function()
+      vscode.action("testing.runCurrentFile")
     end, { desc = "Run this test" })
+    vim.keymap.set({ "n", "x" }, "<leader>to", function()
+      vscode.action("testing.toggleInlineTestOutput")
+    end, { desc = "Run this test" })
+    vim.keymap.set({ "n", "x" }, "<leader>tO", function()
+      vscode.action("testing.showMostRecentOutput")
+    end, { desc = "Toggle output panel" })
+    vim.keymap.set({ "n", "x" }, "<leader>tr", function()
+      vscode.action("testing.runAtCursor")
+    end, { desc = "Run previous test command" })
+    vim.keymap.set({ "n", "x" }, "<leader>tT", function()
+      vscode.action("testing.runAll")
+    end, { desc = "Run all tests" })
+    vim.keymap.set({ "n", "x" }, "<leader>tw", function()
+      vscode.action("testing.toggleContinuousRunForTest")
+    end, { desc = "Toggle watch" })
+
     vim.keymap.set({ "n", "x" }, "K", function()
       vscode.action("editor.action.showHover")
     end, { desc = "Show hover" })
@@ -260,6 +284,23 @@ vim.api.nvim_create_autocmd("User", {
     -- vim.keymap.set("n", "<leader>gg", function()
     --   vscode.action("lazygit-vscode.toggle")
     -- end, { desc = "Toggle lazygit" })
+
+    local addSelection = function()
+      vscode.action("editor.action.addSelectionToNextFindMatch")
+    end
+
+    --- NOTE: multi-cursor keymaps
+    vim.keymap.set({ "n", "x" }, "<C-g>", function()
+      addSelection()
+    end, {
+      desc = "Add selection to next find match",
+    })
+
+    vim.keymap.set({ "i", "x" }, "<C-g>", function()
+      vscode.with_insert(addSelection)
+    end, {
+      desc = "Add selection to next find match",
+    })
   end,
 })
 
