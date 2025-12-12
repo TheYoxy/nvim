@@ -33,3 +33,10 @@ vim.filetype.add({
 require("colorify").run()
 
 table.insert(vim.opt.spelllang, "fr")
+vim.opt.list = true -- Show some invisible characters (tabs...
+vim.opt.listchars = {
+  -- space = ".",
+  -- eol = "$",
+  -- tab = ">-",
+  nbsp = "\\x24",
+}
