@@ -40,6 +40,7 @@ return {
       { "=P", "<Plug>(YankyPutBeforeFilter)", desc = "Put Before Applying a Filter" },
     },
   },
+
   {
     "folke/snacks.nvim",
     optional = true,
@@ -321,6 +322,7 @@ return {
       { "<leader>uC", false },
     },
   },
+
   {
     "folke/which-key.nvim",
     optional = true,
@@ -366,6 +368,7 @@ return {
       },
     },
   },
+
   {
     "ThePrimeagen/refactoring.nvim",
     optional = true,
@@ -421,6 +424,7 @@ return {
       },
     },
   },
+
   {
     "neovim/nvim-lspconfig",
     optional = true,
@@ -645,6 +649,7 @@ return {
       },
     },
   },
+
   {
     "stevearc/conform.nvim",
     optional = true,

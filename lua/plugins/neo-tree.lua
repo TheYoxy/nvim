@@ -22,6 +22,7 @@ return {
       opts.filesystem.filtered_items.never_show = {
         ".DS_Store",
       }
+      opts.window.position = "right"
 
       opts.nesting_rules = require("neotree-file-nesting-config").nesting_rules
       opts.window.mappings.l = { "open", config = { expand_nested_files = true } }
