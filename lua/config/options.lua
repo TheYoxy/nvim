@@ -6,7 +6,8 @@ if vim.fn.getenv("TERM_PROGRAM") == "ghostty" then
   vim.opt.titlestring = "%{fnamemodify(getcwd(), ':t')}"
 end
 
-vim.g.root_spec = { "lsp", { ".git", "lua" }, { "package.json", "tsconfig.json" }, "cwd" }
+-- vim.g.root_spec = { "lsp", { ".git", "lua" }, { "package.json", "tsconfig.json" }, "cwd" }
+vim.g.root_spec = { ".git", "cwd" }
 vim.opt.laststatus = 3
 vim.opt.scrolloff = 4 -- Lines of context
 vim.opt.sidescrolloff = 0 -- Columns of context
