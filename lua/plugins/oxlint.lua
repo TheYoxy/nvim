@@ -25,6 +25,9 @@ return {
     ---@type conform.setupOpts
     opts = {
       formatters_by_ft = {
+        css = { "oxfmt" },
+        markdown = { "oxfmt" },
+        toml = { "oxfmt" },
         typescript = { "oxfmt" },
         typescriptreact = { "oxfmt" },
         json = { "oxfmt" },
