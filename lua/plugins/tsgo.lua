@@ -1,3 +1,26 @@
+-- NOTE: disabled
+if false then
+  return {
+    {
+      "neovim/nvim-lspconfig",
+      ---@diagnostic disable missing-fields
+      ---@type PluginLspOpts
+      opts = {
+        -- make sure mason installs the server
+        servers = {
+          tsgo = {
+            enabled = false,
+          },
+        },
+      },
+    },
+  }
+end
+
+--- @module "lspconfig"
+--- @module "lspconfig.configs"
+--- @module "lspconfig.configs.tailwindcss"
+--- @type LazySpec
 return {
   -- correctly setup lspconfig
   {
@@ -6,6 +29,8 @@ return {
   },
   {
     "neovim/nvim-lspconfig",
+    ---@diagnostic disable missing-fields
+    ---@type PluginLspOpts
     opts = {
       -- make sure mason installs the server
       servers = {
@@ -14,6 +39,7 @@ return {
         },
         tsgo = {
           enabled = true,
+          -- available on 190326: "quickfix", "source.organizeImports", "source.removeUnusedImports", "source.sortImports"
           keys = {
             {
               "gD",
@@ -41,7 +67,7 @@ return {
             },
             {
               "<leader>ri",
-              LazyVim.lsp.action["source.removeUnused.ts"],
+              LazyVim.lsp.action["source.removeUnusedImports"],
               desc = "Remove unused imports",
             },
             {
@@ -51,12 +77,12 @@ return {
             },
             {
               "<leader>lo",
-              LazyVim.lsp.action["source.addMissingImports.ts"],
+              LazyVim.lsp.action["source.addMissingImports"],
               desc = "Add missing imports",
             },
             {
               "<leader>lD",
-              LazyVim.lsp.action["source.fixAll.ts"],
+              LazyVim.lsp.action["quickfix"],
               desc = "Fix all diagnostics",
             },
             {

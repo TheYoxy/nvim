@@ -1,3 +1,7 @@
+--- @module "lspconfig"
+--- @module "lspconfig.configs"
+--- @module "lspconfig.configs.tailwindcss"
+--- @type LazySpec
 return {
   {
     "mason-org/mason.nvim",
@@ -5,10 +9,9 @@ return {
   },
   {
     "neovim/nvim-lspconfig",
-    ---@class PluginLspOpts
+    ---@diagnostic disable missing-fields
+    ---@type PluginLspOpts
     opts = {
-      --- @module "lspconfig"
-      ---@type table<string, lazyvim.lsp.Config|boolean>
       servers = {
         oxlint = {},
       },

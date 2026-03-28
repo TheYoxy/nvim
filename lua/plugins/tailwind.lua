@@ -10,26 +10,34 @@ return {
       ---@type PluginLspOpts
       servers = {
         tailwindcss = {
-          validate = true,
-          lint = {
-            cssConflict = "error",
-          },
-          classFunctions = {
-            "cva",
-            "cn",
-          },
-          classAttributes = {
-            "class",
-            "className",
-            "class:list",
-            "classList",
-            "ngClass",
-          },
-          includeLanguages = {
-            eelixir = "html-eex",
-            eruby = "erb",
-            templ = "html",
-            htmlangular = "html",
+
+          -- additional settings for the server, e.g:
+          -- tailwindCSS = { includeLanguages = { someLang = "html" } }
+          -- can be addeded to the settings table and will be merged with
+          -- this defaults for Phoenix projects
+          settings = {
+            tailwindCSS = {
+              validate = true,
+              lint = {
+                cssConflict = "error",
+                invalidApply = "error",
+                invalidScreen = "error",
+                invalidVariant = "error",
+                invalidConfigPath = "error",
+                invalidTailwindDirective = "error",
+                recommendedVariantOrder = "warning",
+              },
+              classFunctions = {
+                "cva",
+                "cn",
+              },
+              includeLanguages = {
+                eelixir = "html-eex",
+                eruby = "erb",
+                templ = "html",
+                htmlangular = "html",
+              },
+            },
           },
         },
       },
