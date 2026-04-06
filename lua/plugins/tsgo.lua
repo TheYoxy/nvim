@@ -1,5 +1,5 @@
 -- NOTE: disabled
-if false then
+if true then
   return {
     {
       "neovim/nvim-lspconfig",

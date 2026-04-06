@@ -1,3 +1,8 @@
+-- WARN: disabled
+if true then
+  return {}
+end
+
 --- @type LazySpec
 return {
   -- add some stuff to treesitter

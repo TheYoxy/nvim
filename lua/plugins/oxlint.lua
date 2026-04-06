@@ -13,7 +13,17 @@ return {
     ---@type PluginLspOpts
     opts = {
       servers = {
-        oxlint = {},
+        oxlint = {
+          settings = {
+            run = "onSave",
+            -- configPath = nil,
+            -- tsConfigPath = nil,
+            -- unusedDisableDirectives = 'allow',
+            typeAware = false,
+            -- disableNestedConfig = false,
+            -- fixKind = 'safe_fix',
+          },
+        },
       },
     },
     --- --- @return lspconfig.Config

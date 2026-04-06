@@ -29,6 +29,7 @@ Config.options.defaults.cond = function(plugin)
   return vim.tbl_contains(enabled, plugin.name) or plugin.vscode
 end
 vim.g.snacks_animate = false
+vim.opt.spell = false -- ensure it is always disabled
 
 -- Add some vscode specific keymaps
 vim.api.nvim_create_autocmd("User", {

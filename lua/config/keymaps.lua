@@ -30,8 +30,9 @@ vim.keymap.set("n", "<Leader>pS", "<cmd>Lazy sync<cr>", { desc = "Plugins Sync" 
 vim.keymap.set("n", "<Leader>pu", "<cmd>Lazy check<cr>", { desc = "Plugins Check Updates" })
 vim.keymap.set("n", "<Leader>pU", "<cmd>Lazy update<cr>", { desc = "Plugins Update" })
 
+vim.keymap.del({ "n", "v" }, "<leader>cf")
 if not vim.g.vscode then
-  vim.keymap.del({ "n", "v" }, "<leader>cf")
+  -- NOTE: this is defined in vscode.lua
   vim.keymap.set({ "n", "v" }, "<leader>rf", function()
     LazyVim.format({ force = true })
   end, { desc = "Format" })
