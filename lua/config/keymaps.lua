@@ -29,6 +29,7 @@ vim.keymap.set("n", "<Leader>ps", "<cmd>Lazy<cr>", { desc = "Plugins Status" })
 vim.keymap.set("n", "<Leader>pS", "<cmd>Lazy sync<cr>", { desc = "Plugins Sync" })
 vim.keymap.set("n", "<Leader>pu", "<cmd>Lazy check<cr>", { desc = "Plugins Check Updates" })
 vim.keymap.set("n", "<Leader>pU", "<cmd>Lazy update<cr>", { desc = "Plugins Update" })
+vim.keymap.set("n", "<Leader>si", "<cmd>lsp restart<cr>", { desc = "Restart lsp" })
 
 vim.keymap.del({ "n", "v" }, "<leader>cf")
 if not vim.g.vscode then
@@ -41,6 +42,7 @@ end
 vim.keymap.del("n", "<leader>cd")
 if not vim.g.vscode then
   vim.keymap.set("n", "<leader>ld", vim.diagnostic.open_float, { desc = "Line Diagnostics" })
+  Snacks.toggle.zoom():map("<C-w>z")
 end
 
 vim.keymap.del("n", "<leader>fT")

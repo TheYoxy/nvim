@@ -1,3 +1,15 @@
+local supported = {
+  "javascript",
+  "javascriptreact",
+  "typescript",
+  "typescriptreact",
+  "json",
+  "jsonc",
+  "vue",
+  "svelte",
+  "astro",
+}
+
 --- @module "lspconfig"
 --- @module "lspconfig.configs"
 --- @module "lspconfig.configs.tailwindcss"
@@ -5,7 +17,7 @@
 return {
   {
     "mason-org/mason.nvim",
-    opts = { ensure_installed = { "oxlint" } },
+    opts = { ensure_installed = { "oxlint", "oxfmt" } },
   },
   {
     "neovim/nvim-lspconfig",
@@ -13,6 +25,7 @@ return {
     ---@type PluginLspOpts
     opts = {
       servers = {
+        ---@type lspconfig.settings.oxlint
         oxlint = {
           settings = {
             run = "onSave",
@@ -22,8 +35,11 @@ return {
             typeAware = false,
             -- disableNestedConfig = false,
             -- fixKind = 'safe_fix',
+            -- fixKind = "safe_fix",
           },
         },
+
+        oxfmt = { enabled = false },
       },
     },
     --- --- @return lspconfig.Config
@@ -34,20 +50,12 @@ return {
   {
     "stevearc/conform.nvim",
     optional = true,
-    ---@module "conform"
-    ---@type conform.setupOpts
-    opts = {
-      formatters_by_ft = {
-        css = { "oxfmt" },
-        markdown = { "oxfmt" },
-        toml = { "oxfmt" },
-        typescript = { "oxfmt" },
-        typescriptreact = { "oxfmt" },
-        json = { "oxfmt" },
-        jsonc = { "oxfmt" },
-        javascript = { "oxfmt" },
-        javascriptreact = { "oxfmt" },
-      },
-    },
+    opts = function(_, opts)
+      opts.formatters_by_ft = opts.formatters_by_ft or {}
+      for _, ft in ipairs(supported) do
+        opts.formatters_by_ft[ft] = opts.formatters_by_ft[ft] or {}
+        table.insert(opts.formatters_by_ft[ft], "oxfmt")
+      end
+    end,
   },
 }

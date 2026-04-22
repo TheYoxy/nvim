@@ -34,12 +34,39 @@ return {
     opts = {
       -- make sure mason installs the server
       servers = {
+        ---@type lspconfig.settings.vtsls
         vtsls = {
           enabled = false,
         },
+        ---@type lspconfig.settings.tsgo
         tsgo = {
           enabled = true,
           -- available on 190326: "quickfix", "source.organizeImports", "source.removeUnusedImports", "source.sortImports"
+          -- explicitly add default filetypes, so that we can extend
+          -- them in related extras
+          filetypes = {
+            "javascript",
+            "javascriptreact",
+            "javascript.jsx",
+            "typescript",
+            "typescriptreact",
+            "typescript.tsx",
+          },
+          settings = {
+            typescript = {
+              inlayHints = {
+                enumMemberValues = { enabled = true },
+                functionLikeReturnTypes = { enabled = false },
+                parameterNames = {
+                  enabled = "literals",
+                  suppressWhenArgumentMatchesName = true,
+                },
+                parameterTypes = { enabled = true },
+                propertyDeclarationTypes = { enabled = true },
+                variableTypes = { enabled = false },
+              },
+            },
+          },
           keys = {
             {
               "gD",

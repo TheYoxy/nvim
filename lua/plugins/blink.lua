@@ -2,6 +2,11 @@
 --- @type LazySpec
 return {
   "saghen/blink.cmp",
+  -- dependencies = {
+  --   {
+  --     "giuxtaposition/blink-cmp-copilot",
+  --   },
+  -- },
   optional = true,
   --- @module "blink.cmp"
   --- @param opts blink.cmp.Config
@@ -10,9 +15,9 @@ return {
     -- opts.signature = opts.signature or {}
     -- opts.signature.enabled = true
     -- opts.completion.menu.border = "shadow"
-    -- opts.completion.menu.draw.columns = { { "label", "label_description", gap = 1 }, {
-    --   "kind_icon",
-    --   "kind",
-    -- } }
+    opts.completion.menu.draw.columns = { { "label", "label_description", gap = 1 }, {
+      "kind_icon",
+      "kind",
+    } }
   end,
 }

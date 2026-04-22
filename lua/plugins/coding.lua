@@ -1,3 +1,7 @@
+--- @module "lspconfig"
+--- @module "lspconfig.configs"
+--- @module "lspconfig.configs.tailwindcss"
+--- @type LazySpec
 return {
   {
     "nvim-mini/mini.ai",
@@ -12,9 +16,9 @@ return {
             i = { "@block.inner", "@conditional.inner", "@loop.inner" },
           }),
           f = ai.gen_spec.treesitter({ a = "@function.outer", i = "@function.inner" }), -- function
-          c = ai.gen_spec.treesitter({ a = "@class.outer", i = "@class.inner" }), -- class
-          C = ai.gen_spec.treesitter({ a = "@comment.outer", i = "@comment.inner" }), -- comment
-          t = { "<([%p%w]-)%f[^<%w][^<>]->.-</%1>", "^<.->().*()</[^/]->$" }, -- tags
+          c = ai.gen_spec.treesitter({ a = { "@class.outer", "@comment.outer" }, i = { "@class.inner", "@comment.inner" } }), -- class
+          t = ai.gen_spec.treesitter({ a = "@tag.outer", i = "@tag.inner" }), -- tags
+          -- t = { "<([%p%w]-)%f[^<%w][^<>]->.-</%1>", "^<.->().*()</[^/]->$" },
           d = { "%f[%d]%d+" }, -- digits
           e = { -- Word with case
             { "%u[%l%d]+%f[^%l%d]", "%f[%S][%l%d]+%f[^%l%d]", "%f[%P][%l%d]+%f[^%l%d]", "^[%l%d]+%f[^%l%d]" },
@@ -34,5 +38,25 @@ return {
         end)
       end)
     end,
+  },
+
+  {
+    "nvim-treesitter/nvim-treesitter-textobjects",
+    branch = "main",
+    event = "VeryLazy",
+    --- @module "nvim-treesitter-textobjects"
+    opts = {
+      move = {
+        enable = true,
+        set_jumps = true, -- whether to set jumps in the jumplist
+        -- LazyVim extention to create buffer-local keymaps
+        keys = {
+          goto_next_start = { ["]f"] = "@function.outer", ["]c"] = "@class.outer", ["]a"] = "@parameter.inner" },
+          goto_next_end = { ["]F"] = "@function.outer", ["]C"] = "@class.outer", ["]A"] = "@parameter.inner" },
+          goto_previous_start = { ["[f"] = "@function.outer", ["[c"] = "@class.outer", ["[a"] = "@parameter.inner" },
+          goto_previous_end = { ["[F"] = "@function.outer", ["[C"] = "@class.outer", ["[A"] = "@parameter.inner" },
+        },
+      },
+    },
   },
 }
