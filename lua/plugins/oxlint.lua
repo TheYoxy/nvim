@@ -8,6 +8,7 @@ local supported = {
   "vue",
   "svelte",
   "astro",
+  "css",
 }
 
 --- @module "lspconfig"

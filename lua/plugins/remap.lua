@@ -371,6 +371,7 @@ return {
 
   {
     "ThePrimeagen/refactoring.nvim",
+    dependencies = { "lewis6991/async.nvim", lazy = true },
     optional = true,
     keys = {
       { "<leader>ri", false },
@@ -380,34 +381,16 @@ return {
       {
         "<leader>rn",
         function()
-          return require("refactoring").refactor("Inline Variable")
+          return require("refactoring").inline_var()
         end,
         mode = { "n", "x" },
         desc = "Inline Variable",
         expr = true,
       },
       {
-        "<leader>rbb",
-        function()
-          return require("refactoring").refactor("Extract Block")
-        end,
-        mode = { "n", "x" },
-        desc = "Extract Block",
-        expr = true,
-      },
-      {
-        "<leader>rbf",
-        function()
-          return require("refactoring").refactor("Extract Block To File")
-        end,
-        mode = { "n", "x" },
-        desc = "Extract Block To File",
-        expr = true,
-      },
-      {
         "<leader>rm",
         function()
-          return require("refactoring").refactor("Extract Function")
+          return require("refactoring").extract_func()
         end,
         mode = { "n", "x" },
         desc = "Extract Function",
@@ -416,7 +399,7 @@ return {
       {
         "<leader>rM",
         function()
-          return require("refactoring").refactor("Extract Function To File")
+          return require("refactoring").extract_func_to_file()
         end,
         mode = { "n", "x" },
         desc = "Extract Function To File",
