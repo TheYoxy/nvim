@@ -58,6 +58,9 @@ return {
           },
           settings = {
             typescript = {
+              ["native-preview"] = {
+                goMemLimit = "6GiB",
+              },
               inlayHints = {
                 enumMemberValues = { enabled = true },
                 functionLikeReturnTypes = { enabled = false },
