@@ -1,3 +1,8 @@
+-- NOTE: disabled
+if true then
+  return {}
+end
+
 return {
   -- Add packages(linting, debug adapter)
   {
@@ -12,9 +17,13 @@ return {
   -- Add language server
   {
     "neovim/nvim-lspconfig",
+    ---@diagnostic disable missing-fields
+    ---@type PluginLspOpts
     opts = {
       servers = {
-        kotlin_lsp = {},
+        kotlin_lsp = {
+          single_file_support = true,
+        },
       },
     },
   },

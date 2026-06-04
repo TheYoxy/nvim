@@ -469,7 +469,6 @@ return {
             {
               "<leader>lf",
               function()
-                vim.notify("This doesn't works anymore. I should have a better look for a fix")
                 -- local oxlint = vim.lsp.get_clients({
                 --   name = "oxlint"
                 -- })
@@ -481,8 +480,13 @@ return {
                 --           return string.find(code_action.command, "source.fixAll.oxc")
                 --         end
                 --       })
-                -- if vim.fn.exists(":OxcFixAll") > 0 then vim.cmd("OxcFixAll") end
-                -- if vim.fn.exists(":EslintFixAll") > 0 then vim.cmd("EslintFixAll") end
+                if vim.fn.exists(":LspOxlintFixAll") > 0 then
+                  vim.cmd("LspOxlintFixAll")
+                elseif vim.fn.exists(":EslintFixAll") > 0 then
+                  vim.cmd("EslintFixAll")
+                else
+                  vim.notify("This doesn't works anymore. I should have a better look for a fix")
+                end
               end,
               desc = "Fix all",
             },

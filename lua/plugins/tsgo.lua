@@ -1,10 +1,11 @@
--- NOTE: disabled
-if true then
+-- NOTE: enabled
+if false then
   return {
     {
       "neovim/nvim-lspconfig",
       ---@diagnostic disable missing-fields
       ---@type PluginLspOpts
+      ---@type vim.lsp.Config
       opts = {
         -- make sure mason installs the server
         servers = {
@@ -17,9 +18,12 @@ if true then
   }
 end
 
+--- @module "nvim.lsp."
 --- @module "lspconfig"
 --- @module "lspconfig.configs"
 --- @module "lspconfig.configs.tailwindcss"
+--- @module "lspconfig.configs.kotlin_language_server"
+--- @module "lspconfig.configs"
 --- @type LazySpec
 return {
   -- correctly setup lspconfig
@@ -132,6 +136,9 @@ return {
         --- the proper approach is to check the nvim-lspconfig release version when it's released to determine the server name dynamically
         tsserver = function()
           -- disable tsserver
+          return true
+        end,
+        vtsls = function()
           return true
         end,
         ts_ls = function()
