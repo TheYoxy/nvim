@@ -12,10 +12,10 @@ return {
         virtual_text = {
           virt_text_pos = "eol_right_align",
         },
-        virtual_lines = {
-          severity = vim.diagnostic.severity.ERROR,
-          current_line = true,
-        },
+        -- virtual_lines = {
+        --   severity = vim.diagnostic.severity.ERROR,
+        --   current_line = true,
+        -- },
       },
       -- Enable this to enable the builtin LSP inlay hints on Neovim.
       -- Be aware that you also will need to properly configure your LSP server to

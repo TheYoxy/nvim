@@ -75,6 +75,13 @@ vim.api.nvim_create_autocmd("User", {
       vscode.call("workbench.action.nextEditor")
     end)
 
+    vim.keymap.set("n", "<C-j>", function()
+      vscode.call("goToNextReference")
+    end)
+    vim.keymap.set("n", "<C-k>", function()
+      vscode.call("goToPreviousReference")
+    end)
+
     -- vim.keymap.set({ "n" }, "<leader>", function() vscode.action "whichkey.show" end, { noremap = false, remap = true })
     -- vim.keymap.set({ "n", "x", "i" }, "<C-g>", function() vscode.action "editor.action.addSelectionToNextFindMatch" end)
 

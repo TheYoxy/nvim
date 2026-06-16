@@ -28,6 +28,16 @@ return {
       servers = {
         ---@type lspconfig.settings.oxlint
         oxlint = {
+          root_dir = function(bufnr, on_dir)
+            -- prefer the top-level oxlint config if it exists (monorepo support)
+            local git = vim.fs.root(bufnr, ".git")
+            local markers = { ".oxlintrc.json", ".oxlintrc.jsonc", "oxlint.config.ts" }
+            local root = git and vim.fs.root(git, markers) or vim.fs.root(bufnr, markers)
+            if root then
+              on_dir(root)
+            end
+          end,
+
           settings = {
             run = "onSave",
             -- configPath = nil,
@@ -36,17 +46,14 @@ return {
             typeAware = false,
             -- disableNestedConfig = false,
             -- fixKind = 'safe_fix',
-            -- fixKind = "safe_fix",
+            fixKind = "safe_fix_or_suggestion",
           },
         },
 
+        --- disable the oxfmt lsp server since we use conform for formatting
         oxfmt = { enabled = false },
       },
     },
-    --- --- @return lspconfig.Config
-    --- opts = function()
-    ---   vim.lsp.enable("oxlint")
-    --- end,
   },
   {
     "stevearc/conform.nvim",

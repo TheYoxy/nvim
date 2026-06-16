@@ -9,8 +9,9 @@ end
 -- vim.g.root_spec = { "lsp", { ".git", "lua" }, { "package.json", "tsconfig.json" }, "cwd" }
 vim.g.root_spec = { ".git", "cwd" }
 vim.opt.laststatus = 3
-vim.opt.scrolloff = 4 -- Lines of context
-vim.opt.sidescrolloff = 0 -- Columns of context
+-- vim.opt.so = 999 -- Lines of context
+-- vim.opt.ss = 1 -- Columns of context
+-- vim.opt.siso = 0 -- Columns of context
 vim.g.snacks_animate = false -- disable all animations
 
 vim.keymap.set("n", "<leader>po", ":update<CR> :source<CR>", { desc = "Update and source" })

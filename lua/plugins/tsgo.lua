@@ -61,6 +61,36 @@ return {
               ["native-preview"] = {
                 goMemLimit = "6GiB",
               },
+              suggest = {
+                autoImports = true,
+                completeFunctionCalls = true,
+                includeCompletionsForImportStatements = true,
+                includeAutomaticOptionalChainCompletions = true,
+              },
+              preferences = {
+                importModuleSpecifier = "non-relative", -- 'shortest' | 'relative' | 'non-relative' | 'project-relative'
+                importModuleSpecifierEnding = "auto", -- 'auto' | 'minimal' | 'index' | 'js'
+                quoteStyle = "auto", -- 'auto' | 'single' | 'double'
+                preferTypeOnlyAutoImports = true,
+              },
+              format = {
+                enable = true,
+                semicolons = "ignore", -- 'ignore' | 'insert' | 'remove'
+                indentSwitchCase = true,
+                insertSpaceAfterCommaDelimiter = true,
+                insertSpaceAfterFunctionKeywordForAnonymousFunctions = true,
+                insertSpaceBeforeFunctionParenthesis = false,
+              },
+              referencesCodeLens = {
+                enabled = false, -- not working
+                showOnAllFunctions = true,
+              },
+              implementationsCodeLens = {
+                enabled = false, -- not working
+                showOnInterfaceMethods = true,
+                showOnAllClassMethods = true,
+              },
+              updateImportsOnFileMove = { enabled = "always" },
               inlayHints = {
                 enumMemberValues = { enabled = true },
                 functionLikeReturnTypes = { enabled = false },
@@ -111,7 +141,7 @@ return {
             },
             {
               "<leader>lo",
-              LazyVim.lsp.action["source.addMissingImports"],
+              LazyVim.lsp.action["source.fixAll"],
               desc = "Add missing imports",
             },
             {

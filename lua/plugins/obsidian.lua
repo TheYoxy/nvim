@@ -46,36 +46,18 @@ return {
         date_format = "%Y-%m-%d-%a",
         time_format = "%H:%M",
       },
-      -- Optional, alternatively you can customize the frontmatter data.
-      ---@return table
-      note_frontmatter_func = function(note)
-        -- Add the title of the note as an alias.
-        if note.title then
-          note:add_alias(note.title)
-        end
-
-        local out = { id = note.id, aliases = note.aliases, tags = note.tags, date = os.date("%Y-%m-%d") }
-
-        -- `note.metadata` contains any manually added fields in the frontmatter.
-        -- So here we just make sure those fields are kept in the frontmatter.
-        if note.metadata ~= nil and not vim.tbl_isempty(note.metadata) then
-          for k, v in pairs(note.metadata) do
-            out[k] = v
-          end
-        end
-
-        return out
-      end,
       daily_notes = {
         folder = "daily",
       },
-      completion = {
-        nvim_cmp = not not require("lazy.core.config").plugins["nvim-cmp"],
-        blink = not not require("lazy.core.config").plugins["blink"],
-      },
       frontmatter = {
         func = function(note) -- This is equivalent to the default frontmatter function.
-          local out = { id = note.id, aliases = note.aliases, tags = note.tags }
+          -- Add the title of the note as an alias.
+          if note.title then
+            note:add_alias(note.title)
+          end
+
+          local out = { id = note.id, aliases = note.aliases, tags = note.tags, date = os.date("%Y-%m-%d") }
+
           -- `note.metadata` contains any manually added fields in the frontmatter.
           -- So here we just make sure those fields are kept in the frontmatter.
           if note.metadata ~= nil and not vim.tbl_isempty(note.metadata) then
@@ -83,6 +65,7 @@ return {
               out[k] = v
             end
           end
+
           return out
         end,
       },
