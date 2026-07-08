@@ -2,7 +2,7 @@ if not vim.g.neovide then
   return {}
 end
 
-vim.g.neovide_opacity = 0.6
+vim.g.neovide_opacity = 0.8
 vim.g.transparency = 0.8
 
 vim.g.winblend = 100
@@ -94,7 +94,7 @@ return {
     },
   },
   {
-    "nvim-treesitter/nvim-treesitte-context",
+    "nvim-treesitter/nvim-treesitter-context",
     optional = true,
     opts = {
       multiwindow = true,
@@ -108,12 +108,12 @@ return {
     config = {
       update_interval = 1000,
       set_dark_mode = function()
-        vim.api.nvim_set_option("background", "dark")
-        vim.g.neovide_floating_shadow = true
+        vim.api.nvim_set_option_value("background", "dark", {})
+        -- vim.g.neovide_floating_shadow = true
       end,
       set_light_mode = function()
-        vim.g.neovide_floating_shadow = false
-        vim.api.nvim_set_option("background", "light")
+        -- vim.g.neovide_floating_shadow = true
+        vim.api.nvim_set_option_value("background", "light", {})
       end,
     },
   },

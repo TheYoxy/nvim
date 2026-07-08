@@ -48,10 +48,17 @@ return {
     optional = true,
     opts = {
       formatters_by_ft = {
-        hcl = { "packer_fmt" },
-        terraform = { "terraform_fmt" },
-        tf = { "terraform_fmt" },
-        ["terraform-vars"] = { "terraform_fmt" },
+        hcl = { "tfmt" },
+        terraform = { "tfmt" },
+        tf = { "tfmt" },
+        ["terraform-vars"] = { "tfmt" },
+      },
+      formatters = {
+        tfmt = {
+          command = "tofu",
+          args = { "fmt", "-" },
+          stdin = true,
+        },
       },
     },
   },

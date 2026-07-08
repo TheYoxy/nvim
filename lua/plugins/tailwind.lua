@@ -55,7 +55,6 @@ return {
           -- → css.lint.zeroUnits                             default: "ignore"
         },
         tailwindcss = {
-
           -- additional settings for the server, e.g:
           -- tailwindCSS = { includeLanguages = { someLang = "html" } }
           -- can be addeded to the settings table and will be merged with
@@ -75,6 +74,16 @@ return {
               classFunctions = {
                 "cva",
                 "cn",
+              },
+              classAttributes = {
+                "class",
+                "className",
+                "className$",
+                "inputClassName",
+                "controlClassName",
+                "class:list",
+                "classList",
+                "ngClass",
               },
               includeLanguages = {
                 eelixir = "html-eex",

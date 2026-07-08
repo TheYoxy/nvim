@@ -11,6 +11,7 @@ local supported = {
   "css",
 }
 
+--- @module "lazy"
 --- @module "lspconfig"
 --- @module "lspconfig.configs"
 --- @module "lspconfig.configs.tailwindcss"
@@ -42,8 +43,8 @@ return {
             run = "onSave",
             -- configPath = nil,
             -- tsConfigPath = nil,
-            -- unusedDisableDirectives = 'allow',
-            typeAware = false,
+            unusedDisableDirectives = "deny",
+            typeAware = true,
             -- disableNestedConfig = false,
             -- fixKind = 'safe_fix',
             fixKind = "safe_fix_or_suggestion",

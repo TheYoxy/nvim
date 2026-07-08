@@ -9,6 +9,7 @@ return {
     -- },
     {
       "rafamadriz/friendly-snippets",
+      enabled = false,
       version = false,
     },
     {
@@ -111,12 +112,12 @@ return {
       if opts.keymap.preset == "super-tab" then -- super-tab
         opts.keymap["<Tab>"] = {
           require("blink.cmp.keymap.presets").get("super-tab")["<Tab>"][1],
-          LazyVim.cmp.map({ "snippet_forward", "ai_nes", "ai_accept" }),
+          LazyVim.cmp.map({ "ai_nes", "ai_accept" }),
           "fallback",
         }
       else -- other presets
         opts.keymap["<Tab>"] = {
-          LazyVim.cmp.map({ "snippet_forward", "ai_nes", "ai_accept" }),
+          LazyVim.cmp.map({ "ai_nes", "ai_accept" }),
           "fallback",
         }
       end

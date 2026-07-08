@@ -20,6 +20,14 @@ return {
           hidden = true,
         },
       },
+      win = {
+        input = {
+          keys = {
+            ["<C-S-j>"] = { "history_forward", mode = { "i", "n" } },
+            ["<C-S-k>"] = { "history_backward", mode = { "i", "n" } },
+          },
+        },
+      },
     },
   },
 }
