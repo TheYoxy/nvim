@@ -7,6 +7,9 @@ return {
       "nvim-lua/plenary.nvim",
     },
     lazy = false,
+    opts = {
+      status_bar_enabled = false,
+    },
   },
   {
     "nvim-lualine/lualine.nvim",

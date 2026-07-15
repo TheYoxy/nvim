@@ -29,6 +29,7 @@ return {
         { icon = "󰒲 ", key = "l", desc = "Lazy", action = ":Lazy" },
         { icon = " ", key = "q", desc = "Quit", action = ":qa" },
       }
+      return opts
     end,
   },
 }

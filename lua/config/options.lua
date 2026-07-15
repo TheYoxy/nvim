@@ -9,10 +9,10 @@ end
 -- vim.g.root_spec = { "lsp", { ".git", "lua" }, { "package.json", "tsconfig.json" }, "cwd" }
 vim.g.root_spec = { ".git", "cwd" }
 vim.opt.laststatus = 3
--- vim.opt.so = 999 -- Lines of context
+vim.opt.so = 999 -- Lines of context
+vim.opt.sop = 999 -- Lines of context
 -- vim.opt.ss = 1 -- Columns of context
 -- vim.opt.siso = 0 -- Columns of context
-vim.g.snacks_animate = false -- disable all animations
 
 vim.keymap.set("n", "<leader>po", ":update<CR> :source<CR>", { desc = "Update and source" })
 vim.filetype.add({
@@ -45,3 +45,18 @@ vim.opt.listchars = {
 vim.g.loaded_node_provider = 0
 vim.g.loaded_perl_provider = 0
 vim.g.lazyvim_prettier_needs_config = true
+
+-- vim.lsp.config("fallow", {
+--   cmd = { "fallow-lsp" },
+--   filetypes = { "javascript", "typescript", "javascriptreact", "typescriptreact" },
+--   root_markers = { ".fallowrc.json", "package.json", ".git" },
+--   init_options = {
+--     -- Every issue type is enabled by default. List only the ones you
+--     -- want to turn off; any key you omit stays enabled.
+--     -- issueTypes = {
+--     --   ["circular-dependencies"] = false,
+--     -- },
+--   },
+-- })
+--
+-- vim.lsp.enable("fallow")
