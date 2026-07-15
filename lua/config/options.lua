@@ -46,6 +46,21 @@ vim.g.loaded_node_provider = 0
 vim.g.loaded_perl_provider = 0
 vim.g.lazyvim_prettier_needs_config = true
 
+-- Remote clipboard copy
+if os.getenv("SSH_TTY") then
+  vim.g.clipboard = {
+    name = "OSC 52",
+    copy = {
+      ["+"] = require("vim.ui.clipboard.osc52").copy("+"),
+      ["*"] = require("vim.ui.clipboard.osc52").copy("*"),
+    },
+    paste = {
+      ["+"] = require("vim.ui.clipboard.osc52").paste("+"),
+      ["*"] = require("vim.ui.clipboard.osc52").paste("*"),
+    },
+  }
+end
+
 -- vim.lsp.config("fallow", {
 --   cmd = { "fallow-lsp" },
 --   filetypes = { "javascript", "typescript", "javascriptreact", "typescriptreact" },
