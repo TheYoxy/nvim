@@ -6,6 +6,7 @@ return {
   {
     "nvim-mini/mini.ai",
     event = "VeryLazy",
+    lazy = true,
     opts = function()
       local ai = require("mini.ai")
       return {
@@ -44,12 +45,13 @@ return {
     "nvim-treesitter/nvim-treesitter-textobjects",
     branch = "main",
     event = "VeryLazy",
+    lazy = true,
     --- @module "nvim-treesitter-textobjects"
     opts = {
       move = {
         enable = true,
         set_jumps = true, -- whether to set jumps in the jumplist
-        -- LazyVim extention to create buffer-local keymaps
+        -- LazyVim extension to create buffer-local keymaps
         keys = {
           goto_next_start = { ["]f"] = "@function.outer", ["]c"] = "@class.outer", ["]a"] = "@parameter.inner" },
           goto_next_end = { ["]F"] = "@function.outer", ["]C"] = "@class.outer", ["]A"] = "@parameter.inner" },

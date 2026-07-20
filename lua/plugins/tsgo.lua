@@ -34,6 +34,8 @@ return {
   {
     "neovim/nvim-lspconfig",
     ---@diagnostic disable missing-fields
+    ---@module "lspconfig"
+    ---@module "lspconfig.configs"
     ---@type PluginLspOpts
     opts = {
       -- make sure mason installs the server
@@ -156,9 +158,7 @@ return {
             },
             {
               "<leader>rV",
-              function()
-                LazyVim.lsp.execute({ command = "typescript.selectTypeScriptVersion" })
-              end,
+              LazyVim.lsp.action["typescript.selectTypeScriptVersion"],
               desc = "Select TS workspace version",
             },
           },

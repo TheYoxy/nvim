@@ -535,16 +535,6 @@ return {
               end,
             },
             {
-              "<leader>lr",
-              function()
-                local inc_rename = require("inc_rename")
-                return ":" .. inc_rename.config.cmd_name .. " " .. vim.fn.expand("<cword>")
-              end,
-              expr = true,
-              desc = "Rename (inc-rename.nvim)",
-              has = "rename",
-            },
-            {
               "gd",
               function()
                 Snacks.picker.lsp_definitions()

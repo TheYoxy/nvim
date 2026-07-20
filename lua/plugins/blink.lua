@@ -86,6 +86,7 @@ return {
     opts.keymap = {
       preset = "enter",
       ["<C-y>"] = { "select_and_accept" },
+      ["."] = { "accept", "fallback" },
     }
     -- opts.signature = opts.signature or {}
     -- opts.signature.enabled = true

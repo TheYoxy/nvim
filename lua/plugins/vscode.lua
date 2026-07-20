@@ -294,6 +294,14 @@ vim.api.nvim_create_autocmd("User", {
     vim.keymap.set({ "n", "i", "v", "x" }, "<C-i>", function()
       vscode.action("inlineChat.start")
     end, { desc = "Start inline chat" })
+
+    vim.keymap.set("n", "<leader>ln", function()
+      vscode.action("editor.action.inlineSuggest.trigger")
+    end, { desc = "Start inline chat" })
+    vim.keymap.set("n", "<leader>lo", function()
+      vscode.action("editor.action.fixAll")
+    end, { desc = "Fix all" })
+
     vim.keymap.del({ "n" }, "<leader>gg")
     vim.keymap.set({ "n" }, "<leader>gg", function()
       vscode.action("workbench.action.tasks.runTask", { args = { task = "Lazygit" } })

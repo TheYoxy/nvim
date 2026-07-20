@@ -21,12 +21,12 @@ if not vim.g.vscode then
   vim.keymap.set({ "n", "x" }, "<leader>bc", function()
     Snacks.bufdelete.other()
   end, { desc = "Delete Other Buffers" })
-end
 
-vim.keymap.del("n", "<leader>l")
-vim.keymap.set("n", "<leader>ln", function()
-  require("sidekick.nes").update()
-end, { desc = "Trigger NES" })
+  vim.keymap.del("n", "<leader>l")
+  vim.keymap.set("n", "<leader>ln", function()
+    require("sidekick.nes").update()
+  end, { desc = "Trigger NES" })
+end
 
 vim.keymap.set("n", "<Leader>pi", "<cmd>Lazy install<cr>", { desc = "Plugins Install" })
 vim.keymap.set("n", "<Leader>ps", "<cmd>Lazy<cr>", { desc = "Plugins Status" })
