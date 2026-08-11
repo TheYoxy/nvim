@@ -44,9 +44,27 @@ return {
         vtsls = {
           enabled = false,
         },
+        --- The configuration can be found in the file userpreferences.go from typescript-go repostiory
         ---@type lspconfig.settings.tsgo
         tsgo = {
           enabled = true,
+          cmd = function(dispatchers, config)
+            local cmd = "tsgo"
+            if (config or {}).root_dir then
+              local local_cmd_tsc = vim.fs.joinpath(config.root_dir, "node_modules/.bin", "tsc")
+              if vim.fn.executable(local_cmd_tsc) == 1 then
+                -- vim.notify("Using local tsc binary: " .. local_cmd_tsc)
+                cmd = local_cmd_tsc
+              end
+
+              local local_cmd = vim.fs.joinpath(config.root_dir, "node_modules/.bin", cmd)
+              if vim.fn.executable(local_cmd) == 1 then
+                -- vim.notify("Using local tsgo binary: " .. local_cmd)
+                cmd = local_cmd
+              end
+            end
+            return vim.lsp.rpc.start({ cmd, "--lsp", "--stdio" }, dispatchers)
+          end,
           -- available on 190326: "quickfix", "source.organizeImports", "source.removeUnusedImports", "source.sortImports"
           -- explicitly add default filetypes, so that we can extend
           -- them in related extras
@@ -60,21 +78,30 @@ return {
           },
           settings = {
             typescript = {
-              ["native-preview"] = {
-                goMemLimit = "6GiB",
+              ["server"] = {
+                goMemLimit = "16GiB",
               },
               suggest = {
                 autoImports = true,
                 completeFunctionCalls = true,
                 includeCompletionsForImportStatements = true,
                 includeAutomaticOptionalChainCompletions = true,
+                completeJSDocs = true,
+                jsdoc = {
+                  generateReturns = true,
+                },
+              },
+              validate = {
+                enable = true,
               },
               preferences = {
                 importModuleSpecifier = "non-relative", -- 'shortest' | 'relative' | 'non-relative' | 'project-relative'
                 importModuleSpecifierEnding = "auto", -- 'auto' | 'minimal' | 'index' | 'js'
                 quoteStyle = "auto", -- 'auto' | 'single' | 'double'
                 preferTypeOnlyAutoImports = true,
+                jsxAttributeCompletionStyle = "auto",
               },
+              autoClosingTags = true,
               format = {
                 enable = true,
                 semicolons = "ignore", -- 'ignore' | 'insert' | 'remove'
@@ -84,15 +111,14 @@ return {
                 insertSpaceBeforeFunctionParenthesis = false,
               },
               referencesCodeLens = {
-                enabled = false, -- not working
+                enabled = true, -- not working
                 showOnAllFunctions = true,
               },
               implementationsCodeLens = {
-                enabled = false, -- not working
+                enabled = true, -- not working
                 showOnInterfaceMethods = true,
                 showOnAllClassMethods = true,
               },
-              updateImportsOnFileMove = { enabled = "always" },
               inlayHints = {
                 enumMemberValues = { enabled = true },
                 functionLikeReturnTypes = { enabled = false },

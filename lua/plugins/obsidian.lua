@@ -56,7 +56,7 @@ return {
             note:add_alias(note.title)
           end
 
-          local out = { id = note.id, aliases = note.aliases, tags = note.tags, date = os.date("%Y-%m-%d") }
+          local out = { id = note.id, aliases = note.aliases, tags = note.tags, Date = os.date("%Y-%m-%d") }
 
           -- `note.metadata` contains any manually added fields in the frontmatter.
           -- So here we just make sure those fields are kept in the frontmatter.
@@ -65,6 +65,8 @@ return {
               out[k] = v
             end
           end
+
+          out["last-modified"] = os.date("%Y-%m-%d")
 
           return out
         end,
