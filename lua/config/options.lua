@@ -13,6 +13,8 @@ vim.opt.so = 999 -- Lines of context
 vim.opt.sop = 999 -- Lines of context
 -- vim.opt.ss = 1 -- Columns of context
 -- vim.opt.siso = 0 -- Columns of context
+vim.o.numberwidth = 1
+vim.o.ruler = true
 
 vim.keymap.set("n", "<leader>po", ":update<CR> :source<CR>", { desc = "Update and source" })
 vim.filetype.add({
