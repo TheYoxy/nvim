@@ -9,7 +9,7 @@ if false then
       opts = {
         -- make sure mason installs the server
         servers = {
-          tsgo = {
+          tsc = {
             enabled = false,
           },
         },
@@ -29,7 +29,7 @@ return {
   -- correctly setup lspconfig
   {
     "mason-org/mason.nvim",
-    opts = { ensure_installed = { "tsgo" } },
+    opts = { ensure_installed = { "tsc" } },
   },
   {
     "neovim/nvim-lspconfig",
@@ -45,19 +45,19 @@ return {
           enabled = false,
         },
         --- The configuration can be found in the file userpreferences.go from typescript-go repostiory
-        ---@type lspconfig.settings.tsgo
-        tsgo = {
+        ---@type lspconfig.settings.tsc
+        tsc = {
           enabled = true,
           cmd = function(dispatchers, config)
-            local cmd = "tsgo"
+            local cmd = "tsc"
             if (config or {}).root_dir then
-              local local_cmd_tsc = vim.fs.joinpath(config.root_dir, "node_modules/.bin", "tsc")
+              local local_cmd_tsc = vim.fs.joinpath(config.root_dir, "node_modules/.bin", cmd)
               if vim.fn.executable(local_cmd_tsc) == 1 then
                 -- vim.notify("Using local tsc binary: " .. local_cmd_tsc)
                 cmd = local_cmd_tsc
               end
 
-              local local_cmd = vim.fs.joinpath(config.root_dir, "node_modules/.bin", cmd)
+              local local_cmd = vim.fs.joinpath(config.root_dir, "node_modules/.bin", "tsgo")
               if vim.fn.executable(local_cmd) == 1 then
                 -- vim.notify("Using local tsgo binary: " .. local_cmd)
                 cmd = local_cmd
@@ -96,8 +96,8 @@ return {
               },
               preferences = {
                 importModuleSpecifier = "non-relative", -- 'shortest' | 'relative' | 'non-relative' | 'project-relative'
-                importModuleSpecifierEnding = "auto", -- 'auto' | 'minimal' | 'index' | 'js'
-                quoteStyle = "auto", -- 'auto' | 'single' | 'double'
+                importModuleSpecifierEnding = "auto",   -- 'auto' | 'minimal' | 'index' | 'js'
+                quoteStyle = "auto",                    -- 'auto' | 'single' | 'double'
                 preferTypeOnlyAutoImports = true,
                 jsxAttributeCompletionStyle = "auto",
               },

@@ -1,6 +1,8 @@
 -- Options are automatically loaded before lazy.nvim startup
 -- Default options that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/options.lua
 -- Add any additional options here
+require("config.remote_clipboard").setup()
+
 if vim.fn.getenv("TERM_PROGRAM") == "ghostty" then
   vim.opt.title = true
   vim.opt.titlestring = "%{fnamemodify(getcwd(), ':t')}"
@@ -9,14 +11,13 @@ end
 -- vim.g.root_spec = { "lsp", { ".git", "lua" }, { "package.json", "tsconfig.json" }, "cwd" }
 vim.g.root_spec = { ".git", "cwd" }
 vim.opt.laststatus = 3
-vim.opt.so = 999 -- Lines of context
+vim.opt.so = 999  -- Lines of context
 vim.opt.sop = 999 -- Lines of context
 -- vim.opt.ss = 1 -- Columns of context
 -- vim.opt.siso = 0 -- Columns of context
 vim.o.numberwidth = 1
-vim.o.ruler = true
+vim.o.ruler = false
 
-vim.keymap.set("n", "<leader>po", ":update<CR> :source<CR>", { desc = "Update and source" })
 vim.filetype.add({
   extension = {
     props = "xml",
@@ -47,21 +48,6 @@ vim.opt.listchars = {
 vim.g.loaded_node_provider = 0
 vim.g.loaded_perl_provider = 0
 vim.g.lazyvim_prettier_needs_config = true
-
--- Remote clipboard copy
-if os.getenv("SSH_TTY") then
-  vim.g.clipboard = {
-    name = "OSC 52",
-    copy = {
-      ["+"] = require("vim.ui.clipboard.osc52").copy("+"),
-      ["*"] = require("vim.ui.clipboard.osc52").copy("*"),
-    },
-    paste = {
-      ["+"] = require("vim.ui.clipboard.osc52").paste("+"),
-      ["*"] = require("vim.ui.clipboard.osc52").paste("*"),
-    },
-  }
-end
 
 -- vim.lsp.config("fallow", {
 --   cmd = { "fallow-lsp" },

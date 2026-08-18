@@ -3,6 +3,7 @@
 -- Add any additional keymaps here
 vim.keymap.set({ "n", "x" }, "+", "<C-a>", { desc = "Increment number" })
 vim.keymap.set({ "n", "x" }, "-", "<C-x>", { desc = "Decrement number" })
+vim.keymap.set("n", "<leader>po", ":update<CR> :source<CR>", { desc = "Update and source" })
 
 -- vim.keymap.set({ "n", "x" }, "j", "v:count == 0 ? 'gjzz' : 'jzz'", { desc = "Down", expr = true, silent = true })
 -- vim.keymap.set({ "n", "x" }, "<Down>", "v:count == 0 ? 'gjzz' : 'jzz'", { desc = "Down", expr = true, silent = true })
