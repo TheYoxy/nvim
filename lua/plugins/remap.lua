@@ -52,7 +52,7 @@ return {
         end,
         desc = "Buffers",
       },
-      { "<leader>/", LazyVim.pick("grep"), desc = "Grep (Root Dir)" },
+      -- { "<leader>/", function() require("fff").live_grep() end, desc = "Grep (Root Dir)" }, -- moved to lua/plugins/picker.lua
       {
         "<leader>:",
         function()
@@ -60,7 +60,7 @@ return {
         end,
         desc = "Command History",
       },
-      { "<leader><space>", LazyVim.pick("files", { root = false }), desc = "Find Files (cwd)" },
+      -- { "<leader><space>", function() require("fff").find_files() end, desc = "Find Files (cwd)" }, -- moved to lua/plugins/picker.lua
       {
         "<leader>n",
         function()
@@ -84,8 +84,8 @@ return {
         desc = "Buffers (all)",
       },
       { "<leader>fc", LazyVim.pick.config_files(), desc = "Find Config File" },
-      { "<leader>ff", LazyVim.pick("files"), desc = "Find Files (Root Dir)" },
-      { "<leader>fF", LazyVim.pick("files", { root = false }), desc = "Find Files (cwd)" },
+      -- { "<leader>ff", function() require("fff").find_files() end, desc = "Find Files (Root Dir)" }, -- moved to lua/plugins/picker.lua
+      -- { "<leader>fF", function() require("fff").find_files() end, desc = "Find Files (cwd)" }, -- moved to lua/plugins/picker.lua
       -- { "<leader>fg", function() Snacks.picker.git_files() end, desc = "Find Files (git-files)" },
       {
         "<leader>fe",
@@ -139,8 +139,8 @@ return {
         end,
         desc = "Grep Open Buffers",
       },
-      { "<leader>fw", LazyVim.pick("live_grep"), desc = "Grep (Root Dir)" },
-      { "<leader>fW", LazyVim.pick("live_grep", { root = false }), desc = "Grep (cwd)" },
+      -- { "<leader>fw", function() require("fff").live_grep() end, desc = "Grep (Root Dir)" }, -- moved to lua/plugins/picker.lua
+      -- { "<leader>fW", function() require("fff").live_grep() end, desc = "Grep (cwd)" }, -- moved to lua/plugins/picker.lua
       {
         "<leader>fp",
         function()
@@ -148,8 +148,8 @@ return {
         end,
         desc = "Search for Plugin Spec",
       },
-      { "<leader>fw", LazyVim.pick("grep_word"), desc = "Visual selection or word (Root Dir)", mode = { "v" } },
-      { "<leader>fW", LazyVim.pick("grep_word", { root = false }), desc = "Visual selection or word (cwd)", mode = { "v" } },
+      -- { "<leader>fw", function() require("fff").live_grep_under_cursor() end, desc = "Visual selection or word (Root Dir)", mode = { "v" } }, -- moved to lua/plugins/picker.lua
+      -- { "<leader>fW", function() require("fff").live_grep_under_cursor() end, desc = "Visual selection or word (cwd)", mode = { "v" } }, -- moved to lua/plugins/picker.lua
       -- search
       {
         '<leader>f"',
