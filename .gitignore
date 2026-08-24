@@ -7,3 +7,6 @@ foo.*
 *.log
 data
 lazy-lock.json
+lua/plugins/theme.lua
+lua/plugins/all-themes.lua
+lua/plugins/omarchy-theme-hotreload.lua
