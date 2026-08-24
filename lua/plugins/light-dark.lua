@@ -1,3 +1,7 @@
+if true then
+  return {}
+end -- NOTE: disabled
+
 return {
   "f-person/auto-dark-mode.nvim",
   config = {

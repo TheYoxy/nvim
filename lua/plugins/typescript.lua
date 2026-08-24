@@ -77,9 +77,9 @@ return {
             "typescript.tsx",
           },
           settings = {
-            typescript = {
+            ["js/ts"] = {
               ["server"] = {
-                goMemLimit = "16GiB",
+                goMemLimit = "6GiB",
               },
               suggest = {
                 autoImports = true,
@@ -96,8 +96,8 @@ return {
               },
               preferences = {
                 importModuleSpecifier = "non-relative", -- 'shortest' | 'relative' | 'non-relative' | 'project-relative'
-                importModuleSpecifierEnding = "auto",   -- 'auto' | 'minimal' | 'index' | 'js'
-                quoteStyle = "auto",                    -- 'auto' | 'single' | 'double'
+                importModuleSpecifierEnding = "auto", -- 'auto' | 'minimal' | 'index' | 'js'
+                quoteStyle = "auto", -- 'auto' | 'single' | 'double'
                 preferTypeOnlyAutoImports = true,
                 jsxAttributeCompletionStyle = "auto",
               },
@@ -111,11 +111,11 @@ return {
                 insertSpaceBeforeFunctionParenthesis = false,
               },
               referencesCodeLens = {
-                enabled = true, -- not working
+                enabled = false, -- not working
                 showOnAllFunctions = true,
               },
               implementationsCodeLens = {
-                enabled = true, -- not working
+                enabled = false, -- not working
                 showOnInterfaceMethods = true,
                 showOnAllClassMethods = true,
               },

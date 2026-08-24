@@ -4,26 +4,66 @@ return {
   {
     "brenton-leighton/multiple-cursors.nvim",
     version = "*", -- Use the latest tagged version
-    opts = {}, -- This causes the plugin setup function to be called
+    -- This causes the plugin setup function to be called
+    --- @module "multiple-cursors"
+    opts = {},
+    event = "VeryLazy",
+    lazy = true,
     keys = {
-      { "<C-j>", "<Cmd>MultipleCursorsAddDown<CR>", mode = { "n", "x" }, desc = "Add cursor and move down" },
-      { "<C-k>", "<Cmd>MultipleCursorsAddUp<CR>", mode = { "n", "x" }, desc = "Add cursor and move up" },
+      {
+        "<C-Up>",
+        function()
+          require("multiple-cursors").add_cursor_up()
+        end,
+        mode = { "n", "i", "x" },
+        desc = "Add cursor and move up",
+      },
+      {
+        "<C-Down>",
+        function()
+          require("multiple-cursors").add_cursor_down()
+        end,
+        mode = { "n", "i", "x" },
+        desc = "Add cursor and move down",
+      },
 
-      { "<C-Up>", "<Cmd>MultipleCursorsAddUp<CR>", mode = { "n", "i", "x" }, desc = "Add cursor and move up" },
-      { "<C-Down>", "<Cmd>MultipleCursorsAddDown<CR>", mode = { "n", "i", "x" }, desc = "Add cursor and move down" },
+      {
+        "<C-LeftMouse>",
+        "<Cmd>MultipleCursorsMouseAddDelete<CR>",
+        mode = { "n", "i" },
+        desc = "Add or remove cursor on mouse click",
+      },
+      {
+        "<C-Return>",
+        "<Cmd>MultipleCursorsAddDelete<CR>",
+        mode = { "n" },
+        desc = "Add a locked cursor or remove an existing cursor",
+      },
 
-      { "<C-LeftMouse>", "<Cmd>MultipleCursorsMouseAddDelete<CR>", mode = { "n", "i" }, desc = "Add or remove cursor on mouse click" },
-      { "<C-Return>", "<Cmd>MultipleCursorsAddDelete<CR>", mode = { "n" }, desc = "Add a locked cursor or remove an existing cursor" },
-
-      { "<Leader>m", "<Cmd>MultipleCursorsAddVisualArea<CR>", mode = { "x" }, desc = "Add cursors to the lines of the visual area" },
-
-      { "<Leader>a", "<Cmd>MultipleCursorsAddMatches<CR>", mode = { "n", "x" }, desc = "Add cursors to cword" },
-      { "<Leader>A", "<Cmd>MultipleCursorsAddMatchesV<CR>", mode = { "n", "x" }, desc = "Add cursors to cword in previous area" },
-
-      { "<Leader>d", "<Cmd>MultipleCursorsAddJumpNextMatch<CR>", mode = { "n", "x" }, desc = "Add cursor and jump to next cword" },
-      { "<Leader>D", "<Cmd>MultipleCursorsJumpNextMatch<CR>", mode = { "n", "x" }, desc = "Jump to next cword" },
-
-      { "<Leader>l", "<Cmd>MultipleCursorsLock<CR>", mode = { "n", "x" }, desc = "Lock virtual cursors" },
+      {
+        "<C-g>",
+        function()
+          require("multiple-cursors").add_cursors_to_matches()
+        end,
+        mode = { "n" },
+        desc = "Add cursors to cword",
+      },
+      {
+        "<C-g>",
+        function()
+          require("multiple-cursors").add_cursors_to_visual_area()
+        end,
+        mode = { "v", "x" },
+        desc = "Add cursors to the lines of the visual area",
+      },
+      {
+        "<C-G>",
+        function()
+          require("multiple-cursors").add_cursors_to_matches_v()
+        end,
+        mode = { "n", "x" },
+        desc = "Add cursors to cword in previous area",
+      },
     },
   },
 }
