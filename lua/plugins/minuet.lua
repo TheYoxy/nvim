@@ -1,6 +1,5 @@
 if true then
   return {
-
     { import = "lazyvim.plugins.extras.ai.sidekick" },
     { import = "lazyvim.plugins.extras.ai.supermaven" },
   }

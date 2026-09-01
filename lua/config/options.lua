@@ -51,6 +51,7 @@ vim.opt.listchars = {
 vim.g.loaded_node_provider = 0
 vim.g.loaded_perl_provider = 0
 vim.g.lazyvim_prettier_needs_config = true
+vim.g.lazyvim_check_order = false
 
 -- vim.lsp.config("fallow", {
 --   cmd = { "fallow-lsp" },

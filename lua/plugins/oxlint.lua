@@ -9,6 +9,7 @@ local supported = {
   "svelte",
   "astro",
   "css",
+  "yaml",
 }
 
 --- @module "lazy"
