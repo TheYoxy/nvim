@@ -42,14 +42,16 @@ return {
       legacy_commands = false,
       finder = "snacks.pick",
       templates = {
-        subdir = "templates",
+        folder = "templates",
         date_format = "%Y-%m-%d-%a",
         time_format = "%H:%M",
       },
       daily_notes = {
         folder = "daily",
+        date_format = "%Y-%m-%d",
       },
       frontmatter = {
+        sort = true,
         func = function(note) -- This is equivalent to the default frontmatter function.
           -- Add the title of the note as an alias.
           if note.title then
@@ -70,6 +72,25 @@ return {
 
           return out
         end,
+      },
+      footer = {
+        enabled = true,
+      },
+      attachments = {
+        folder = "/assets",
+      },
+    },
+  },
+  {
+    "saghen/blink.cmp",
+    optional = true,
+    --- @module "blink.cmp"
+    --- @type blink.cmp.Config
+    opts = {
+      sources = {
+        per_filetype = {
+          markdown = { "lsp", "path" },
+        },
       },
     },
   },

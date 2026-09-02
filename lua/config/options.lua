@@ -12,7 +12,7 @@ if vim.fn.getenv("TERM_PROGRAM") == "ghostty" then
 end
 
 -- vim.g.root_spec = { "lsp", { ".git", "lua" }, { "package.json", "tsconfig.json" }, "cwd" }
-vim.g.root_spec = { ".git", "cwd" }
+vim.g.root_spec = { ".git", ".obsidian", "cwd" }
 vim.opt.laststatus = 3
 vim.opt.so = 999 -- Lines of context
 vim.opt.sop = 999 -- Lines of context
