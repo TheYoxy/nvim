@@ -20,6 +20,7 @@ vim.opt.sop = 999 -- Lines of context
 -- vim.opt.siso = 0 -- Columns of context
 vim.o.numberwidth = 1
 vim.o.ruler = false
+vim.o.swapfile = false
 
 vim.filetype.add({
   extension = {

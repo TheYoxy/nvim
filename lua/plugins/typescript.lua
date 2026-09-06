@@ -96,7 +96,7 @@ return {
               },
               preferences = {
                 importModuleSpecifier = "non-relative", -- 'shortest' | 'relative' | 'non-relative' | 'project-relative'
-                importModuleSpecifierEnding = "auto", -- 'auto' | 'minimal' | 'index' | 'js'
+                importModuleSpecifierEnding = "minimal", -- 'auto' | 'minimal' | 'index' | 'js'
                 quoteStyle = "auto", -- 'auto' | 'single' | 'double'
                 preferTypeOnlyAutoImports = true,
                 jsxAttributeCompletionStyle = "auto",
