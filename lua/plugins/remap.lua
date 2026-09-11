@@ -285,6 +285,8 @@ return {
         end,
         desc = "Colorschemes",
       },
+      { "<leader>e", false },
+      { "<leader>E", false },
       -- git
       { "<leader>gd", false },
       { "<leader>gs", false },
@@ -318,8 +320,6 @@ return {
       { "<leader>su", false },
       { "<leader>ss", false },
       { "<leader>sS", false },
-      -- ui
-      { "<leader>uC", false },
     },
   },
 
@@ -454,7 +454,13 @@ return {
             },
             { "<leader>la", vim.lsp.buf.code_action, desc = "Code Action", mode = { "n", "v" }, has = "codeAction" },
             { "<leader>lc", vim.lsp.codelens.run, desc = "Run Codelens", mode = { "n", "v" }, has = "codeLens" },
-            { "<leader>lC", vim.lsp.codelens.refresh, desc = "Refresh & Display Codelens", mode = { "n" }, has = "codeLens" },
+            {
+              "<leader>lC",
+              vim.lsp.codelens.refresh,
+              desc = "Refresh & Display Codelens",
+              mode = { "n" },
+              has = "codeLens",
+            },
             {
               "<leader>rR",
               function()
@@ -958,42 +964,5 @@ return {
         },
       }
     end,
-  },
-
-  {
-    "nvim-neo-tree/neo-tree.nvim",
-    cmd = "Neotree",
-    keys = {
-      { "<leader>fe", false },
-      { "<leader>fE", false },
-      {
-        "<leader>e",
-        function()
-          require("neo-tree.command").execute({ toggle = true, dir = LazyVim.root() })
-        end,
-        desc = "Explorer NeoTree (Root Dir)",
-      },
-      {
-        "<leader>E",
-        function()
-          require("neo-tree.command").execute({ toggle = true, dir = vim.uv.cwd() })
-        end,
-        desc = "Explorer NeoTree (cwd)",
-      },
-      {
-        "<leader>ge",
-        function()
-          require("neo-tree.command").execute({ source = "git_status", toggle = true })
-        end,
-        desc = "Git Explorer",
-      },
-      {
-        "<leader>be",
-        function()
-          require("neo-tree.command").execute({ source = "buffers", toggle = true })
-        end,
-        desc = "Buffer Explorer",
-      },
-    },
   },
 }

@@ -16,8 +16,18 @@ vim.g.neovide_window_blurred = true
 --   vim.o.guifont = "JetBrains Mono,PowerlineSymbols"
 -- end
 
-vim.api.nvim_set_keymap("n", "<C-=>", ":lua vim.g.neovide_scale_factor = vim.g.neovide_scale_factor + 0.1<CR>", { silent = true })
-vim.api.nvim_set_keymap("n", "<C-->", ":lua vim.g.neovide_scale_factor = vim.g.neovide_scale_factor - 0.1<CR>", { silent = true })
+vim.api.nvim_set_keymap(
+  "n",
+  "<C-=>",
+  ":lua vim.g.neovide_scale_factor = vim.g.neovide_scale_factor + 0.1<CR>",
+  { silent = true }
+)
+vim.api.nvim_set_keymap(
+  "n",
+  "<C-->",
+  ":lua vim.g.neovide_scale_factor = vim.g.neovide_scale_factor - 0.1<CR>",
+  { silent = true }
+)
 vim.api.nvim_set_keymap("n", "<C-0>", ":lua vim.g.neovide_scale_factor = 1<CR>", { silent = true })
 
 vim.g.neovide_floating_shadow = true
@@ -36,7 +46,7 @@ vim.g.neovide_cursor_animate_command_line = false
 --- @type LazySpec
 return {
   {
-    "snacks.nvim",
+    "folke/snacks.nvim",
     opts = {
       scroll = { enabled = false },
     },

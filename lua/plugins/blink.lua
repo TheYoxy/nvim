@@ -2,18 +2,15 @@
 --- @module "lazyvim"
 --- @type LazySpec
 return {
-
   {
     "rafamadriz/friendly-snippets",
+    optional = true,
     enabled = false,
     version = false,
   },
   {
     "saghen/blink.cmp",
     dependencies = {
-      -- {
-      --   "giuxtaposition/blink-cmp-copilot",
-      -- },
       {
         "saghen/blink.compat",
         optional = true, -- make optional so it's only enabled if any extras need it
@@ -179,6 +176,7 @@ return {
     -- add icons
     {
       "saghen/blink.cmp",
+      optional = true,
       opts = function(_, opts)
         opts.appearance = opts.appearance or {}
         opts.appearance.kind_icons =
@@ -189,6 +187,7 @@ return {
     -- lazydev
     {
       "saghen/blink.cmp",
+      optional = true,
       opts = {
         sources = {
           per_filetype = {
@@ -199,6 +198,25 @@ return {
               name = "LazyDev",
               module = "lazydev.integrations.blink",
               score_offset = 100, -- show at a higher priority than lsp
+            },
+          },
+        },
+      },
+    },
+
+    {
+      "saghen/blink.cmp",
+      optional = true,
+      dependencies = { "fang2hou/blink-copilot" },
+      opts = {
+        sources = {
+          default = { "copilot" },
+          providers = {
+            copilot = {
+              name = "copilot",
+              module = "blink-copilot",
+              score_offset = 100,
+              async = true,
             },
           },
         },

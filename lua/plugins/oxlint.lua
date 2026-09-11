@@ -44,7 +44,7 @@ return {
             run = "onSave",
             -- configPath = nil,
             -- tsConfigPath = nil,
-            unusedDisableDirectives = "deny",
+            unusedDisableDirectives = "allow",
             typeAware = false,
             -- disableNestedConfig = false,
             -- fixKind = 'safe_fix',

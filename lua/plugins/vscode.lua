@@ -43,7 +43,12 @@ vim.api.nvim_create_autocmd("User", {
     vim.notify = vscode.notify
 
     vim.keymap.set({ "n", "x" }, "j", "v:count == 0 ? 'gjzz' : 'jzz'", { desc = "Down", expr = true, silent = true })
-    vim.keymap.set({ "n", "x" }, "<Down>", "v:count == 0 ? 'gjzz' : 'jzz'", { desc = "Down", expr = true, silent = true })
+    vim.keymap.set(
+      { "n", "x" },
+      "<Down>",
+      "v:count == 0 ? 'gjzz' : 'jzz'",
+      { desc = "Down", expr = true, silent = true }
+    )
     vim.keymap.set({ "n", "x" }, "k", "v:count == 0 ? 'gkzz' : 'kzz'", { desc = "Up", expr = true, silent = true })
     vim.keymap.set({ "n", "x" }, "<Up>", "v:count == 0 ? 'gkzz' : 'kzz'", { desc = "Up", expr = true, silent = true })
     vim.keymap.set({ "n", "x" }, "G", "'Gzz'", { expr = true, silent = true })
@@ -340,7 +345,7 @@ end
 
 return {
   {
-    "snacks.nvim",
+    "folke/snacks.nvim",
     opts = {
       bigfile = { enabled = false },
       dashboard = { enabled = false },

@@ -3,6 +3,8 @@
 return {
   {
     "LazyVim/LazyVim",
+    --- @module "lazyvim"
+    --- @type LazyVimOptions
     opts = {
       colorscheme = "catppuccin-nvim",
     },
@@ -37,6 +39,18 @@ return {
           information = { "undercurl" },
         },
       },
+      highlight_overrides = {
+        all = function(colors)
+          return {
+            DiagnosticDeprecated = {
+              undercurl = true,
+              sp = colors.red,
+              strikethrough = false,
+              underline = false,
+            },
+          }
+        end,
+      },
       integrations = {
         aerial = true,
         alpha = true,
@@ -51,7 +65,12 @@ return {
         indent_blankline = { enabled = true },
         leap = true,
         lsp_trouble = true,
+        blink_cmp = true,
+        blink_indent = true,
+        blink_pairs = true,
+        dadbod_ui = true,
         mason = true,
+        rainbow_delimiters = true,
         mini = true,
         navic = { enabled = true, custom_bg = "lualine" },
         neotest = true,

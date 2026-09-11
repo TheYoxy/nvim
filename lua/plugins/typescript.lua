@@ -119,6 +119,7 @@ return {
                 showOnInterfaceMethods = true,
                 showOnAllClassMethods = true,
               },
+              updateImportsOnFileMove = { enabled = true },
               inlayHints = {
                 enumMemberValues = { enabled = true },
                 functionLikeReturnTypes = { enabled = false },
@@ -161,6 +162,11 @@ return {
               "<leader>ri",
               LazyVim.lsp.action["source.removeUnusedImports"],
               desc = "Remove unused imports",
+            },
+            {
+              "<leader>ro",
+              LazyVim.lsp.action["source.organizeImports"],
+              desc = "Organize Imports",
             },
             {
               "<leader>rI",

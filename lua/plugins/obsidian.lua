@@ -40,7 +40,7 @@ return {
         use_advanced_uri = true,
       },
       legacy_commands = false,
-      finder = "snacks.pick",
+      finder = "snacks.picker",
       templates = {
         folder = "templates",
         date_format = "%Y-%m-%d-%a",
