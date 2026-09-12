@@ -79,7 +79,7 @@ return {
           settings = {
             ["js/ts"] = {
               ["server"] = {
-                goMemLimit = "6GiB",
+                goMemLimit = "8GiB",
               },
               suggest = {
                 autoImports = true,

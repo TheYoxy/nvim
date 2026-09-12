@@ -61,43 +61,24 @@ return {
       end,
     })
   end,
-  config = function(_, opts)
-    local function on_move(data)
-      Snacks.rename.on_rename_file(data.source, data.destination)
-    end
-
-    local events = require("neo-tree.events")
-    opts.event_handlers = opts.event_handlers or {}
-    vim.list_extend(opts.event_handlers, {
-      { event = events.FILE_MOVED, handler = on_move },
-      { event = events.FILE_RENAMED, handler = on_move },
-    })
-    require("neo-tree").setup(opts)
-    vim.api.nvim_create_autocmd("TermClose", {
-      pattern = "*lazygit",
-      callback = function()
-        if package.loaded["neo-tree.sources.git_status"] then
-          require("neo-tree.sources.git_status").refresh()
-        end
-      end,
-    })
-  end,
-
   --- @module "neo-tree"
-  --- @type neotree.Config
+  --- @param opts neotree.Config
+  --- @return neotree.Config
   opts = function(_, opts)
-    return {
+    --- @type neotree.Config
+    local localOpts = {
       hide_root_node = true,
       retain_hidden_root_indent = true,
-      sources = { "filesystem", "buffers", "git_status" },
+      sources = { "filesystem" },
       open_files_do_not_replace_types = { "terminal", "Trouble", "trouble", "qf", "Outline" },
       filesystem = {
-        hide_dotfiles = false,
-        hide_gitignored = true,
-        hide_hidden = false,
-        show_hidden_count = false,
-        never_show = {
-          ".DS_Store",
+        filtered_items = {
+          visible = true,
+          hide_dotfiles = false,
+          hide_gitignored = true,
+          hide_hidden = false,
+          show_hidden_count = false,
+          never_show = { ".DS_Store" },
         },
         bind_to_cwd = false,
         follow_current_file = { enabled = true },
@@ -144,5 +125,27 @@ return {
         },
       },
     }
+    return vim.tbl_extend("force", opts, localOpts)
+  end,
+  config = function(_, opts)
+    local function on_move(data)
+      Snacks.rename.on_rename_file(data.source, data.destination)
+    end
+
+    local events = require("neo-tree.events")
+    opts.event_handlers = opts.event_handlers or {}
+    vim.list_extend(opts.event_handlers, {
+      { event = events.FILE_MOVED, handler = on_move },
+      { event = events.FILE_RENAMED, handler = on_move },
+    })
+    require("neo-tree").setup(opts)
+    vim.api.nvim_create_autocmd("TermClose", {
+      pattern = "*lazygit",
+      callback = function()
+        if package.loaded["neo-tree.sources.git_status"] then
+          require("neo-tree.sources.git_status").refresh()
+        end
+      end,
+    })
   end,
 }
