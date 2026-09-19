@@ -30,6 +30,7 @@ return {
       servers = {
         ---@type lspconfig.settings.oxlint
         oxlint = {
+          -- capabilities = { textDocument = { diagnostic = vim.NIL } },
           root_dir = function(bufnr, on_dir)
             -- prefer the top-level oxlint config if it exists (monorepo support)
             local git = vim.fs.root(bufnr, ".git")
@@ -45,7 +46,7 @@ return {
             -- configPath = nil,
             -- tsConfigPath = nil,
             unusedDisableDirectives = "allow",
-            -- typeAware = false,
+            typeAware = false,
             -- disableNestedConfig = false,
             -- fixKind = 'safe_fix',
             fixKind = "safe_fix_or_suggestion",

@@ -51,20 +51,86 @@ return {
         date_format = "%Y-%m-%d",
       },
       frontmatter = {
-        sort = true,
+        --- @param a string
+        --- @param b string
+        --- @return boolean
+        sort = function(a, b)
+          --- Keep the aliases and tags at the end of the frontmatter.
+          if a == "aliases" then
+            return false
+          end
+          if a == "tags" then
+            return false
+          end
+          if b == "aliases" then
+            return true
+          end
+          if b == "tags" then
+            return true
+          end
+
+          --- Keep the id at the top
+          if a == "id" then
+            return true
+          end
+          if b == "id" then
+            return false
+          end
+          if a == "title" then
+            if b == "description" then
+              return true
+            else
+              return true
+            end
+          end
+          if b == "title" then
+            if b == "description" then
+              return false
+            else
+              return false
+            end
+          end
+
+          if a == "description" then
+            if b == "title" then
+              return false
+            else
+              return true
+            end
+          end
+          if b == "description" then
+            if b == "title" then
+              return false
+            else
+              return false
+            end
+          end
+
+          return a < b
+        end,
         func = function(note) -- This is equivalent to the default frontmatter function.
           -- Add the title of the note as an alias.
           if note.title then
             note:add_alias(note.title)
           end
 
-          local out = { id = note.id, aliases = note.aliases, tags = note.tags, Date = os.date("%Y-%m-%d") }
+          local out = {
+            id = note.id,
+            aliases = note.aliases,
+            tags = note.tags,
+            date = os.date("%Y-%m-%d", vim.uv.fs_stat(note.path.filename).birthtime.sec),
+          }
 
           -- `note.metadata` contains any manually added fields in the frontmatter.
           -- So here we just make sure those fields are kept in the frontmatter.
           if note.metadata ~= nil and not vim.tbl_isempty(note.metadata) then
             for k, v in pairs(note.metadata) do
               out[k] = v
+            end
+
+            if out["Date"] ~= nil then
+              out["date"] = out["Date"]
+              out["Date"] = nil
             end
           end
 

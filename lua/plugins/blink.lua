@@ -53,10 +53,7 @@ return {
             treesitter = { "lsp" },
             columns = {
               { "label", "label_description", gap = 1 },
-              {
-                "kind_icon",
-                "kind",
-              },
+              { "kind_icon", "kind" },
             },
           },
         },
@@ -76,6 +73,14 @@ return {
         -- with blink.compat
         compat = {},
         default = { "lsp", "path" },
+        providers = {
+          snippets = {
+            opts = {
+              friendly_snippets = false,
+            },
+          },
+        },
+        --- remove snippets from sources
         transform_items = function(_, items)
           return vim.tbl_filter(function(item)
             return item.kind ~= require("blink.comp.types").CompletionItemKind.Snippet
@@ -215,7 +220,7 @@ return {
             copilot = {
               name = "copilot",
               module = "blink-copilot",
-              score_offset = 100,
+              score_offset = 1,
               async = true,
             },
           },
