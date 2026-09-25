@@ -40,7 +40,6 @@ vim.filetype.add({
 })
 
 require("colorify").run()
-require("tailwind_classes").setup()
 
 table.insert(vim.opt.spelllang, "fr")
 vim.opt.list = true -- Show some invisible characters (tabs...
