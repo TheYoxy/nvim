@@ -88,21 +88,35 @@ return {
 
   {
     "MeanderingProgrammer/render-markdown.nvim",
+    ---@module 'render-markdown'
+    ---@type render.md.UserConfig
     opts = {
       code = {
-        sign = false,
+        sign = true,
         width = "block",
         right_pad = 1,
       },
       heading = {
-        sign = false,
+        sign = true,
         icons = {},
+      },
+      bullet = {
+        right_pad = 1,
       },
       checkbox = {
         enabled = false,
       },
+      pipe_table = {
+        preset = "round",
+      },
+      html = {
+        comment = {
+          conceal = false,
+        },
+      },
     },
-    enabled = false,
+    -- dependencies = { "nvim-treesitter/nvim-treesitter", "nvim-mini/mini.nvim" },
+    enabled = true,
     ft = { "markdown", "norg", "rmd", "org", "codecompanion" },
     config = function(_, opts)
       require("render-markdown").setup(opts)
