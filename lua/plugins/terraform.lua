@@ -36,12 +36,21 @@ return {
   {
     "mfussenegger/nvim-lint",
     optional = true,
-    opts = {
-      linters_by_ft = {
-        terraform = { "terraform_validate" },
-        tf = { "terraform_validate" },
-      },
-    },
+    opts = function(_, opts)
+      -- The builtin runs `terraform validate`, which cannot resolve the
+      -- registry.opentofu.org providers this repo locks; same check via tofu.
+      require("lint").linters.tofu_validate = function()
+        local linter = require("lint").linters.terraform_validate()
+        linter.cmd = "tofu"
+        linter.source = "tofu validate"
+        return linter
+      end
+
+      opts.linters_by_ft = {
+        terraform = { "tofu_validate" },
+        tf = { "tofu_validate" },
+      }
+    end,
   },
   {
     "stevearc/conform.nvim",
