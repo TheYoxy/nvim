@@ -1,3 +1,5 @@
+local is_mise_file = require("config.mise")
+
 --- @module "lazy"
 --- @type LazySpec
 return {
@@ -7,6 +9,11 @@ return {
       servers = {
         taplo = {
           root_dir = function(bufnr, on_dir)
+            -- mise configs get their own server; taplo would duplicate its
+            -- hover, completion and diagnostics
+            if is_mise_file(bufnr) then
+              return
+            end
             -- prefer the top-level oxlint config if it exists (monorepo support)
             local git = vim.fs.root(bufnr, ".git")
             local markers = { ".taplo.toml", "taplo.toml" }

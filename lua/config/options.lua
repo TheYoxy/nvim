@@ -58,6 +58,9 @@ if uname == "linux" then
   require("config.remote_clipboard").setup()
 end
 
+-- Prepend mise shims to PATH
+vim.env.PATH = vim.env.HOME .. "/.local/share/mise/shims:" .. vim.env.PATH
+
 if vim.fn.getenv("TERM_PROGRAM") == "ghostty" then
   vim.opt.title = true
   vim.opt.titlestring = "%{fnamemodify(getcwd(), ':t')}"
@@ -67,7 +70,6 @@ end
 vim.g.root_spec = { ".git", ".obsidian", "cwd" }
 vim.opt.laststatus = 3
 vim.opt.so = 999 -- Lines of context
-vim.opt.sop = 999 -- Lines of context
 -- vim.opt.ss = 1 -- Columns of context
 -- vim.opt.siso = 0 -- Columns of context
 vim.o.numberwidth = 1
@@ -81,7 +83,8 @@ vim.filetype.add({
     editorconfig = "editorconfig",
     slnx = "xml",
     tmpl = "gotmpl",
-    -- cod = "coda",
+    cod = "coda",
+    coda = "coda",
   },
   pattern = {
     [".*/hypr/.*%.conf"] = "hyprlang",
