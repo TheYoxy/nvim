@@ -74,7 +74,7 @@ return {
             -- configPath = nil,
             -- tsConfigPath = nil,
             unusedDisableDirectives = "allow",
-            typeAware = false,
+            typeAware = true,
             -- disableNestedConfig = false,
             -- fixKind = 'safe_fix',
             fixKind = "safe_fix_or_suggestion",
